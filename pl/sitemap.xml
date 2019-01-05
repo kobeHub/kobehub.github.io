@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://innohub.github.io/pl/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/pl/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/pl/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/tags/"
+                />
+  </url>
+  
+</urlset>

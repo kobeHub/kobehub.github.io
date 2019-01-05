@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://innohub.github.io/posts/first-post/</loc>
+    <lastmod>2019-01-05T22:58:05+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/categories/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/</loc>
+    <lastmod>2019-01-05T22:58:05+08:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/posts/</loc>
+    <lastmod>2019-01-05T22:58:05+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://innohub.github.io/tags/</loc>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pl"
+                href="https://innohub.github.io/pl/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://innohub.github.io/tags/"
+                />
+  </url>
+  
+</urlset>
