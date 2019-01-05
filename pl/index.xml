@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>John Doe po polsku</title>
-    <link>https://innohub.github.io/pl/</link>
+    <link>https://kobehub.github.io/pl/</link>
     <description>Recent content on John Doe po polsku</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     
-	<atom:link href="https://innohub.github.io/pl/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kobehub.github.io/pl/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>

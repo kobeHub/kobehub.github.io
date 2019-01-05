@@ -3,59 +3,59 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://innohub.github.io/posts/first-post/</loc>
+    <loc>https://kobehub.github.io/posts/first-post/</loc>
     <lastmod>2019-01-05T22:58:05+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://innohub.github.io/categories/</loc>
+    <loc>https://kobehub.github.io/categories/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://innohub.github.io/pl/categories/"
+                href="https://kobehub.github.io/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://innohub.github.io/categories/"
+                href="https://kobehub.github.io/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://innohub.github.io/</loc>
+    <loc>https://kobehub.github.io/</loc>
     <lastmod>2019-01-05T22:58:05+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://innohub.github.io/pl/"
+                href="https://kobehub.github.io/pl/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://innohub.github.io/"
+                href="https://kobehub.github.io/"
                 />
   </url>
   
   <url>
-    <loc>https://innohub.github.io/posts/</loc>
+    <loc>https://kobehub.github.io/posts/</loc>
     <lastmod>2019-01-05T22:58:05+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://innohub.github.io/tags/</loc>
+    <loc>https://kobehub.github.io/tags/</loc>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="https://innohub.github.io/pl/tags/"
+                href="https://kobehub.github.io/pl/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://innohub.github.io/tags/"
+                href="https://kobehub.github.io/tags/"
                 />
   </url>
   
