@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kobehub.github.io/about/</loc>
+    <lastmod>2019-01-07T16:10:59+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/posts/first-post/</loc>
     <lastmod>2019-01-05T22:58:05+08:00</lastmod>
   </url>
