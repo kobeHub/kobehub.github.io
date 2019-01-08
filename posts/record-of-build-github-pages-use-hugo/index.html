@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/">
+    <title>
+   · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.53" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title"></h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='2019-01-08T20:40:41&#43;08:00'>
+                January 8, 8019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              One minute read
+            </span>
+          </div>
+          
+          
+        </div>
+      </header>
+
+      <div>
+        
+
+<h1 id="前期准备">前期准备</h1>
+
+<h2 id="1-本地下载安装hugo">1. 本地下载安装Hugo</h2>
+
+<p>基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 <code>apt</code>,或者  <code>snap</code> 包管理进行最快速的安装</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt-get install hugo
+snap install install hugo --channel=extended
+<span style="color:#007f7f"># 安装Sass/SCSS版本</span></code></pre></div>
+<p><strong>源码安装：</strong></p>
+
+<p>首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，<code>export GOPATH=$HOME/go</code> ,然后clone 到本地进行编译安装</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">git clone https://github.com/gohugoio/hugo.git
+cd hugo
+go install</pre></div>
+<h2 id="2-建立的站点">2. 建立的站点</h2>
+
+<p>在工作目录下，建立一个新的站点</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hugo new site Hugo-site
+<span style="color:#fff;font-weight:bold">cd</span> Hugo-site
+git init </code></pre></div>
+<p>该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用<code>hugo-coder</code> 主题做为新的站点主题。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder
+cp themes/hugo-coder/exampleSite/config.toml  config.toml </code></pre></div>
+<p>然后将样例站点的配置文件cp到主文件夹下，同时将<code>themes/hugo-coder</code> 文件夹下的<code>static</code>, <code>layouts</code> 文件夹复制到主目录下，进行内容的更换。</p>
+
+<h2 id="3-编辑新的文章">3. 编辑新的文章</h2>
+
+<p><code>hugo new posts/title.md</code></p>
+
+<p>hugo使用markdown进行文章书写，可以使用该命令建立一篇新的文章，新的文件出现在<code>content/posts/</code> 文件夹下。注意需要将文件头的<code>draft</code> 改为<code>false</code>,才可以正式发布。</p>
+
+<h2 id="4-测试站点">4.测试站点</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">hugo server -D</pre></div>
+<p>在浏览器访问[<a href="http://localhost:1313]就可以查看网站内容。">http://localhost:1313]就可以查看网站内容。</a></p>
+
+<h1 id="搭建到github">搭建到GitHub</h1>
+
+<h2 id="1-搭建脚本">1. 搭建脚本</h2>
+
+<p>首先写一个自动构建网站的脚本，每次有新的内容或者网站布局有所改变都可以使用该脚本推送到远程服务器。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#0f0;font-weight:bold">#!/bin/sh 
+</span><span style="color:#0f0;font-weight:bold"></span>
+<span style="color:#fff;font-weight:bold">echo</span> -e <span style="color:#0ff;font-weight:bold">&#34;\033[0;32mDeploying updates to GitHub...\033[0m&#34;</span>
+
+msg=<span style="color:#0ff;font-weight:bold">&#34;rebuilding site `date`&#34;</span>
+<span style="color:#fff;font-weight:bold">if</span> [ $# -eq <span style="color:#ff0;font-weight:bold">1</span>  ]
+    <span style="color:#fff;font-weight:bold">then</span> msg=<span style="color:#0ff;font-weight:bold">&#34;</span>$1<span style="color:#0ff;font-weight:bold">&#34;</span>
+    <span style="color:#fff;font-weight:bold">fi</span>
+<span style="color:#0ff;font-weight:bold">&#34;]]&#34;</span>
+
+<span style="color:#007f7f"># push Hugo all</span>
+git add -A
+git commit -m <span style="color:#0ff;font-weight:bold">&#34;</span>$msg<span style="color:#0ff;font-weight:bold">&#34;</span>
+git push hugo master
+
+<span style="color:#007f7f"># Build the project</span>
+hugo 
+
+<span style="color:#007f7f">#Add public folder</span>
+<span style="color:#fff;font-weight:bold">cd</span> public
+git add -A
+
+git commit -m <span style="color:#0ff;font-weight:bold">&#34;</span>$msg<span style="color:#0ff;font-weight:bold">&#34;</span>
+
+git push siteio master
+
+<span style="color:#fff;font-weight:bold">cd</span> ..</code></pre></div>
+<p>每次进行git提交时，可以在后面跟上提交的内容，如果没有的话，默认采用提交时间作为提交日志。</p>
+
+<h2 id="2-建立远程仓库">2.建立远程仓库</h2>
+
+<p>首先建立一个<code>yourgitname.github.io</code> 的仓库，然后转到设置，将该仓库设置为<code>github pages</code>,可以选择从<code>master</code>进行构建。</p>
+
+<p><img src="http://media.innohub.top/190108-hugo.png" alt="hugo" /></p>
+
+<p>然后在主目录执行<code>hugo</code> 命令，此时会产生一个名为<code>public</code>的文件夹，这就是hugo产生的静态网站，可以被直接访问，现在将远程仓库与<code>public</code> 文件夹绑定在一起</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#fff;font-weight:bold">cd</span> public 
+git init 
+git remote add site  git@github.com:kobeHub/kobehub.github.io
+git push u site master</code></pre></div>
+<p>同时建立一个防治Hugo文件的远程仓库<code>Hugo-site</code>, 将原本在主目录下的git仓库与该远程库绑定，现在已经配置完成，可以访问<code>kobeHub.github.io</code> 进行查看了。</p>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>
