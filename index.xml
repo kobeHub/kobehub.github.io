@@ -6,10 +6,19 @@
     <description>Recent content on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 08 Jan 2019 17:28:13 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jan 2019 20:24:57 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Project</title>
+      <link>https://kobehub.github.io/project/</link>
+      <pubDate>Tue, 08 Jan 2019 20:24:57 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/project/</guid>
+      <description>Waiting to be updated&amp;hellip;</description>
+    </item>
     
     <item>
       <title>Contact</title>
@@ -17,7 +26,7 @@
       <pubDate>Tue, 08 Jan 2019 17:28:13 +0800</pubDate>
       
       <guid>https://kobehub.github.io/contact/</guid>
-      <description> Contact me  Email:jdgets111@gmail.com
+      <description> Email:jdgets111@gmail.com
  WeChat: Add Contacts jdgets, or scan the QR code in WeChat
   </description>
     </item>
@@ -28,7 +37,7 @@
       <pubDate>Mon, 07 Jan 2019 16:10:59 +0800</pubDate>
       
       <guid>https://kobehub.github.io/about/</guid>
-      <description>About me I am Inno Jia. A junior in School of Software, Shandong University. I will graduate in 2020.
+      <description>I am Inno Jia. A junior in School of Software, Shandong University. I will graduate in 2020.
 My major is Artificial Intelligence, and my interests focus on machine learning and algorithm. Now my work is mainly at signal processing. I am a programming enthusiast and willing to share and discuss.
 I am a typical user of python, and my favorite static language is Golang. In many ways, I like to learn various programming languages and skills.</description>
     </item>
