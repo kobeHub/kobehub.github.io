@@ -38,6 +38,12 @@
   </url>
   
   <url>
+    <loc>https://kobehub.github.io/tags/hugo/</loc>
+    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/</loc>
     <lastmod>2019-01-08T20:40:41+08:00</lastmod>
     <priority>0</priority>
@@ -60,7 +66,14 @@
   </url>
   
   <url>
+    <loc>https://kobehub.github.io/categories/record/</loc>
+    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/tags/</loc>
+    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -72,6 +85,12 @@
                 hreflang="en"
                 href="https://kobehub.github.io/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/tags/tutorial/</loc>
+    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
 </urlset>
