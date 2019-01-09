@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://kobehub.github.io/projects/</loc>
     <lastmod>2019-01-08T20:24:57+08:00</lastmod>
   </url>
@@ -15,6 +10,11 @@
   <url>
     <loc>https://kobehub.github.io/contact/</loc>
     <lastmod>2019-01-08T17:28:13+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</loc>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
   </url>
   
   <url>
@@ -39,13 +39,13 @@
   
   <url>
     <loc>https://kobehub.github.io/tags/hugo/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T20:24:57+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -61,19 +61,19 @@
   
   <url>
     <loc>https://kobehub.github.io/posts/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/record/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/tags/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -89,7 +89,7 @@
   
   <url>
     <loc>https://kobehub.github.io/tags/tutorial/</loc>
-    <lastmod>2019-01-08T20:40:41+08:00</lastmod>
+    <lastmod>2019-01-08T12:40:41+08:00</lastmod>
     <priority>0</priority>
   </url>
   
