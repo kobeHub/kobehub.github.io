@@ -6,27 +6,10 @@
     <description>Recent content on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 08 Jan 2019 20:40:41 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jan 2019 20:24:57 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Record of build GitHub Pages use pages</title>
-      <link>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</link>
-      <pubDate>Tue, 08 Jan 2019 20:40:41 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</guid>
-      <description>前期准备 1. 本地下载安装Hugo 基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 apt,或者 snap 包管理进行最快速的安装
-apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
-首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装
-git clone https://github.com/gohugoio/hugo.git cd hugo go install 2. 建立的站点 在工作目录下，建立一个新的站点
-hugo new site Hugo-site cd Hugo-site git init  该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
-git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml  然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
-3. 编辑新的文章 hugo new posts/title.md
-hugo使用markdown进行文章书写，可以使用该命令建立一篇新的文章，新的文件出现在content/posts/ 文件夹下。注意需要将文件头的draft 改为false,才可以正式发布。
-4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。</description>
-    </item>
     
     <item>
       <title>Project</title>
@@ -46,6 +29,23 @@ hugo使用markdown进行文章书写，可以使用该命令建立一篇新的�
       <description> Email:jdgets111@gmail.com
  WeChat: Add Contacts jdgets, or scan the QR code in WeChat
   </description>
+    </item>
+    
+    <item>
+      <title>Record of build GitHub Pages use pages</title>
+      <link>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</link>
+      <pubDate>Tue, 08 Jan 2019 12:40:41 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</guid>
+      <description>前期准备 1. 本地下载安装Hugo 基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 apt,或者 snap 包管理进行最快速的安装
+apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
+首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装
+git clone https://github.com/gohugoio/hugo.git cd hugo go install 2. 建立的站点 在工作目录下，建立一个新的站点
+hugo new site Hugo-site cd Hugo-site git init  该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
+git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml  然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
+3. 编辑新的文章 hugo new posts/title.md
+hugo使用markdown进行文章书写，可以使用该命令建立一篇新的文章，新的文件出现在content/posts/ 文件夹下。注意需要将文件头的draft 改为false,才可以正式发布。
+4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。</description>
     </item>
     
     <item>
