@@ -34,7 +34,7 @@
     <item>
       <title>Record of build GitHub Pages use pages</title>
       <link>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</link>
-      <pubDate>Tue, 08 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 08 Jan 2019 12:12:00 +0800</pubDate>
       
       <guid>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</guid>
       <description>前期准备 1. 本地下载安装Hugo 基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 apt,或者 snap 包管理进行最快速的安装
