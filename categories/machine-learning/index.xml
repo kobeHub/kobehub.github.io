@@ -6,10 +6,28 @@
     <description>Recent content in Machine Learning on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 12 Jan 2019 17:43:29 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 12 Jan 2019 23:50:37 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Feature selection and feature extraction</title>
+      <link>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</link>
+      <pubDate>Sat, 12 Jan 2019 23:50:37 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</guid>
+      <description>特征选择与特征提取 1. 特征介绍 通常用于机器学习任务的特征集，可以使用一个 $l$ 维向量表示。称之为特征向量
+$x = [x_1, x_2, &amp;hellip;, x_l]^T$
+对于特征的产生，可以通过先验知识手工设定，也可以通过学习自动获取。对于先验知识较为明确，区分度大的样本，可以直接设计较好的特征将其分开；对于先验知识不明确，的特征集可以通学习获取。
+继续以分类系统为例：针对一个典型的分类系统的基本步骤，有关特征工程（Feature Engineering）主要有两部分：
+ 特征产生 （feature generation）  特征设计 （design） 特征提取 （extraction）  特征选择  子集搜索 （subset search） 子集评估 （subset evaluation）   2. 特征选取 2.1 选取准则 选取与任务相关度最高的特征集，特征间相关性较低
+特征与任务的相关性越大越好，特征间的相关性越小越好
+2.2 特征选择的一般步骤  从原始的特征集出发对于子集进行搜索 对于特征子集进行评估 观察是否达到临界条件，达到即可以使用，否则继续上述操作  2.3 特征选取方法（ Relief / LVW / L1-Norm ） a. 过滤式（Filter）  在训练之前进行，与分类器无关。
+ 对数据集进行特征选取之后，根据一些评估方法，选出最优特征
+ 代表方法：relief。首先给定一个相关统计量（一种评估方法），可以将其理解为基于距离的，也可以是基于概率的评估。如果基于距离，如果只选取一个特征作为特征集，相当于把所有的数据放在一个一维的直线上，我们希望类内尽可能聚集，类间尽可能分离，也就是说希望 类间距离 与 类内距离 的比值尽可能大。可以计算该比值。
+  现在可以设置一个阈值t 如果对于一个特征而言，经过评估其比值超过该阈值，就可以将该特征加入特征集。</description>
+    </item>
     
     <item>
       <title>[Review] Main concept of ML</title>
@@ -17,8 +35,7 @@
       <pubDate>Sat, 12 Jan 2019 17:43:29 +0800</pubDate>
       
       <guid>https://kobehub.github.io/posts/review-main-concept-of-ml/</guid>
-      <description>机器学习的一些重要概念 [TOC]
-1. 机器学习系统的主要操作 对于一个基于普通机器学习方法的分类系统，可能具有以下的基本操作步骤：
+      <description>机器学习的一些重要概念 1. 机器学习系统的主要操作 对于一个基于普通机器学习方法的分类系统，可能具有以下的基本操作步骤：
  数据收集(Sensing)
  数据预处理(Preprocessing):
   通常使用分割操作，将分类目标与背景进行分离
@@ -26,14 +43,17 @@
  选取模型(Model Selection)
  训练(Training)
  模型评估(Evaluation)
-  ##2.机器学习的主要任务
-有标记数据的分类(Classification)以及回归(Regression)，无标记数据进行聚簇分析(Clustering Analysis),异常检测(Anomaly Detection).
-1. 学习器  #### K-Nearest Neighbor(K-NN)  在特征空间找到K个最近的邻居，选取数量最大的类别作为某个样本的预测类别。无需训练，适用于小数据量，非线性问题
- #### Decision Tree  通过每次选取最优特征进行进一步决策，构成了一组规则集组成的决策树，通过输入样本的特征进行分类任务。
+  2.机器学习的主要任务 有标记数据的分类(Classification)以及回归(Regression)，无标记数据进行聚簇分析(Clustering Analysis),异常检测(Anomaly Detection).
+1. 学习器  K-Nearest Neighbor(K-NN)  在特征空间找到K个最近的邻居，选取数量最大的类别作为某个样本的预测类别。无需训练，适用于小数据量，非线性问题
+ Decision Tree  通过每次选取最优特征进行进一步决策，构成了一组规则集组成的决策树，通过输入样本的特征进行分类任务。
 决策过程具有良好的可理解性，对于单一因素即可决定的预测结果的问题，可以弥补基于统计的机器学习的不足。
- #### Support Vector Machine  在特征空间选取一个超平面，使得所有样本点到超平面的总距离最小。通过定义一个间隔(Margin),最大化Margin，选取一个合适的超平面用于分类任务。通过使用合适的变换核可以进行解决非线性问题。
+ Support Vector Machine  在特征空间选取一个超平面，使得所有样本点到超平面的总距离最小。通过定义一个间隔(Margin),最大化Margin，选取一个合适的超平面用于分类任务。通过使用合适的变换核可以进行解决非线性问题。
 在解决小规模、非线性问题上具有优势，因为对于预测起到决定性作用的，是少数边界上的向量(Support Vector)
- 朴素贝叶斯(Naive Bayesian) Neural Networks 最小二乘 (Least Squares) 高斯混合模型（Gaussian Mixture Model） Hidden Markov Model ####Dynamic Bayesian Network</description>
+ 朴素贝叶斯(Naive Bayesian)
+ Neural Networks
+ 最小二乘 (Least Squares)
+ 高斯混合模型（Gaussian Mixture Model）
+ Hidden Markov Model</description>
     </item>
     
   </channel>

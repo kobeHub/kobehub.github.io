@@ -115,7 +115,9 @@
             </span>
             <span class="reading-time">
               <i class="fas fa-clock"></i>
-              One minute read
+              
+              
+              Reading time: 12 minutes.
             </span>
           </div>
           <div class="categories">
@@ -127,14 +129,68 @@
     <a href="https://kobehub.github.io/tags/review/">Review</a></div>
 
         </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
       </header>
 
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#机器学习的一些重要概念">机器学习的一些重要概念</a>
+<ul>
+<li><a href="#1-机器学习系统的主要操作">1. 机器学习系统的主要操作</a></li>
+<li><a href="#2-机器学习的主要任务">2.机器学习的主要任务</a>
+<ul>
+<li><a href="#1-学习器">1. 学习器</a></li>
+</ul></li>
+<li><a href="#3-所使用的范式-paradigms">3. 所使用的范式（Paradigms）</a>
+<ul>
+<li><a href="#1-集成学习-ensemble-learning">1. 集成学习  (Ensemble learning)</a>
+<ul>
+<li><a href="#1-1-bagging-bootstrap-aggregating-方法">1.1 Bagging （Bootstrap AGGregatING）方法</a></li>
+</ul></li>
+<li><a href="#2-深度学习-dl">2. 深度学习(DL)</a></li>
+<li><a href="#3-半监督学习-semi-supervised-learning">3.半监督学习 (Semi-supervised learning)</a></li>
+<li><a href="#4-代价敏感学习-cost-sensitive-learning">4.代价敏感学习 (Cost-sensitive learning)</a></li>
+<li><a href="#5-类别不平衡学习-class-imbalance-learning">5.类别不平衡学习 (Class-imbalance learning)</a></li>
+<li><a href="#6-多标记学习-multi-label-learning">6.多标记学习 (Multi-label learning)</a></li>
+<li><a href="#7-多示例学习-multi-instance-learning">7.多示例学习 (Multi-instance learning)</a></li>
+</ul></li>
+<li><a href="#4-data-and-feature">4. Data and Feature</a></li>
+<li><a href="#5-误差-error-与错误率-error-rate">5. 误差（Error）与错误率（Error rate）</a></li>
+<li><a href="#6-泛化能力">6. 泛化能力</a></li>
+<li><a href="#7-独立同分布的假设">7. 独立同分布的假设</a></li>
+<li><a href="#8-模型的拟合程度">8.模型的拟合程度</a>
+<ul>
+<li><a href="#1-过拟合">1. 过拟合</a></li>
+<li><a href="#2-欠拟合">2.欠拟合</a></li>
+</ul></li>
+<li><a href="#9-评估方法-evaluation-method">9. 评估方法（Evaluation Method）</a>
+<ul>
+<li><a href="#数据集的划分">数据集的划分</a></li>
+</ul></li>
+<li><a href="#10-性能度量">10. 性能度量</a></li>
+<li><a href="#11-比较检验">11. 比较检验</a></li>
+<li><a href="#12-方差和偏差">12. 方差和偏差</a>
+<ul>
+<li><a href="#二者关系">二者关系</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </aside>
       <div>
         
 
 <h1 id="机器学习的一些重要概念">机器学习的一些重要概念</h1>
-
-<p>[TOC]</p>
 
 <h2 id="1-机器学习系统的主要操作">1. 机器学习系统的主要操作</h2>
 
@@ -162,20 +218,20 @@
 <li><p>模型评估<strong>(Evaluation)</strong></p></li>
 </ul>
 
-<p>##2.机器学习的主要任务</p>
+<h2 id="2-机器学习的主要任务">2.机器学习的主要任务</h2>
 
 <p>有标记数据的分类<strong>(Classification)</strong>以及回归<strong>(Regression)</strong>，无标记数据进行聚簇分析<strong>(Clustering Analysis)</strong>,异常检测<strong>(Anomaly Detection)</strong>.</p>
 
 <h3 id="1-学习器">1. 学习器</h3>
 
 <ul>
-<li>#### K-Nearest Neighbor(K-NN)</li>
+<li><strong>K-Nearest Neighbor(K-NN)</strong></li>
 </ul>
 
 <p>在特征空间找到K个最近的邻居，选取数量最大的类别作为某个样本的预测类别。无需训练，适用于小数据量，非线性问题</p>
 
 <ul>
-<li>#### Decision Tree</li>
+<li><strong>Decision Tree</strong></li>
 </ul>
 
 <p>通过每次选取最优特征进行进一步决策，构成了一组规则集组成的决策树，通过输入样本的特征进行分类任务。</p>
@@ -183,7 +239,7 @@
 <p>决策过程具有良好的可理解性，对于单一因素即可决定的预测结果的问题，可以弥补基于统计的机器学习的不足。</p>
 
 <ul>
-<li>#### Support Vector Machine</li>
+<li><strong>Support Vector Machine</strong></li>
 </ul>
 
 <p>在特征空间选取一个超平面，使得所有样本点到超平面的总距离最小。通过定义一个间隔<strong>(Margin)</strong>,最大化Margin，选取一个合适的超平面用于分类任务。通过使用合适的变换核可以进行解决非线性问题。</p>
@@ -191,17 +247,17 @@
 <p>在解决小规模、非线性问题上具有优势，因为对于预测起到决定性作用的，是少数边界上的向量<strong>(Support Vector)</strong></p>
 
 <ul>
-<li><h4 id="朴素贝叶斯-naive-bayesian">朴素贝叶斯(Naive Bayesian)</h4></li>
+<li><p><strong>朴素贝叶斯(Naive Bayesian)</strong></p></li>
 
-<li><h4 id="neural-networks">Neural Networks</h4></li>
+<li><p><strong>Neural Networks</strong></p></li>
 
-<li><h4 id="最小二乘-least-squares">最小二乘 (Least Squares)</h4></li>
+<li><p><strong>最小二乘 (Least Squares)</strong></p></li>
 
-<li><h4 id="高斯混合模型-gaussian-mixture-model">高斯混合模型（Gaussian Mixture Model）</h4></li>
+<li><p><strong>高斯混合模型（Gaussian Mixture Model）</strong></p></li>
 
-<li><h4 id="hidden-markov-model">Hidden Markov Model</h4></li>
+<li><p><strong>Hidden Markov Model</strong></p></li>
 
-<li><p>####Dynamic Bayesian Network</p></li>
+<li><p><strong>Dynamic Bayesian Network</strong></p></li>
 </ul>
 
 <h2 id="3-所使用的范式-paradigms">3. 所使用的范式（Paradigms）</h2>
@@ -222,7 +278,7 @@
 
 <p>随机森林中的基学习器的多样性不仅来自样本扰动，而且来自属性扰动，具有更高的差异度。泛化能力更强</p>
 
-<p>###2. 深度学习(DL)</p>
+<h3 id="2-深度学习-dl">2. 深度学习(DL)</h3>
 
 <h3 id="3-半监督学习-semi-supervised-learning">3.半监督学习 (Semi-supervised learning)</h3>
 
@@ -232,9 +288,9 @@
 
 <h3 id="6-多标记学习-multi-label-learning">6.多标记学习 (Multi-label learning)</h3>
 
-<p>###7.多示例学习 (Multi-instance learning)</p>
+<h3 id="7-多示例学习-multi-instance-learning">7.多示例学习 (Multi-instance learning)</h3>
 
-<p>##4. Data and Feature</p>
+<h2 id="4-data-and-feature">4. Data and Feature</h2>
 
 <ul>
 <li>数据：样本、实例、对象</li>
@@ -309,31 +365,31 @@
 
 <li><p>分类任务：错误率（Error rate: <strong>错分</strong>样本占总体的比例）以及精度(Accuracy：<strong>正分</strong>样本占总体比例)</p></li>
 
-<li><p>查准率（Precision：准确率）与查全率（Recall：召回率）
-检索出的真正例所占的比例：
-$$
-P = \frac{TP}{TP+FP} \ \
-$$
-检索出的真正例占全部正例的比例：
-$$
-R = \frac{TP}{TP+FN} \ <br />
-$$
-分类正确的比例：
-$$
-Acc = \frac{TP+TN}{TP+FP+TN+FN}
-$$</p></li>
+<li><p>查准率（Precision：准确率）与查全率（Recall：召回率）</p>
+
+<ul>
+<li><p>检索出的真正例所占的比例：
+<img src="http://latex.codecogs.com/gif.latex?P=\frac{TP}{TP+FP}" alt="" /></p></li>
+
+<li><p>检索出的真正例占全部正例的比例：
+<img src="http://latex.codecogs.com/gif.latex?R=\frac{TP}{TP+FN}" alt="" /></p></li>
+
+<li><p>分类正确的比例：
+<img src="http://latex.codecogs.com/gif.latex?Acc=\frac{TP+TN}{TP+FP+TN+FN}" alt="" /></p></li>
+</ul></li>
 
 <li><p>ROC</p></li>
 </ul>
 
 <p><strong>Receiver Operating Characteristic</strong>受试者工作曲线。若一个学习器的ROC曲线完全位于另一个学习器曲线下，则后者的性能较优。该曲线基于两个主要量进行绘制：真正例率（True Positive Rate），假正例率（False Positive Rate）</p>
 
-<p>ROC曲线下的面积AUC(Area Under ROC Curve)
-  $$
-  TPR = \frac{TP}{TP+FN} = R \ <br />
-  FPR = \frac{FP}{TN+FP}
-  $$
-  <img src="http://media.innohub.top/190112-roc.png" alt="ROC" /></p>
+<p>ROC曲线下的面积AUC(Area Under ROC Curve)</p>
+
+<p><img src="http://latex.codecogs.com/gif.latex?TPR=\frac{TP+TN}{TPFN}" alt="" /></p>
+
+<p><img src="http://latex.codecogs.com/gif.latex?FPT=\frac{FP}{FP+TN}" alt="" /></p>
+
+<p><img src="http://media.innohub.top/190112-roc.png" alt="ROC" /></p>
 
 <h2 id="11-比较检验">11. 比较检验</h2>
 
