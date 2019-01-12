@@ -6,10 +6,35 @@
     <description>Recent content on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 08 Jan 2019 20:24:57 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 12 Jan 2019 17:43:29 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Main concept of ML</title>
+      <link>https://kobehub.github.io/posts/review-main-concept-of-ml/</link>
+      <pubDate>Sat, 12 Jan 2019 17:43:29 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/review-main-concept-of-ml/</guid>
+      <description>机器学习的一些重要概念 [TOC]
+1. 机器学习系统的主要操作 对于一个基于普通机器学习方法的分类系统，可能具有以下的基本操作步骤：
+ 数据收集(Sensing)
+ 数据预处理(Preprocessing):
+  通常使用分割操作，将分类目标与背景进行分离
+ 特征定义以及特征提取(Feature definition and Extraction)  以上过程一般都需要使用到一定的先验知识(Prior Knowledge)
+ 选取模型(Model Selection)
+ 训练(Training)
+ 模型评估(Evaluation)
+  ##2.机器学习的主要任务
+有标记数据的分类(Classification)以及回归(Regression)，无标记数据进行聚簇分析(Clustering Analysis),异常检测(Anomaly Detection).
+1. 学习器  #### K-Nearest Neighbor(K-NN)  在特征空间找到K个最近的邻居，选取数量最大的类别作为某个样本的预测类别。无需训练，适用于小数据量，非线性问题
+ #### Decision Tree  通过每次选取最优特征进行进一步决策，构成了一组规则集组成的决策树，通过输入样本的特征进行分类任务。
+决策过程具有良好的可理解性，对于单一因素即可决定的预测结果的问题，可以弥补基于统计的机器学习的不足。
+ #### Support Vector Machine  在特征空间选取一个超平面，使得所有样本点到超平面的总距离最小。通过定义一个间隔(Margin),最大化Margin，选取一个合适的超平面用于分类任务。通过使用合适的变换核可以进行解决非线性问题。
+在解决小规模、非线性问题上具有优势，因为对于预测起到决定性作用的，是少数边界上的向量(Support Vector)
+ 朴素贝叶斯(Naive Bayesian) Neural Networks 最小二乘 (Least Squares) 高斯混合模型（Gaussian Mixture Model） Hidden Markov Model ####Dynamic Bayesian Network</description>
+    </item>
     
     <item>
       <title>Project</title>
