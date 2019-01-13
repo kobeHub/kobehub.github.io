@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kobehub.github.io/posts/review-decision-tree/</loc>
+    <lastmod>2019-01-13T21:05:17+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/posts/review-bayesian-decision-theory/</loc>
     <lastmod>2019-01-13T17:11:19+08:00</lastmod>
   </url>
@@ -60,7 +65,7 @@
   
   <url>
     <loc>https://kobehub.github.io/</loc>
-    <lastmod>2019-01-13T17:11:19+08:00</lastmod>
+    <lastmod>2019-01-13T21:05:17+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -76,13 +81,13 @@
   
   <url>
     <loc>https://kobehub.github.io/categories/machine-learning/</loc>
-    <lastmod>2019-01-13T17:11:19+08:00</lastmod>
+    <lastmod>2019-01-13T21:05:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/posts/</loc>
-    <lastmod>2019-01-13T17:11:19+08:00</lastmod>
+    <lastmod>2019-01-13T21:05:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -94,7 +99,7 @@
   
   <url>
     <loc>https://kobehub.github.io/tags/review/</loc>
-    <lastmod>2019-01-13T17:11:19+08:00</lastmod>
+    <lastmod>2019-01-13T21:05:17+08:00</lastmod>
     <priority>0</priority>
   </url>
   
