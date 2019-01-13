@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/review-bayesian-decision-theory/">
+    <title>
+  [Review] Bayesian decision theory · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/review-bayesian-decision-theory/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.53" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">[Review] Bayesian decision theory</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='January 13, 2019'>
+                January 13, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              Reading time: 18 minutes.
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://kobehub.github.io/categories/machine-learning/">Machine Learning</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://kobehub.github.io/tags/review/">Review</a></div>
+
+        </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      </header>
+
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#bayesian-decision-theory">Bayesian decision theory</a>
+<ul>
+<li><a href="#1-常用的贝叶斯决策规则">1. 常用的贝叶斯决策规则</a></li>
+<li><a href="#2-基本概率公式">2.基本概率公式</a></li>
+<li><a href="#3-基于最小错误率的贝叶斯决策">3. 基于最小错误率的贝叶斯决策</a>
+<ul>
+<li><a href="#平均错误率最小的证明">平均错误率最小的证明：</a></li>
+</ul></li>
+<li><a href="#4-基于最小风险的贝叶斯决策">4. 基于最小风险的贝叶斯决策</a>
+<ul>
+<li><a href="#1-基本概念">1. 基本概念</a></li>
+<li><a href="#2-形式化表示">2. 形式化表示</a></li>
+<li><a href="#3-决策规则">3. 决策规则</a></li>
+<li><a href="#4-0-1损失函数的特殊情形">4. 0-1损失函数的特殊情形</a></li>
+</ul></li>
+<li><a href="#5-限定一类错误率条件下使另一类错误率最小的两类别决策">5. 限定一类错误率条件下使另一类错误率最小的两类别决策</a></li>
+<li><a href="#6-最大最小决策">6. 最大最小决策</a></li>
+</ul></li>
+<li><a href="#类条件概率密度的估计">类条件概率密度的估计</a>
+<ul>
+<li><a href="#1-主要问题">1. 主要问题</a></li>
+<li><a href="#2-最大似然估计-mle">2. 最大似然估计（MLE）</a>
+<ul>
+<li><a href="#2-1-假设">2.1 假设</a></li>
+<li><a href="#2-2-定义">2.2 定义</a></li>
+<li><a href="#2-3-求解">2.3 求解</a></li>
+</ul></li>
+<li><a href="#3-贝叶斯估计">3. 贝叶斯估计</a></li>
+<li><a href="#4-非参数估计任务">4. 非参数估计任务</a></li>
+<li><a href="#5-parzen窗法以及-k-n-近邻法">5. Parzen窗法以及$K_N$近邻法</a></li>
+</ul></li>
+</ul>
+</nav>
+      </aside>
+      <div>
+        
+
+<h1 id="bayesian-decision-theory">Bayesian decision theory</h1>
+
+<h2 id="1-常用的贝叶斯决策规则">1. 常用的贝叶斯决策规则</h2>
+
+<ul>
+<li>基于最小错误率的贝叶斯决策</li>
+<li>基于最小风险的贝叶斯决策</li>
+<li>在限定一类错误率条件下使另一类错误率最小的两类别决策</li>
+<li>最小最大决策</li>
+</ul>
+
+<h2 id="2-基本概率公式">2.基本概率公式</h2>
+
+<ul>
+<li><p><strong>条件概率：</strong>$p(A|B)$表示事件A在事件B发生的条件下发生的概率</p></li>
+
+<li><p><strong>联合概率：</strong>$p(A. B)$ 表示两个事件同时发生的概率，当两个随机事件相互独立时，联合概率等于概率的乘积</p></li>
+</ul>
+
+<p><strong>基本条件概率公式：</strong>
+  $$
+  P(A | B) = \frac{P(A, B)}{P(B)}
+  $$
+  所以当A B相互独立时，$P(A|B) =  P(A)$ .</p>
+
+<ul>
+<li><strong>全概率公式：</strong>  如果B是由相互独立的事假组成的概率空间 ${B_1, B_2,&hellip;,B_n}$, 那么关于事件A的全概率公式可以写作：</li>
+</ul>
+
+<p>$$P(A) = \sum_{i=1}^{n}P(B_i)P(A|B_i)$$</p>
+
+<p>对于全概率公式可以通过，条件概率进行推导，相当于将所有在B的子事件和同时A发生的概率的和，因为B的概率空间之和为1，所以最终得到的是A发生的概率。</p>
+
+<ul>
+<li><strong>贝叶斯公式：</strong>
+<br /></li>
+</ul>
+
+<p>$$
+  P(B_i | A) = \frac{P(B_i)P(A|B_i)}{\sum _{i=1}^{n}P(B_i) P(A|B_i) }
+  $$</p>
+
+<p>其中 $P(B_i|A)$ 被称为后验概率，$P(B_i)$ 为先验概率，$P(A|B_i)$ 是条件概率</p>
+
+<h2 id="3-基于最小错误率的贝叶斯决策">3. 基于最小错误率的贝叶斯决策</h2>
+
+<p>模式分类问题中，基于减少分类错误的要求。使用概率论中的贝叶斯公式，可得出使得分类错误率规则。</p>
+
+<p>以简单的二分类任务为例，类别的状态用变量$w$表示，其中$w_1$表示正常，$w_2$表示异常。$p(w_1), p(w_2)$是已知的先验概率。那么有：</p>
+
+<ul>
+<li>$p(x|w_1):$样本x为正常类的条件概率密度</li>
+<li>$p(x|w_2):$样本x为正常类的条件概率密度</li>
+</ul>
+
+<p>使用贝叶斯公式，给定一个样本x，可以求出所属类的后验概率，然后选取后验概率更大的一类作为x的分类标签。</p>
+
+<p>$$
+P(w_i | x) = \frac{P(x|w_i)P(w_i)}{\sum _{j=1}^2P(x|w_j)P(w_j)}
+$$</p>
+
+<p>分类规则可以写作：</p>
+
+<p>$$
+P(w_i|x) = max _{j = 1,2} P(w_j| x)
+$$</p>
+
+<p>使用这种决策方式，决策结果仅取决于实际观察到的<strong>类条件概率密度</strong>以及<strong>先验概率</strong>，如果先验概率有明显的偏向性，那么决策结果也有明显的偏向性。</p>
+
+<h3 id="平均错误率最小的证明">平均错误率最小的证明：</h3>
+
+<h2 id="4-基于最小风险的贝叶斯决策">4. 基于最小风险的贝叶斯决策</h2>
+
+<h3 id="1-基本概念">1. 基本概念</h3>
+
+<p>使得分类错误率达到最小是必要的，但是对于实际问题，有时需要考虑另一个比错误率更加广泛的概念&mdash;-<strong>风险</strong>。风险与损失是紧密相连的。</p>
+
+<p>例如癌症细胞的判别，将异常细胞判别为正常的风险显然比将正常判别为异常的风险大。基于决策论的角度进行考虑。在决策轮中，采取的决定称为<strong>决策</strong>或者<strong>行动</strong>，所有可能采取的决策组成的集合称之为<strong>决策空间</strong>，<strong>行动空间</strong>，用A表示。而每一个决策都会带来一定的损失。<strong>状态空间</strong>又称为<strong>自然空间</strong>。</p>
+
+<h3 id="2-形式化表示">2. 形式化表示</h3>
+
+<ul>
+<li><p>对于观察X是一个d维的随机向量：$X = [x_1, x_2,&hellip;,x_d]^T$</p></li>
+
+<li><p>状态空间$\omega$ 是由c个自然状态组成（C类）
+$$
+\omega = {\omega_1,\omega_2,&hellip;,\omega_c}
+$$</p></li>
+
+<li><p>决策空间由a个决策组成$a_1,..a_a$，<strong>一般而言c类对应于c个决策，但是可能存在“拒绝”的情形，所以使用a个决策</strong></p></li>
+</ul>
+
+<p>为了引入损失的概念，对于给定的x，如果采取的决策从决策表可见，那么对应于决策$a_i$,可以在c个类中任取一个，对应的损失为 $\lambda(a_i, \omega_j)$ ,而取得该类的<strong>后验概率</strong>为$P(w_j|x)$.那么就可以得到条件期望损失：
+$$
+R(a_i | x) = \sum _{j=1}^c\lambda(a_i, \omega_j)P(w_j|x)
+$$
+条件期望损失又被称为条件风险，对于条件风险进行积分，可以得到期望风险R。</p>
+
+<blockquote>
+<p><strong>期望风险</strong>反映了对于整个特征空间上的所有x取值采取相应的决策$a_i$,所带来的平均风险；而<strong>条件风险</strong>反映的是对于某一具体的x采取决策带来的风险。</p>
+
+<p>在考虑错判带来的损失时，我们希望期望风险最小；如果在对每一个决策采取行动时，都使其条件风险最小，那么期望风险一定也最小。这样的决策就是最小风险贝叶斯决策。</p>
+</blockquote>
+
+<h3 id="3-决策规则">3. 决策规则</h3>
+
+<ul>
+<li>利用已知的先验概率$P(w_j)$,条件概率$P(x|w_j), j=1,2&hellip;,c$   以及给出待识别的<code>x</code> 等条件下。计算后验概率$P(w_i| x), i=1,2&hellip;,c$</li>
+<li>利用计算得到的后验概率以及决策表，计算采用每一种决策$a_i$的<strong>条件风险</strong>,  $R(a_i | x)$</li>
+<li>找出风险最小的决策作为最终决策</li>
+</ul>
+
+<h3 id="4-0-1损失函数的特殊情形">4. 0-1损失函数的特殊情形</h3>
+
+<p>基于最小风险的贝叶斯决策，不仅需要符合实际的先验概率以及类条件概率，还需要合适的损失函数，一般需要使用专业领域知识确定。</p>
+
+<p>在不考虑“拒绝”的决策时，如果使用最为简单<code>0-1损失函数</code>，那么这时的最小风险决策就是最小错误率的贝叶斯决策。后者是前者的一个特殊形式。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">0-1损失： 决策与状态下表相等时损失0；不等时损失1</pre></div>
+<h2 id="5-限定一类错误率条件下使另一类错误率最小的两类别决策">5. 限定一类错误率条件下使另一类错误率最小的两类别决策</h2>
+
+<p>由于先验概率对于具体问题而言，通常是确定的。所以一般称$p_1(e), p_2(e)$为两类错误率。实际使用中，有时要求限制其中一类的错误率不得大于某个常数，使得另一类错误率尽可能小。</p>
+
+<h2 id="6-最大最小决策">6. 最大最小决策</h2>
+
+<p>对于给定的x其先验概率不变，一般通过贝叶斯规则，可以使得错误率或者风险最小。但是对于未知的先验概率或者是可变的先验概率，往往无法得到结果。</p>
+
+<p>最大最小决策就是考虑先验概率可变时，如何使得最大可能风险最小，在最差情况下争取最好结果。是一种偏于保守的分类方法。</p>
+
+<h1 id="类条件概率密度的估计">类条件概率密度的估计</h1>
+
+<h2 id="1-主要问题">1. 主要问题</h2>
+
+<p>由于在实际中，从有限的样本集中可能未知两个重要的前提条件，类条件概率密度以及先验概率。所以需要使用样本进行估计；同时需要探讨估计量的性质；利用样本集后估计错误率的方法。</p>
+
+<p><strong>从样本推断总体概率分布的方法：</strong></p>
+
+<ul>
+<li>监督参数估计：样本所属类别以及总体的概率密度函数形式已知，而某些参数未知。<strong>MLE，贝叶斯估计</strong></li>
+<li>非监督参数估计：已知总体的概率密度形式，但是样本无标记，求解概率密度函数的参数</li>
+<li>非参数估计：对于有标记数据，不知道数据的概率密度函数形式 <strong>Parzen</strong>， <strong>KN近邻</strong></li>
+</ul>
+
+<h2 id="2-最大似然估计-mle">2. 最大似然估计（MLE）</h2>
+
+<h3 id="2-1-假设">2.1 假设</h3>
+
+<p>最大似然估计基于以下假设：</p>
+
+<ul>
+<li>参数$\theta$是确定而未知的</li>
+<li>样本与总体独立同分布，样本独立抽取</li>
+<li>类条件概率密度具有某种特定函数形式</li>
+<li>不同类别的参数在函数上是独立的，每一类别的样本只对本类估计有影响</li>
+</ul>
+
+<h3 id="2-2-定义">2.2 定义</h3>
+
+<p>对于某一类样本的集合的N个样本，$X = {x_1, x_2, &hellip;, x_n}$, 假设样本是独立抽取的，那么似然函数如下：</p>
+
+<p>$$P(X|\theta) = P(x_1, x_2, &hellip;,x_n) = \prod _{k=1}^nP(x_k|\theta)
+$$</p>
+
+<p>叫做参数$\theta$相对于样本集X的似然函数。给出了从总体中抽出这n个样本的概率。<strong>如果$\theta$是已知的，那么哪一个样本集被抽取的可能性最大呢？显然是令该似然函数值最大的样本集被抽取的概率最大。</strong></p>
+
+<p>那么根据此思路，当 参数未知，根据给定的样本集，我们需要找到其来自哪一个密度函数的概率最大，就是要在参数空间找一个值$\theta$ 使得似然函数最大。</p>
+
+<h3 id="2-3-求解">2.3 求解</h3>
+
+<p>对于似然函数的连乘可能造成下溢，通常使用对数似然。
+$$
+H(\theta) = ln(l(\theta))
+$$
+然后对$\theta$求出梯度算子，令其等于0，计算使得目标函数为最大值的参数值<strong>作为概率密度分布函数的参数</strong>。</p>
+
+<h2 id="3-贝叶斯估计">3. 贝叶斯估计</h2>
+
+<p>贝叶斯决策与贝叶斯估计两者都是立足于使得贝叶斯风险最小，只是解决的问题不同，前者<strong>前者是要决策x的真实状态，而后者是估计样本集X所属总体分布的参数。</strong></p>
+
+<p><img src="http://media.innohub.top/190113-baye.png" alt="baye" /></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>贝叶斯决策</th>
+<th>贝叶斯估计</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>问题性质</td>
+<td><strong>决策问题</strong></td>
+<td><strong>估计问题</strong></td>
+</tr>
+
+<tr>
+<td>已知</td>
+<td>样本x</td>
+<td>样本集X</td>
+</tr>
+
+<tr>
+<td>需要</td>
+<td>做出决策$a_i$</td>
+<td>得出估计量$\theta^*$</td>
+</tr>
+
+<tr>
+<td>客观存在</td>
+<td>真实状态$w_j$</td>
+<td>真实参数$\theta$</td>
+</tr>
+
+<tr>
+<td>已知</td>
+<td>状态空间A是离散空间</td>
+<td>参数空间$\theta$是连续空间</td>
+</tr>
+
+<tr>
+<td>已知</td>
+<td>先验概率$p(w_j)$</td>
+<td>待估计参数的分布形式</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="4-非参数估计任务">4. 非参数估计任务</h2>
+
+<p>​      以上讨论的参数估计方法要求已知总体分布的形式。然而许多实际问题并不知道总体分布形式，或总体分布形式不是一些通常遇到的典型分布，不能写成某些参数的函数。为了设计贝叶斯分类器，仍然需要总体分布的知识，于是提出了某些直接用样本来估计总体分布的方法，称为估计分布的非参数法。</p>
+
+<p>​    <strong>估计总体分布密度函数有很多方法，它们的最根本出发点是随机向量x落入区域R的概率P。</strong>对于给定的样本，已知其类别。对于一个以为的样本而言，假定所有的样本位于一个范围[a, b]之间，我们要求的的东西就是，给定一个区间内的值，求出该值的概率。也就是求每一点的密度大小。</p>
+
+<p><img src="http://media.innohub.top/190113-noarg.png" alt="no arg" /></p>
+
+<p>​       要估计无限个点，任何一个点，找一个邻域，一个框，看它框住几个样本点，如果框住的样本点越多说明这个地方估计值越高，框出的样本点越少说明这个地方密度越小，这样的话，这个公式就很好理解了，那个大N是没有用的，这个大N除不除是没有用的，大N都扔了也没有关系，因为对于同一组系数来说，N都是一样的，就是一个因子分子，有用的是KN和V，V这个就是框是多大，框是一定的话，V就定了，那么就是KN就是圈几个点，圈的点越多，这个点的密度就越大，圈的点越少，这个点密度就越小，根据公式也可以计算具体的值，这个具体的值就是x,y点的密度，也就是这个空间中样本的密度，注意这个密度不一定样本点所在位置的密度，也可以是没有样本点所在位置的估计，每个有效区域上都可以，所以看这个公式非常好理解，</p>
+
+<p>​      样本总数为N，在每个区域中，体积为V时所包含的的样本数Kn。在求x处的密度估计p时，我们得到包含x的区域体积，区域内恰好落入kN个样本，用这个式子来估计p。对于parzen窗，就是每个区域中的体积是固定的，我们计算估计每个区域中样本的个数。kn近邻就是样本个数已知，我们计算每个区域中包含给定样本个数的体积, 进而求概率分布形式。</p>
+
+<h2 id="5-parzen窗法以及-k-n-近邻法">5. Parzen窗法以及$K_N$近邻法</h2>
+
+<p>用来估计一点的密度的“邻域”的大小，都是根据样本集的大小来确定的。对一个固定大小的样本集，两种方法均有自己确定“邻域”大小的方法：</p>
+
+<ul>
+<li>Parzen窗法：“邻域” 体积大小是固定，但“邻域”包含的样本点数目可能不同<br /></li>
+<li>近邻法： “邻域”内包含的样本点数目固定，但“邻域”的体积可能不同</li>
+</ul>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>

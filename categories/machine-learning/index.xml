@@ -6,10 +6,27 @@
     <description>Recent content in Machine Learning on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 12 Jan 2019 23:50:37 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jan 2019 17:11:19 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Bayesian decision theory</title>
+      <link>https://kobehub.github.io/posts/review-bayesian-decision-theory/</link>
+      <pubDate>Sun, 13 Jan 2019 17:11:19 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/review-bayesian-decision-theory/</guid>
+      <description>Bayesian decision theory 1. 常用的贝叶斯决策规则  基于最小错误率的贝叶斯决策 基于最小风险的贝叶斯决策 在限定一类错误率条件下使另一类错误率最小的两类别决策 最小最大决策  2.基本概率公式  条件概率：$p(A|B)$表示事件A在事件B发生的条件下发生的概率
+ 联合概率：$p(A. B)$ 表示两个事件同时发生的概率，当两个随机事件相互独立时，联合概率等于概率的乘积
+  基本条件概率公式： $$ P(A | B) = \frac{P(A, B)}{P(B)} $$ 所以当A B相互独立时，$P(A|B) = P(A)$ .
+ 全概率公式： 如果B是由相互独立的事假组成的概率空间 ${B_1, B_2,&amp;hellip;,B_n}$, 那么关于事件A的全概率公式可以写作：  $$P(A) = \sum_{i=1}^{n}P(B_i)P(A|B_i)$$
+对于全概率公式可以通过，条件概率进行推导，相当于将所有在B的子事件和同时A发生的概率的和，因为B的概率空间之和为1，所以最终得到的是A发生的概率。
+ 贝叶斯公式：   $$ P(B_i | A) = \frac{P(B_i)P(A|B_i)}{\sum _{i=1}^{n}P(B_i) P(A|B_i) } $$
+其中 $P(B_i|A)$ 被称为后验概率，$P(B_i)$ 为先验概率，$P(A|B_i)$ 是条件概率
+3. 基于最小错误率的贝叶斯决策 模式分类问题中，基于减少分类错误的要求。使用概率论中的贝叶斯公式，可得出使得分类错误率规则。
+以简单的二分类任务为例，类别的状态用变量$w$表示，其中$w_1$表示正常，$w_2$表示异常。$p(w_1), p(w_2)$是已知的先验概率。那么有：</description>
+    </item>
     
     <item>
       <title>[Review] Feature selection and feature extraction</title>
