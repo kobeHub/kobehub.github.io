@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://kobehub.github.io/posts/review-neural-networks/</loc>
+    <lastmod>2019-01-14T20:23:39+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/posts/review-regression/</loc>
     <lastmod>2019-01-14T15:35:50+08:00</lastmod>
   </url>
@@ -75,7 +80,7 @@
   
   <url>
     <loc>https://kobehub.github.io/</loc>
-    <lastmod>2019-01-14T15:35:50+08:00</lastmod>
+    <lastmod>2019-01-14T20:23:39+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -91,13 +96,13 @@
   
   <url>
     <loc>https://kobehub.github.io/categories/machine-learning/</loc>
-    <lastmod>2019-01-14T15:35:50+08:00</lastmod>
+    <lastmod>2019-01-14T20:23:39+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/posts/</loc>
-    <lastmod>2019-01-14T15:35:50+08:00</lastmod>
+    <lastmod>2019-01-14T20:23:39+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -109,7 +114,7 @@
   
   <url>
     <loc>https://kobehub.github.io/tags/review/</loc>
-    <lastmod>2019-01-14T15:35:50+08:00</lastmod>
+    <lastmod>2019-01-14T20:23:39+08:00</lastmod>
     <priority>0</priority>
   </url>
   
