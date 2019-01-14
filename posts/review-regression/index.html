@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/review-regression/">
+    <title>
+  [Review] Regression · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/review-regression/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.53" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">[Review] Regression</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='January 14, 2019'>
+                January 14, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              Reading time: 9 minutes.
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://kobehub.github.io/categories/machine-learning/">Machine Learning</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://kobehub.github.io/tags/review/">Review</a></div>
+
+        </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      </header>
+
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#线性回归">线性回归</a>
+<ul>
+<li><a href="#1-回归模型">1. 回归模型</a>
+<ul>
+<li><a href="#分类">分类</a></li>
+</ul></li>
+<li><a href="#2-最小二乘法">2.最小二乘法</a>
+<ul>
+<li><a href="#2-1-单元线性回归">2.1 单元线性回归</a></li>
+<li><a href="#2-2-多元线性回归">2.2 多元线性回归</a></li>
+</ul></li>
+<li><a href="#3-最小二乘法的缺点">3.最小二乘法的缺点</a></li>
+<li><a href="#4-范数norm">4. 范数Norm</a></li>
+<li><a href="#5-岭回归-lasso回归">5. 岭回归，Lasso回归</a>
+<ul>
+<li><a href="#5-1-ridge-regression">5.1 Ridge Regression</a></li>
+<li><a href="#5-2-lasso-regression">5.2 Lasso Regression</a></li>
+</ul></li>
+<li><a href="#6-广义线性回归">6. 广义线性回归</a>
+<ul>
+<li><a href="#6-1-基本形式">6.1 基本形式</a></li>
+<li><a href="#6-2-分类任务-对数几率回归-极大似然法mle">6.2 分类任务&ndash;对数几率回归（极大似然法MLE）</a></li>
+<li><a href="#6-3-对数几率回归的特点">6.3 对数几率回归的特点</a></li>
+</ul></li>
+<li><a href="#7-多分类任务">7. 多分类任务</a>
+<ul>
+<li><a href="#拆分策略">拆分策略</a></li>
+<li><a href="#类别不平衡">类别不平衡</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+      </aside>
+      <div>
+        
+
+<h1 id="线性回归">线性回归</h1>
+
+<h2 id="1-回归模型">1. 回归模型</h2>
+
+<p>回归任务主要是处理连续值的模型。回归学习是用来估计输入值和输出值之间的关系，建立输入值和输出值之间的数学模型，当再来一个新样本时，可以预测新样本的输出值。回归是一个有监督的学习过程，在建立输入值和输出值之间的数学模型时，需要有训练集，在预测的时候需要一些先验知识。</p>
+
+<p>典型例子：房价的估计</p>
+
+<h3 id="分类">分类</h3>
+
+<p><strong>1. 按照输入值的数量</strong></p>
+
+<ul>
+<li>单元回归，输入的特征值只有一个</li>
+<li>多元回归，输入多个特征值</li>
+</ul>
+
+<p><strong>2. 输入与输出的关系</strong></p>
+
+<ul>
+<li>线性回归</li>
+<li>非线性回归</li>
+</ul>
+
+<p>基本模型：
+$$
+f(x_i) = wx_i  + b
+$$
+最常用的性能度量是均方误差，可以试图通过令均方误差最小化求得参数。</p>
+
+<h2 id="2-最小二乘法">2.最小二乘法</h2>
+
+<h3 id="2-1-单元线性回归">2.1 单元线性回归</h3>
+
+<p>对于只有一维特征的线性回归，可以直接使用均方误差作为损失函数。同时，对于$w, b$求偏导。令其等于0，即可以求出模型的两个参数。</p>
+
+<h3 id="2-2-多元线性回归">2.2 多元线性回归</h3>
+
+<p>更一般的情形是对于一个数据集D由d个属性进行描述，所以输入的特征是d维特征，此时试图学得的模型可以表示为：
+$$
+f(x_i) = w^T x_i + b
+$$
+可以把参数$w^T ,b吸收入向量的形式 \hat{w} = (w^T; b)$,同时把数据集D表示为一个<code>m * (d+1)</code> 的矩阵形式，其中每一行代表一个样本，每一列代表一个属性，同时把标记也写作向量形式 <code>m * 1</code></p>
+
+<p><strong>优化目标：</strong>
+$$
+\hat{w} = argmin _{ \hat{w} } (y-X \hat {w})^T (y - X \hat {w})
+\\ E _{ \hat {w}} = (y-X \hat {w}) ^T(y - X \hat {w})
+$$
+<strong>求偏导：</strong>
+$$
+\frac{ \partial E}{\partial \hat{w}} = 2 X^T(X \hat{w} - y)
+$$
+令上式等于0可以得到参数的最优解，但是由于涉及矩阵的逆，所以需要进行讨论。如果，$X^TX$是一个满秩矩阵或者正定矩阵，可以直接求：
+$$
+\hat{w}^* = (X^TX)^{-1}X^Ty
+$$
+但现实任务往往不是满秩矩阵（没有一行或者一列为０），就会有多个解，这是需要使用正则化的方法。使用正则化技术，减少特征前面的参数w的大小，具体就是修改线性回归中的损失函数形式即可，岭回归以及Lasso回归就是这么做的。或者丢弃一些对我们最终预测结果影响不大的特征，具体哪些特征需要丢弃可以通过PCA算法来实现；</p>
+
+<h2 id="3-最小二乘法的缺点">3.最小二乘法的缺点</h2>
+
+<ul>
+<li>模型可能过拟合</li>
+<li>在求解中需要对矩阵进行转置，但是非满秩矩阵的转置不存在，存在多解</li>
+</ul>
+
+<h2 id="4-范数norm">4. 范数Norm</h2>
+
+<p><img src="http://media.innohub.top/190114-norm.png" alt="norm" /></p>
+
+<h2 id="5-岭回归-lasso回归">5. 岭回归，Lasso回归</h2>
+
+<p>ridge 回归和lasso回归可以防止模型过拟合，也可以解决样本的特征数远超过样本数的问题。分别在初始线性回归模型上加<code>l-2</code> 范数，<code>l-1</code> 范数</p>
+
+<h3 id="5-1-ridge-regression">5.1 Ridge Regression</h3>
+
+<p>$\lambda$是需要设定的超参数。通常选取在验证集上损失最小的超参数。</p>
+
+<p><strong>损失函数：</strong>
+$$
+E_{\hat{w}} = (y-X \hat{w})^T(y - X\hat{w}) + \lambda||\hat{w}||^2  \qquad \lambda &gt;0
+$$
+<strong>求偏导：</strong>
+$$
+\frac{ \partial E}{\partial \hat{w}} = 2 X^T(X \hat{w} - y) + \lambda I \hat{w}, \qquad  I:Identity Matrix
+$$
+<strong>解析解：</strong>
+$$
+\hat{w}^* = (X^TX + \lambda I)^{-1}X^Ty
+$$
+对比一下普通的线性回归的解析解和岭回归的解析解，可以发现需要求逆的那一项变化了，岭回归解析解中求逆那一项在x转置x的基础上加了一项单位矩阵，在加入单位矩阵后就可以使得需要求逆那一项是满秩矩阵，不会出现不满秩的情况无论x转置x是满秩还是非满秩，x转置x+I都是满秩，可以解决最小二乘法作为损失函数所不能解决的特征数大于样本数的问题</p>
+
+<h3 id="5-2-lasso-regression">5.2 Lasso Regression</h3>
+
+<p><strong>损失函数：</strong>
+$$
+E_{\hat{w}} = (y-X \hat{w})^T(y - X\hat{w}) + \lambda||\hat{w}||_1  \qquad \lambda &gt;0
+$$
+<strong>在求解lasso回归的$\hat{w}$时要注意，不能用损失函数对其求导，因为一范数在0点处导数不存在。以y=|w|为例，w属于实数范围，在w=0点处，y的左导数是-1，右导数是1，左右导数不想等，所以不能对lasso回归的损失函数求导</strong></p>
+
+<p><strong>使用proximal gradient descent method(近端梯度下降法)</strong></p>
+
+<p>使用lasso回归的主要特点在于解的大部分元素是0，而以此作为参数进行线性回归，对于为0的特征进行了忽略，所以可以进行特征选择，选出重要特征。</p>
+
+<h2 id="6-广义线性回归">6. 广义线性回归</h2>
+
+<h3 id="6-1-基本形式">6.1 基本形式</h3>
+
+<p>对于任意的单调可微函数$g$,广义线性回归的一般形式：</p>
+
+<p>$f(x ) = g^{-1}(w^Tx +b)$</p>
+
+<h3 id="6-2-分类任务-对数几率回归-极大似然法mle">6.2 分类任务&ndash;对数几率回归（极大似然法MLE）</h3>
+
+<p>将线性回归用于分类任务，只需要确定合适的阶跃函数，预测值位于某个区间时输出为某种标记。单位阶跃函数不连续，可以使用<strong>对数几率函数（Logistic Function）</strong>替代
+$$
+g(z) = \frac{1}{1+e^{-z}}
+$$
+<strong>目标函数：</strong>
+$$
+y = \frac{1}{1 + e^{-(w^Tx +b)}}
+$$
+<strong>对数几率：</strong>
+$$
+ln \frac{y}{1-y} = w^Tx+b  \qquad (1)
+$$
+其中$ln \frac{y}{1-y}$ 被称为对数几率，y代表了样本为正例的可能，1-y代表为负例的可能，则该比值代表了样本作为正例的相对可能性。</p>
+
+<p><strong>如果将y视为类别的后验概率估计，则(1)可以改写为：</strong>
+$$
+ln \frac{p(y = 1 | x)}{p(y = 0 | x)} =w^Tx+b  \qquad (2)
+\\ 显然有：
+\\ p(y = 1 | x) =\frac{e^{(w^Tx +b)}}{1 + e^{(w^Tx +b)}}
+\\ p(y = 0 | x) =\frac{1}{1 + e^{(w^Tx +b)}}
+$$
+所以可以使用<strong>MLE</strong>来估计参数。
+$$
+l(w, b) = \sum _{i=1}^m p(y_i \mid x_i; w, b)
+$$</p>
+
+<h3 id="6-3-对数几率回归的特点">6.3 对数几率回归的特点</h3>
+
+<ul>
+<li>无需事先假设数据分布</li>
+<li>可以得到“类别”的近似概率预测</li>
+<li>可直接应用优化算法求解</li>
+</ul>
+
+<h2 id="7-多分类任务">7. 多分类任务</h2>
+
+<p>对于多分类任务，可以直接使用二分类的方法进行推广。基本思路是使用“拆解法”，将多分类任务拆分为多个二分类任务。</p>
+
+<h3 id="拆分策略">拆分策略</h3>
+
+<ul>
+<li>一对一</li>
+<li>一对其他</li>
+<li>多对多</li>
+</ul>
+
+<p><img src="http://media.innohub.top/190114-to1.png" alt="to1" /></p>
+
+<p><img src="http://media.innohub.top/190114-ton.png" alt="ton" /></p>
+
+<p><img src="http://media.innohub.top/190114-com.png" alt="com" /></p>
+
+<h3 id="类别不平衡">类别不平衡</h3>
+
+<ul>
+<li>欠采样：去除一些反例，使得正方数目接近</li>
+<li>过采样：增加正例</li>
+<li>阈值移动：</li>
+</ul>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>

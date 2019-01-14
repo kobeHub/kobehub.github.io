@@ -6,10 +6,26 @@
     <description>Recent content in Review on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 14 Jan 2019 12:01:51 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jan 2019 15:35:50 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Regression</title>
+      <link>https://kobehub.github.io/posts/review-regression/</link>
+      <pubDate>Mon, 14 Jan 2019 15:35:50 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/review-regression/</guid>
+      <description>线性回归 1. 回归模型 回归任务主要是处理连续值的模型。回归学习是用来估计输入值和输出值之间的关系，建立输入值和输出值之间的数学模型，当再来一个新样本时，可以预测新样本的输出值。回归是一个有监督的学习过程，在建立输入值和输出值之间的数学模型时，需要有训练集，在预测的时候需要一些先验知识。
+典型例子：房价的估计
+分类 1. 按照输入值的数量
+ 单元回归，输入的特征值只有一个 多元回归，输入多个特征值  2. 输入与输出的关系
+ 线性回归 非线性回归  基本模型： $$ f(x_i) = wx_i + b $$ 最常用的性能度量是均方误差，可以试图通过令均方误差最小化求得参数。
+2.最小二乘法 2.1 单元线性回归 对于只有一维特征的线性回归，可以直接使用均方误差作为损失函数。同时，对于$w, b$求偏导。令其等于0，即可以求出模型的两个参数。
+2.2 多元线性回归 更一般的情形是对于一个数据集D由d个属性进行描述，所以输入的特征是d维特征，此时试图学得的模型可以表示为： $$ f(x_i) = w^T x_i + b $$ 可以把参数$w^T ,b吸收入向量的形式 \hat{w} = (w^T; b)$,同时把数据集D表示为一个m * (d+1) 的矩阵形式，其中每一行代表一个样本，每一列代表一个属性，同时把标记也写作向量形式 m * 1
+优化目标： $$ \hat{w} = argmin _{ \hat{w} } (y-X \hat {w})^T (y - X \hat {w}) \\ E _{ \hat {w}} = (y-X \hat {w}) ^T(y - X \hat {w}) $$ 求偏导： $$ \frac{ \partial E}{\partial \hat{w}} = 2 X^T(X \hat{w} - y) $$ 令上式等于0可以得到参数的最优解，但是由于涉及矩阵的逆，所以需要进行讨论。如果，$X^TX$是一个满秩矩阵或者正定矩阵，可以直接求： $$ \hat{w}^* = (X^TX)^{-1}X^Ty $$ 但现实任务往往不是满秩矩阵（没有一行或者一列为０），就会有多个解，这是需要使用正则化的方法。使用正则化技术，减少特征前面的参数w的大小，具体就是修改线性回归中的损失函数形式即可，岭回归以及Lasso回归就是这么做的。或者丢弃一些对我们最终预测结果影响不大的特征，具体哪些特征需要丢弃可以通过PCA算法来实现；</description>
+    </item>
     
     <item>
       <title>[Review] Support Vector Machine</title>
