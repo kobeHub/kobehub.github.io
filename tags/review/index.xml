@@ -6,10 +6,25 @@
     <description>Recent content in Review on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 13 Jan 2019 21:05:17 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jan 2019 12:01:51 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Support Vector Machine</title>
+      <link>https://kobehub.github.io/posts/review-support-vector-machine/</link>
+      <pubDate>Mon, 14 Jan 2019 12:01:51 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/review-support-vector-machine/</guid>
+      <description>SVM 1. Margin and Support Vector 首先考虑一个线性分类任务,分类的最基本的想法就是在一个样本空间中划分一个超平面,将两个不同的类别的样本区分开。如何寻找超平面以及衡量超平面的好坏成为重要的问题。
+为了正确的进行分类，我们需要找到一个鲁棒性更强的超平面，对于新的数据具有更强的泛化能力。在样本中，距离超平面的最近的样本点的距离应该尽可能的大，依据此规则选取超平面。
+间隔:margin, 两类样本到划分超平面的最近的距离之和。代表着划分超平面对于样本局部扰动的”容忍性“，间隔越大，容忍性越好。
+超平面可以用以下形式表示： $$ W^Tx+b = 0 $$ 根据超平面可以对样本进行划分： $$ \begin{cases} w^T x_i + b \ge 1, \qquad &amp;amp; y_i = +1 \\ w^Tx_i + b \le 1, \qquad &amp;amp; y_i = -1 \end{cases} $$ 支持向量： 距离超平面最小的训练样本使得等号成立，被称为支持向量
+Margin: $\gamma = \frac{2}{||w||}$,
+Target:最大化margin
+为了找到具有最大间隔的超平面，使用以下目标函数： $$ \begin{align} &amp;amp; min_{w,b} \frac{1}{2} ||w||^2 \qquad (1) \\ &amp;amp; s.t. y_i(w^Tx_i+b) \ge 1, \qquad i=1,2,&amp;hellip;,m \end{align} $$ 这是支持向量机的基本模型。</description>
+    </item>
     
     <item>
       <title>[Review] Decision Tree</title>
@@ -18,12 +33,12 @@
       
       <guid>https://kobehub.github.io/posts/review-decision-tree/</guid>
       <description>Decision Tree 1. 决策树的定义以及建立 决策树是一种常见的机器学习方法。以二分类问题为例，决策树模拟人类处理问题的机制，对于某一个问题进行决策时，进行一些列的判断或者子决策。对于一棵决策树来说，具有以下属性：
- 每一个非叶节点都是一个属性的划分 每一个划分指向下一个决策或者指向最终结论 决策过程从根节点开始，一直到叶节点 最终的结论对应一个目标值  基本决策树算法描述：
-1. 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个节点2. 重复上述过程构造后代节点3. 遇到以下条件停止： 所有实例具有相同的值 在所有的属性集中，没有属性或者是实例具有相同的值 实例已全部划分 所以关于决策树的构建，最关键的问题在于最优属性的选取，不同的决策树算法实则是不同的属性选取方式
-2. Information Gain 2.1 信息熵 随着划分的进行，我们希望决策树的分支结点所包含的样本尽可能属于同一个类别，即我们希望节点的“纯度”越来越高。信息熵（Information Entropy）可以作为纯度的一个度量标准，信息熵的计算方式：对于一个样本集合D中的第k类样本所占的比例为$p_k(k = 1,2,&amp;hellip;,|y|)$,则该样本集合的信息熵为： $$ Ent(D) = - \sum _{k=1}^{|y|}p_klog_2p_k $$ 信息熵越小，纯度越高。针对二分类问题，信息熵可以形式化为：$Entropy = -p_1log_2p_1-(1-p_1)log_2(1-p_1)$
+ 每一个非叶结点都是一个属性的划分 每一个划分指向下一个决策或者指向最终结论 决策过程从根结点开始，一直到叶结点 最终的结论对应一个目标值  基本决策树算法描述：
+1. 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个结点2. 重复上述过程构造后代结点3. 遇到以下条件停止： 所有实例具有相同的值 在所有的属性集中，没有属性或者是实例具有相同的值 实例已全部划分 所以关于决策树的构建，最关键的问题在于最优属性的选取，不同的决策树算法实则是不同的属性选取方式
+2. Information Gain 2.1 信息熵 随着划分的进行，我们希望决策树的分支结点所包含的样本尽可能属于同一个类别，即我们希望结点的“纯度”越来越高。信息熵（Information Entropy）可以作为纯度的一个度量标准，信息熵的计算方式：对于一个样本集合D中的第k类样本所占的比例为$p_k(k = 1,2,&amp;hellip;,|y|)$,则该样本集合的信息熵为： $$ Ent(D) = - \sum _{k=1}^{|y|}p_klog_2p_k $$ 信息熵越小，纯度越高。针对二分类问题，信息熵可以形式化为：$Entropy = -p_1log_2p_1-(1-p_1)log_2(1-p_1)$
 当所有的样本属于同一个类别是，信息熵值为0.
 2.2 信息增益 Information Gain可以表述为，一个通过对于一个属性的划分，原来样本集熵的下降情况。是一个属性的信息增益。所以对于一个属性而言，信息增益越大，说明使用该属性划分得到的纯度提升越大。
-对于离散属性a，可能具有k个不同的取值${a^1, a^2,&amp;hellip;,a^k}$ ,所以对该属性进行划分会得到k个节点，将原样本集分为k个样本$D^1 &amp;hellip; D^k$
+对于离散属性a，可能具有k个不同的取值${a^1, a^2,&amp;hellip;,a^k}$ ,所以对该属性进行划分会得到k个结点，将原样本集分为k个样本$D^1 &amp;hellip; D^k$
 $$ Gain(D, a) = Ent(D) - \sum _{i=1}^k \frac{|D^i|}{|D|}Ent(D^i) $$ 有了信息增益，每次选取信息增益最大的属性进行划分。
 2.3 信息增益率 信息增益准则对于可取值数目较多的属性有所偏好，如果把样本的编号作为一个属性添加进去，那么一个编号只有一个样本，“纯度”最高，所以会选取该属性进行样本的划分，但是这样的决策树显然不具有泛化能力，无法进行有效预测。
 所以可以使用信息增益率作为最优属性的选择标准： $$ Gain\_ ratio(D, a) = \frac{Gain(D, a)}{IV(a)} \</description>

@@ -175,15 +175,15 @@
 <p>决策树是一种常见的机器学习方法。以二分类问题为例，决策树模拟人类处理问题的机制，对于某一个问题进行决策时，进行一些列的判断或者子决策。对于一棵决策树来说，具有以下属性：</p>
 
 <ul>
-<li>每一个非叶节点都是一个属性的划分</li>
+<li>每一个非叶结点都是一个属性的划分</li>
 <li>每一个划分指向下一个决策或者指向最终结论</li>
-<li>决策过程从根节点开始，一直到叶节点</li>
+<li>决策过程从根结点开始，一直到叶结点</li>
 <li>最终的结论对应一个目标值</li>
 </ul>
 
 <p><em>基本决策树算法描述：</em></p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#fff;font-weight:bold">1.</span> 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个节点<span style="color:#f00">
-</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">2.</span> 重复上述过程构造后代节点<span style="color:#f00">
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-markdown" data-lang="markdown"><span style="color:#fff;font-weight:bold">1.</span> 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个结点<span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">2.</span> 重复上述过程构造后代结点<span style="color:#f00">
 </span><span style="color:#f00"></span><span style="color:#fff;font-weight:bold">3.</span> 遇到以下条件停止：<span style="color:#f00">
 </span><span style="color:#f00"></span>       所有实例具有相同的值<span style="color:#f00">
 </span><span style="color:#f00"></span>       在所有的属性集中，没有属性或者是实例具有相同的值<span style="color:#f00">
@@ -194,7 +194,7 @@
 
 <h3 id="2-1-信息熵">2.1 信息熵</h3>
 
-<p>随着划分的进行，我们希望决策树的分支结点所包含的样本尽可能属于同一个类别，即我们希望节点的“纯度”越来越高。信息熵<strong>（Information Entropy）</strong>可以作为纯度的一个度量标准，信息熵的计算方式：对于一个样本集合D中的第k类样本所占的比例为$p_k(k = 1,2,&hellip;,|y|)$,则该样本集合的信息熵为：
+<p>随着划分的进行，我们希望决策树的分支结点所包含的样本尽可能属于同一个类别，即我们希望结点的“纯度”越来越高。信息熵<strong>（Information Entropy）</strong>可以作为纯度的一个度量标准，信息熵的计算方式：对于一个样本集合D中的第k类样本所占的比例为$p_k(k = 1,2,&hellip;,|y|)$,则该样本集合的信息熵为：
 $$
 Ent(D) = - \sum _{k=1}^{|y|}p_klog_2p_k
 $$
@@ -206,7 +206,7 @@ $$
 
 <p><strong>Information Gain</strong>可以表述为，一个通过对于一个属性的划分，原来样本集熵的下降情况。是一个属性的信息增益。所以对于一个属性而言，信息增益越大，说明使用该属性划分得到的<strong>纯度提升越大</strong>。</p>
 
-<p>对于离散属性a，可能具有k个不同的取值${a^1, a^2,&hellip;,a^k}$ ,所以对该属性进行划分会得到k个节点，将原样本集分为k个样本$D^1 &hellip; D^k$<br />
+<p>对于离散属性a，可能具有k个不同的取值${a^1, a^2,&hellip;,a^k}$ ,所以对该属性进行划分会得到k个结点，将原样本集分为k个样本$D^1 &hellip; D^k$<br />
 $$
 Gain(D, a) = Ent(D) - \sum _{i=1}^k \frac{|D^i|}{|D|}Ent(D^i)
 $$
@@ -221,7 +221,7 @@ $$
 Gain\_ ratio(D, a) = \frac{Gain(D, a)}{IV(a)}  \<br />
 IV(a) = - \sum _{i=1}^k \frac{|D^i|}{|D|}log_2\frac{|D^i|}{|D|}
 $$
-$IV(a)$是属性a的<em>固有值（Intrinsic Value）</em> ，属性a的取值数目越多，固有值越大，用来降低信息增益对于取值属性的偏好。</p>
+$IV(a)$是属性a的<em>固有值（Intrinsic Value）</em> ，属性a的取值数目越多，固有值越大，从而可以用来降低信息增益对于取值数目多的属性的偏好。</p>
 
 <h2 id="3-pruning-剪枝处理">3. Pruning 剪枝处理</h2>
 
@@ -232,7 +232,7 @@ $IV(a)$是属性a的<em>固有值（Intrinsic Value）</em> ，属性a的取值�
 <li>后剪枝<strong>（Backward Pruning， post-pruning）</strong></li>
 </ul>
 
-<p>主要依据是决策树的泛化能力：在验证集上的准确率。前剪枝是指在决策树生成过程中，对于每一个节点划分前进行估计，如果进行划分不能带来泛化性能提升，则停止划分。后剪枝指先生成一颗完成的决策树，然后自底而上对非叶结点进行考察，如果将该结点的子树替换为叶结点可以提升泛化性能，则进行替换。</p>
+<p>主要依据是决策树的泛化能力：在验证集上的准确率。前剪枝是指在决策树生成过程中，对于每一个结点划分前进行估计，如果进行划分不能带来泛化性能提升，则停止划分。后剪枝指先生成一颗完成的决策树，然后自底而上对非叶结点进行考察，如果将该结点的子树替换为叶结点可以提升泛化性能，则进行替换。</p>
 
 <h3 id="前剪枝的特点">前剪枝的特点：</h3>
 
@@ -250,7 +250,7 @@ $IV(a)$是属性a的<em>固有值（Intrinsic Value）</em> ，属性a的取值�
 
 <h2 id="4-连续值处理">4. 连续值处理</h2>
 
-<p>决策树针是对离散属性进行决策的，处理连续值是，需要将其离散化。最简单的做法是使用<strong>二分法</strong>，对于一个连续属性，设置一个阈值$T_a$,如果值小于阈值则为true，否则为false。</p>
+<p>决策树针是对离散属性进行决策的，处理连续值时，需要将其离散化。最简单的做法是使用<strong>二分法</strong>，对于一个连续属性，设置一个阈值$T_a$,如果值小于阈值则为true，否则为false。</p>
 
 <p>那么如何选取阈值，即划分点呢？对于具有k个值的连续属性，可以选择k-1个中位数，作为可选划分点，然后针对每一个划分点，计算其信息增益，选取信息增益最大的一个值作为划分点。</p>
 
