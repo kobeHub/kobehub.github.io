@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/yet-another-tool-to-mock-interface-in-go/">
+    <title>
+  Yet another tool to mock interfaces in Go · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/yet-another-tool-to-mock-interface-in-go/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.53" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Yet another tool to mock interfaces in Go</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='January 25, 2019'>
+                January 25, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              Reading time: 5 minutes.
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://kobehub.github.io/categories/golang/">Golang</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://kobehub.github.io/tags/reprint/">reprint</a></div>
+
+        </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      </header>
+
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#go-语言中一个模拟接口的工具">Go 语言中一个模拟接口的工具</a></li>
+</ul>
+</nav>
+      </aside>
+      <div>
+        
+
+<h1 id="go-语言中一个模拟接口的工具">Go 语言中一个模拟接口的工具</h1>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*OC_uFaDoGfZ7s1Pkg8YbGg.png" alt="image" /></p>
+
+<p>单元测试作为一种强大的工具，可以检查代码各个方面的行为。如果对进行代码测试十分重视，那么将会一直编写可持续、可维护的代码，并且在代码的实现过程中保持代码的完整性。依赖于抽象的、经过开发者精心设计的代码是很容易进行测试的，所以代码的可测试性也作为其质量的一个指标。</p>
+
+<p>如果你已经在 Go 中尝试过测试代码，可能知道接口的巨大作用。在 Go 的标准库中，提供了一系列接口，这些接口大多数只包含一个方法，可以直接使用这些接口。</p>
+
+<p>Go 还有一个补充框架，用以模拟接口。同时，还有一些社区驱动的包可以完成类似的功能。他们中的大多数都可以根据给定接口，生成实现这些接口的 <code>struct</code> 。 对于较大的接口，或者嵌套了其他接口，使用这种方式很有效。当接口只有一个方法时，不是更有效果吗？</p>
+
+<p>关于 Go 中的接口，最令人惊讶的部分是它的默认满足性。任何类型，只需要提供其签名与接口声明中的方法匹配的实现，即可以满足该接口。这种类型甚至可以是函数，如果熟悉 <code>net/http</code> 包，你也可能看到其中的一种可以叫做 <code>adapters</code> 的类型。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#007f7f">// A Handler responds to an HTTP request.
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">type</span> Handler <span style="color:#fff;font-weight:bold">interface</span> {
+    ServeHTTP(ResponseWriter, *Request)
+}
+
+<span style="color:#007f7f">// The HandlerFunc type is an adapter to allow the use of
+</span><span style="color:#007f7f">// ordinary functions as HTTP handlers. If f is a function
+</span><span style="color:#007f7f">// with the appropriate signature, HandlerFunc(f) is a
+</span><span style="color:#007f7f">// Handler that calls f.
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">type</span> HandlerFunc <span style="color:#fff;font-weight:bold">func</span>(ResponseWriter, *Request)
+
+<span style="color:#007f7f">// ServeHTTP calls f(w, r).
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">func</span> (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) {
+    f(w, r)
+}</code></pre></div>
+<p>如上述代码，<code>adapters</code> 类型本身是一个函数类型，而且具有与接口方法声明相同的签名，它通过在对应方法中调用自身，实现了接口。这个适配器允许具有适当签名的任何函数来实现 <code>Handler</code> 。它作为一种模拟接口的通用工具，看起来在表驱动的测试中十分有用。例如，需要测试以下代码:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> execute
+
+<span style="color:#fff;font-weight:bold">import</span> (
+	<span style="color:#0ff;font-weight:bold">&#34;errors&#34;</span>
+	<span style="color:#0ff;font-weight:bold">&#34;fmt&#34;</span>
+	<span style="color:#0ff;font-weight:bold">&#34;io&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">var</span> (
+	<span style="color:#007f7f">// ErrExpectedError return when error is expected.
+</span><span style="color:#007f7f"></span>	ErrExpectedError = errors.New(<span style="color:#0ff;font-weight:bold">&#34;expected error&#34;</span>)
+)
+
+<span style="color:#007f7f">// Doer does some job.
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">type</span> Doer <span style="color:#fff;font-weight:bold">interface</span> {
+	Do() (jobID <span style="color:#fff;font-weight:bold">int</span>, err <span style="color:#fff;font-weight:bold">error</span>)
+}
+
+<span style="color:#007f7f">// Execute executes Doer interface and handles errors.
+</span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">func</span> Execute(job Doer, w io.Writer) {
+	id, err := job.Do()
+	<span style="color:#fff;font-weight:bold">if</span> err != <span style="color:#fff;font-weight:bold">nil</span> {
+		<span style="color:#fff;font-weight:bold">switch</span> err {
+		<span style="color:#fff;font-weight:bold">case</span> ErrExpectedError:
+			fmt.Fprintf(w, <span style="color:#0ff;font-weight:bold">&#34;%v\n&#34;</span>, err)
+		<span style="color:#fff;font-weight:bold">default</span>:
+			fmt.Fprintf(w, <span style="color:#0ff;font-weight:bold">&#34;unexpected error: %v\n&#34;</span>, err)
+		}
+
+		<span style="color:#fff;font-weight:bold">return</span>
+	}
+
+	fmt.Fprintf(w, <span style="color:#0ff;font-weight:bold">&#34;job %d done\n&#34;</span>, id)
+}</code></pre></div>
+<p>使用 <code>adapter</code> 的单元测试如下：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">package</span> execute
+
+<span style="color:#fff;font-weight:bold">import</span> (
+	<span style="color:#0ff;font-weight:bold">&#34;bytes&#34;</span>
+	<span style="color:#0ff;font-weight:bold">&#34;errors&#34;</span>
+	<span style="color:#0ff;font-weight:bold">&#34;testing&#34;</span>
+
+	<span style="color:#0ff;font-weight:bold">&#34;github.com/stretchr/testify/assert&#34;</span>
+)
+
+<span style="color:#fff;font-weight:bold">func</span> Test_Execute(t *testing.T) {
+	tests := []<span style="color:#fff;font-weight:bold">struct</span> {
+		name    <span style="color:#fff;font-weight:bold">string</span>
+		doFunc  <span style="color:#fff;font-weight:bold">func</span>() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>)
+		wantErr <span style="color:#fff;font-weight:bold">bool</span>
+		expect  <span style="color:#fff;font-weight:bold">string</span>
+	}{
+		{
+			name: <span style="color:#0ff;font-weight:bold">&#34;expected error&#34;</span>,
+			doFunc: <span style="color:#fff;font-weight:bold">func</span>() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>) {
+				<span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>, ErrExpectedError
+			},
+			expect: <span style="color:#0ff;font-weight:bold">&#34;expected error\n&#34;</span>,
+		},
+		{
+			name: <span style="color:#0ff;font-weight:bold">&#34;unexpected error&#34;</span>,
+			doFunc: <span style="color:#fff;font-weight:bold">func</span>() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>) {
+				<span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>, errors.New(<span style="color:#0ff;font-weight:bold">&#34;mocked error&#34;</span>)
+			},
+			expect: <span style="color:#0ff;font-weight:bold">&#34;unexpected error: mocked error\n&#34;</span>,
+		},
+		{
+			name: <span style="color:#0ff;font-weight:bold">&#34;job done&#34;</span>,
+			doFunc: <span style="color:#fff;font-weight:bold">func</span>() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>) {
+				<span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">333</span>, <span style="color:#fff;font-weight:bold">nil</span>
+			},
+			expect: <span style="color:#0ff;font-weight:bold">&#34;job 333 done\n&#34;</span>,
+		},
+	}
+
+	<span style="color:#fff;font-weight:bold">for</span> _, tt := <span style="color:#fff;font-weight:bold">range</span> tests {
+		tt := tt
+		t.Run(tt.name, <span style="color:#fff;font-weight:bold">func</span>(t *testing.T) {
+			t.Parallel()
+
+			<span style="color:#fff;font-weight:bold">var</span> buf bytes.Buffer
+			Execute(doerFunc(tt.doFunc), &amp;buf)
+
+			assert.Equal(t, tt.expect, buf.String())
+		})
+	}
+}
+
+<span style="color:#fff;font-weight:bold">type</span> doerFunc <span style="color:#fff;font-weight:bold">func</span>() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>)
+
+<span style="color:#fff;font-weight:bold">func</span> (f doerFunc) Do() (<span style="color:#fff;font-weight:bold">int</span>, <span style="color:#fff;font-weight:bold">error</span>) {
+	<span style="color:#fff;font-weight:bold">return</span> f()
+}</code></pre></div>
+<p>编写这样的 <code>adapters</code> 十分繁杂，所以我决定编写一个工具来生成代码，叫做 <a href="https://github.com/romanyx/adapt">adapt</a> 。使用这个工具可以对一个指定接口生成 <code>adapters</code> ，并且打印其输出。你所需要做的工作就是，传入一个包名和接口名来生成代码。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ adapt io Reader
+<span style="color:#fff;font-weight:bold">type</span> readerFunc func([]byte) (int, error)
+
+func (f readerFunc) Read(p []byte) (int, error) {
+	<span style="color:#fff;font-weight:bold">return</span> f(p)
+}</code></pre></div>
+<p>也可以在包中的文件夹内部，使用 <code>adapt</code> 工具为包中的一些接口生成适配器。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#fff;font-weight:bold">cd</span> $GOPATH/src/github.com/x/execute Doer
+$ adapt Doer
+<span style="color:#fff;font-weight:bold">type</span> doerFunc func() (int, error)
+
+func (f doerFunc) Do() (int, error) {
+	<span style="color:#fff;font-weight:bold">return</span> f()
+}</code></pre></div>
+<p>也可以和一个便捷的 <a href="https://github.com/romanyx/vim-go-adapt">vim 插件</a> 配合使用，可以再 vim 中直接调用该工具。</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*PCMcTGnUNvjP0hooLXYBOw.gif" alt="use in vim" /></p>
+
+<p><strong>Reference:</strong></p>
+
+<p>原文链接: <a href="https://itnext.io/yet-another-tool-to-mock-interfaces-in-go-73de1b02c041">https://itnext.io/yet-another-tool-to-mock-interfaces-in-go-73de1b02c041</a></p>
+
+<p>作者：<a href="https://itnext.io/@romanyx90">Roman Budnikov</a></p>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>
