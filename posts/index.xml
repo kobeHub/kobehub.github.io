@@ -6,10 +6,30 @@
     <description>Recent content in Posts on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 25 Jan 2019 14:16:20 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 13 Feb 2019 13:53:00 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go detail to ASCII, Unicode and Character sets</title>
+      <link>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</link>
+      <pubDate>Wed, 13 Feb 2019 13:53:00 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</guid>
+      <description>ASCII，Unicode 码与字符集 很早就对于编码方式，字符集等问题心存疑惑。在一些语言中，有关字符集的问题都被进行了简化。但是在一些语言中，比如 Rust，对于这个问题进行了较为接近本质的谈论。
+1. 历史溯源 很久很久以前，有一群人，他们决定使用8个可以开合的晶体管来组合形成不同的状态，以表示世界上的万物。他们看见8个字节的开关状态最好，于是将其称为“字节”。后来产生了可以处理这些字节的工具，也就是计算机。最早计算机只在美国使用，八位的字节一共可以组合出256种不同的状态，他们使用了0-127进行编码。这样计算机就可以处理英文的文字了。这样的编码方案被称为 ASCII（America Standard Code for Information Translation）码。由于自己聚具有多大8bits的空间，所以很多人都在思考：“gosh， 我们可以使用128-255的编码”当很多人同时具有这个想法就很糟糕了，很多公司使用各自的规范，这造成了极大地混乱。除此之外，ASCII还有更大的先天不足，由于仅支持英文，所以对于世界上的其他语言无法进行表示。
+但是简单地认为“plain text = ascii = characters 为8bits”的错误大错特错。为了对于世界上其他语系进行有效支持，必须使用更多的字节，并且使用统一的编码。由此，Unicode这一统一的编码集便应运而生了。在这里必须明确一个概念，ASCII， Unicode都是字符集，utf-8是一种编码方式，通过使用统一的编码方式，依据unicode字符集，可以满足所有的编码需求。
+2. ASCII 码及其发展 使用一个字节表示进行编码，把其中0-31种状态用作特殊用途，0x20一下字段被称为控制码，然后将空格、标点、数字、大小写字母分别用连续的字节状态表示，一直编码到127号。
+ 0x20&amp;ndash;&amp;gt; space 0x41 &amp;ndash;&amp;gt; A  我们们可以这样理解ASCII码，她就是一个字典，是英文世界和计算机世界沟通的通道。这个通道让一开始的沟通变顺畅。就这样计算机和程序员愉快的交流着。
+英文使用128个编码就足够了，但是用于其同语言的编码，必须对于128之后的码点进行编码，或者使用新的字符集。
+后来，就像建造巴比伦塔一样，世界各地都开始使用计算机，但是很多国家用的不是英文，他们的字母里有许多是ASCII里没有的，为了可以在计算机保存他们的文字，他们决定采用 127号之后的空位来表示这些新的字母、符号，还加入了很多画表格时需要用下到的横线、竖线、交叉等形状，一直把序号编到了最后一个状态255。从128 到255这一页的字符集被称”扩展字符集“。
+等中国人们得到计算机时，已经没有可以利用的字节状态来表示汉字，况且有6000多个常用汉字需要保存呢。但是这难不倒智慧的中国人民，我们不客气地把那些127号之后的奇异符号们直接取消掉, 规定：一个小于127的字符的意义与原来相同，但两个大于127的字符连在一起时，就表示一个汉字，前面的一个字节（他称之为高字节）从0xA1用到0xF7，后面一个字节（低字节）从0xA1到0xFE，这样我们就可以组合出大约7000多个简体汉字了。在这些编码里，我们还把数学符号、罗马希腊的字母、日文的假名们都编进去了，连在 ASCII 里本来就有的数字、标点、字母都统统重新编了两个字节长的编码，这就是常说的”全角”字符，而原来在127号以下的那些就叫”半角”字符了。中国人民看到这样很不错，于是就把这种汉字方案叫做 “GB2312“。GB2312 是对 ASCII 的中文扩展。但是中国的汉字太多了，为了满足需求，干脆不再要求低字节一定是127号之后的内码，只要第一个字节是大于127就固定表示这是一个汉字的开始，不管后面跟的是不是扩展字符集里的内容。结果扩展之后的编码方案被称为 GBK 标准，GBK包括了GB2312 的所有内容，同时又增加了近20000个新的汉字（包括繁体字）和符号。 后来少数民族也要用电脑了，于是我们再扩展，又加了几千个新的少数民族的字，GBK扩成了 GB18030。
+由于使用双字节进行编码，形成了 DBCS(Double Byte Character Set)双字节字符集，所以才有了“一个中文算两个英文字符&amp;hellip;&amp;hellip;&amp;hellip;”
+## 3.Unicode 码
+由于每个国家都试图编写自己的编码标准，导致了互相之间都不支持。此时，ISO着手解决了这个问题：废了所有的地区性编码方案，重新搞一个包括了地球上所有文化、所有字母和符号 的编码！他们打算叫它”Universal Multiple-Octet Coded Character Set”，简称 UCS, 俗称 “unicode“。
+Unicode 是一次伟大的尝试，希望可以创造包含世界上所有有意义符号统一字符集。有人误以为，unicode 码使用两个字节，每一个编码使用16 bits 进行编码，所以最多可以编码 65,536 个字符。这实际上是不对的。事实上，Unicode有一种不同的思考角色的方式，你必须要理解Unicode的思维方式否则没有任何意义。</description>
+    </item>
     
     <item>
       <title>Yet another tool to mock interfaces in Go</title>
