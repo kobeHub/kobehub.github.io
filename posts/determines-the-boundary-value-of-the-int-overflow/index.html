@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/">
+    <title>
+  Determines the boundary value of the int overflow · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.54.0" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">Determines the boundary value of the int overflow</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='February 18, 2019'>
+                February 18, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              Reading time: 5 minutes.
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://kobehub.github.io/categories/notes/">notes</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://kobehub.github.io/tags/leetcode/">Leetcode</a></div>
+
+        </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      </header>
+
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#leetcode-note-关于-int32-溢出值的判定">[Leetcode Note] 关于 int32 溢出值的判定</a></li>
+</ul>
+</nav>
+      </aside>
+      <div>
+        
+
+<h1 id="leetcode-note-关于-int32-溢出值的判定">[Leetcode Note] 关于 int32 溢出值的判定</h1>
+
+<p>关于整数的处理，溢出是一个难以避免的话题。对于强类型静态语言来说，一个固定大小的整形的溢出值需要格外注意。以一个 32 bits 的整形为例：对于无符号数范围（0～4294967296），有符号数的范围（-2147483648~2147483647）。对于溢出值，不可能继续采用 32 bits整形进行存储，可以考虑使用 64 bits 整形存储。但是必须考虑一个情形，如果一个大整数，对于 64 bits 仍然溢出呢？我们如果在计算一个值之后再去估计存储它所需要的位数，未免南辕北辙，毕竟我们的工作只是判断是否溢出。</p>
+
+<p><strong>有符号判定</strong></p>
+
+<p>Leetcode <a href="https://leetcode.com/problems/reverse-integer/">problem 7</a> <a href="https://leetcode.com/problems/string-to-integer-atoi/">problem 8</a> 中，一个进行数字的倒序，一个实现 <code>atoi</code>操作，涉及到整形的操作，而且规定整形的容量为 32 bits。进行数字倒序时，循环的每次操作得到个位数字，然后加到最终结果<code>result</code>上。那么溢出判断在何时进行呢？一定要在进行加法之前进行。分为两种情况进行讨论：</p>
+
+<ul>
+<li><code>result &gt; INT_MAX / 10</code>,  下次操作一定会溢出</li>
+<li><code>result == INT_MAX / 10</code>, 对于 32 bits 有符号数而言，进行下次操作时。最大可以加上<code>7</code>，所以当 <code>result == INT_MAX / 10 &amp;&amp; digit &gt; 7</code>(digit 为下一次加上的数字) 也会溢出</li>
+</ul>
+
+<p>对于负数预制类似。</p>
+
+<p>go 实现的 pro 7：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> reverse(x <span style="color:#fff;font-weight:bold">int</span>) <span style="color:#fff;font-weight:bold">int</span> {
+  <span style="color:#fff;font-weight:bold">var</span> digit <span style="color:#fff;font-weight:bold">int32</span>
+  <span style="color:#fff;font-weight:bold">var</span> d = <span style="color:#fff;font-weight:bold">int32</span>(x)
+  <span style="color:#fff;font-weight:bold">const</span> MAX <span style="color:#fff;font-weight:bold">int32</span> = <span style="color:#fff;font-weight:bold">int32</span>(^<span style="color:#fff;font-weight:bold">uint32</span>(<span style="color:#ff0;font-weight:bold">0</span>) &gt;&gt; <span style="color:#ff0;font-weight:bold">1</span>)
+  <span style="color:#fff;font-weight:bold">const</span> MIN = ^MAX
+  <span style="color:#fff;font-weight:bold">var</span> sum <span style="color:#fff;font-weight:bold">int32</span> = <span style="color:#ff0;font-weight:bold">0</span>
+  <span style="color:#fff;font-weight:bold">for</span> d != <span style="color:#ff0;font-weight:bold">0</span> {
+    digit = d % <span style="color:#ff0;font-weight:bold">10</span>
+    <span style="color:#fff;font-weight:bold">if</span> sum &gt; MAX / <span style="color:#ff0;font-weight:bold">10</span> || (sum == MAX / <span style="color:#ff0;font-weight:bold">10</span> &amp;&amp; digit &gt; <span style="color:#ff0;font-weight:bold">7</span>) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>
+    }
+    <span style="color:#fff;font-weight:bold">if</span> sum &lt; MIN / <span style="color:#ff0;font-weight:bold">10</span> || (sum == MIN / <span style="color:#ff0;font-weight:bold">10</span> &amp;&amp; digit &lt; -<span style="color:#ff0;font-weight:bold">8</span>) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>
+    }
+    sum = sum * <span style="color:#ff0;font-weight:bold">10</span> + digit
+    d /= <span style="color:#ff0;font-weight:bold">10</span>
+  }
+  <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">int</span>(sum)
+}</code></pre></div>
+<p><strong>无符号判定</strong></p>
+
+<p>与 pro 7 相似，pro 8 是一个无符号溢出的判定。要求提取一个字符串中的整数，忽略空格，遇到非数字则停止。可以根据数字前的 ”+， -“ 得到整形的符号。ASCII 码对应的数字范围为： 48-57(0-9), 由于符号已经经过处理，所以每次判定只是无符号数的判定：</p>
+
+<ul>
+<li><code>result &gt; INT_MAX / 10</code>,  下次操作一定会溢出</li>
+<li><code>result == INT_MAX / 10</code>, 对于 32 bits 有符号数<code>+</code>而言，进行下次操作时。最大可以加上<code>7</code>（55），所以当 <code>result == INT_MAX / 10 &amp;&amp; digit &gt; 7</code>(digit 为下一次加上的数字) 也会溢出，符号位<code>-</code>，最大加上<code>8</code>（56）</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#fff;font-weight:bold">func</span> myAtoi(str <span style="color:#fff;font-weight:bold">string</span>) <span style="color:#fff;font-weight:bold">int</span> {
+  <span style="color:#fff;font-weight:bold">const</span> MAX <span style="color:#fff;font-weight:bold">int32</span> = <span style="color:#fff;font-weight:bold">int32</span>(^<span style="color:#fff;font-weight:bold">uint32</span>(<span style="color:#ff0;font-weight:bold">0</span>) &gt;&gt; <span style="color:#ff0;font-weight:bold">1</span>)
+  <span style="color:#fff;font-weight:bold">const</span> MIN <span style="color:#fff;font-weight:bold">int32</span> = ^MAX
+
+  str = strings.Trim(str, <span style="color:#0ff;font-weight:bold">&#34; &#34;</span>)
+  <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(str) == <span style="color:#ff0;font-weight:bold">0</span> {
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>
+  }
+  sign := <span style="color:#ff0;font-weight:bold">1</span>
+  <span style="color:#fff;font-weight:bold">if</span> str[<span style="color:#ff0;font-weight:bold">0</span>] == <span style="color:#0ff;font-weight:bold">&#39;-&#39;</span> {
+    sign = -<span style="color:#ff0;font-weight:bold">1</span>
+    str = str[<span style="color:#ff0;font-weight:bold">1</span>:]
+  } <span style="color:#fff;font-weight:bold">else</span> <span style="color:#fff;font-weight:bold">if</span> str[<span style="color:#ff0;font-weight:bold">0</span>] == <span style="color:#0ff;font-weight:bold">&#39;+&#39;</span> {
+    str = str[<span style="color:#ff0;font-weight:bold">1</span>:]
+  }
+  <span style="color:#fff;font-weight:bold">if</span> <span style="color:#fff;font-weight:bold">len</span>(str) == <span style="color:#ff0;font-weight:bold">0</span> || str[<span style="color:#ff0;font-weight:bold">0</span>] &lt; <span style="color:#ff0;font-weight:bold">48</span> || str[<span style="color:#ff0;font-weight:bold">0</span>] &gt; <span style="color:#ff0;font-weight:bold">57</span> {
+    <span style="color:#fff;font-weight:bold">return</span> <span style="color:#ff0;font-weight:bold">0</span>
+  }
+
+  result := <span style="color:#ff0;font-weight:bold">0</span>
+  <span style="color:#fff;font-weight:bold">for</span> _, v := <span style="color:#fff;font-weight:bold">range</span> str {
+    <span style="color:#fff;font-weight:bold">if</span> v &lt; <span style="color:#ff0;font-weight:bold">48</span> || v &gt; <span style="color:#ff0;font-weight:bold">57</span> {
+      <span style="color:#fff;font-weight:bold">break</span>
+    }
+    <span style="color:#fff;font-weight:bold">if</span> sign * result &gt; <span style="color:#fff;font-weight:bold">int</span>(MAX) / <span style="color:#ff0;font-weight:bold">10</span> || (sign * result == <span style="color:#fff;font-weight:bold">int</span>(MAX)/<span style="color:#ff0;font-weight:bold">10</span> &amp;&amp; <span style="color:#fff;font-weight:bold">int</span>(v) &gt; <span style="color:#ff0;font-weight:bold">55</span>) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">int</span>(MAX)
+    }
+    <span style="color:#fff;font-weight:bold">if</span> sign * result &lt; <span style="color:#fff;font-weight:bold">int</span>(MIN) / <span style="color:#ff0;font-weight:bold">10</span> || (sign * result == <span style="color:#fff;font-weight:bold">int</span>(MIN)/<span style="color:#ff0;font-weight:bold">10</span> &amp;&amp; <span style="color:#fff;font-weight:bold">int</span>(v) &gt; <span style="color:#ff0;font-weight:bold">56</span>) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">int</span>(MIN)
+    }
+    result = result * <span style="color:#ff0;font-weight:bold">10</span> + (<span style="color:#fff;font-weight:bold">int</span>(v) - <span style="color:#ff0;font-weight:bold">48</span>)
+  }
+ 
+  <span style="color:#fff;font-weight:bold">return</span> result * sign
+}</code></pre></div>
+<p><strong>动态类型语言</strong></p>
+
+<p>对于动态类型语言来说，以 python3 为例，<code>&lt;class int&gt;</code> <a href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex">integer have unlimited precision</a>. 也就是说可以使用任意精度的整形，也就不需要每次在循环中判断是否溢出，可以计算出最终值后再判断。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">  <span style="color:#fff;font-weight:bold">if</span> sign &lt; <span style="color:#ff0;font-weight:bold">0</span> {
+    <span style="color:#fff;font-weight:bold">if</span> sign * result &lt; <span style="color:#fff;font-weight:bold">int</span>(MIN) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">int</span>(MIN)
+    } <span style="color:#fff;font-weight:bold">else</span> {
+      <span style="color:#fff;font-weight:bold">return</span> sign * result
+    }
+  } <span style="color:#fff;font-weight:bold">else</span> {
+    <span style="color:#fff;font-weight:bold">if</span> sign * result &gt; <span style="color:#fff;font-weight:bold">int</span>(MAX) {
+      <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">int</span>(MAX)
+    } <span style="color:#fff;font-weight:bold">else</span> {
+      <span style="color:#fff;font-weight:bold">return</span> result
+    }
+  }</code></pre></div>
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+
+    
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>

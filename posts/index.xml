@@ -6,10 +6,24 @@
     <description>Recent content in Posts on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 13 Feb 2019 13:53:00 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 18 Feb 2019 12:56:03 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Determines the boundary value of the int overflow</title>
+      <link>https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/</link>
+      <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/</guid>
+      <description>[Leetcode Note] 关于 int32 溢出值的判定 关于整数的处理，溢出是一个难以避免的话题。对于强类型静态语言来说，一个固定大小的整形的溢出值需要格外注意。以一个 32 bits 的整形为例：对于无符号数范围（0～4294967296），有符号数的范围（-2147483648~2147483647）。对于溢出值，不可能继续采用 32 bits整形进行存储，可以考虑使用 64 bits 整形存储。但是必须考虑一个情形，如果一个大整数，对于 64 bits 仍然溢出呢？我们如果在计算一个值之后再去估计存储它所需要的位数，未免南辕北辙，毕竟我们的工作只是判断是否溢出。
+有符号判定
+Leetcode problem 7 problem 8 中，一个进行数字的倒序，一个实现 atoi操作，涉及到整形的操作，而且规定整形的容量为 32 bits。进行数字倒序时，循环的每次操作得到个位数字，然后加到最终结果result上。那么溢出判断在何时进行呢？一定要在进行加法之前进行。分为两种情况进行讨论：
+ result &amp;gt; INT_MAX / 10, 下次操作一定会溢出 result == INT_MAX / 10, 对于 32 bits 有符号数而言，进行下次操作时。最大可以加上7，所以当 result == INT_MAX / 10 &amp;amp;&amp;amp; digit &amp;gt; 7(digit 为下一次加上的数字) 也会溢出  对于负数预制类似。
+go 实现的 pro 7：
+func reverse(x int) int { var digit int32 var d = int32(x) const MAX int32 = int32(^uint32(0) &amp;gt;&amp;gt; 1) const MIN = ^MAX var sum int32 = 0 for d !</description>
+    </item>
     
     <item>
       <title>Go detail to ASCII, Unicode and Character sets</title>
