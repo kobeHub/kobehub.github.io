@@ -6,10 +6,23 @@
     <description>Recent content in Posts on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Mon, 18 Feb 2019 12:56:03 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 24 Mar 2019 15:29:39 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker 容器配置--多容器通信(Nginx &#43; MongoDB &#43; Tornado)</title>
+      <link>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</link>
+      <pubDate>Sun, 24 Mar 2019 15:29:39 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
+      <description>Docker 容器化部署尝试 1. 背景浅谈 作为学期中的项目实训，我们打算做一个基于 web 的 LaTex 编辑工具。为了方便环境的配置以及服务的分离，选用Docker 进行环境的搭建。初始想法是基于一个 Nginx + MongoDB + Tornado + xeLaTex 的基本架构，至少使用4个容器满足基本的需求，下面进行一下简单的记录。
+2. Dockerfile 自定义容器 该项目分为四个部分，对于数据库，可以直接使用 dockerhub 中的Mongodb。不需要额外的定制，直接pull 最新版即可：
+docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，只是添加了一些需要额外挂载的目录：
+# Define mountable directories. VOLUME [&amp;#34;/etc/nginx/sites-enabled&amp;#34;, &amp;#34;/etc/nginx/certs&amp;#34;, &amp;#34;/etc/nginx/conf.d&amp;#34;, &amp;#34;/var/log/nginx&amp;#34;, &amp;#34;/var/www/html&amp;#34;] 对于 Tornado 服务端，暂时先拟定一个最为简单的Demo，对于以后的版本再进行迭代：
+# Base ENVFROMpython:3.7-slim# set workdir to /appWORKDIR/app# Copy the current directory contents at /appCOPY . /app# Install needed packageRUN pip install --trusted-host pypi.python.org -r requirements.txt# Make port 80 available to the world outside this contanerEXPOSE8888# Define environment variableENVNAME World# Run app.</description>
+    </item>
     
     <item>
       <title>Determines the boundary value of the int overflow</title>
