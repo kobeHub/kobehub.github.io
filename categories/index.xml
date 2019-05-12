@@ -6,43 +6,17 @@
     <description>Recent content in Categories on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
+    <lastBuildDate>Sun, 12 May 2019 20:13:35 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Deep Learning</title>
-      <link>https://kobehub.github.io/categories/deep-learning/</link>
-      <pubDate>Tue, 22 Jan 2019 23:13:21 +0800</pubDate>
+      <title>CV</title>
+      <link>https://kobehub.github.io/categories/cv/</link>
+      <pubDate>Sun, 12 May 2019 20:13:35 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://kobehub.github.io/categories/golang/</link>
-      <pubDate>Fri, 25 Jan 2019 14:16:20 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/categories/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>https://kobehub.github.io/categories/machine-learning/</link>
-      <pubDate>Mon, 14 Jan 2019 20:23:39 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/categories/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Notes</title>
-      <link>https://kobehub.github.io/categories/notes/</link>
-      <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/categories/notes/</guid>
+      <guid>https://kobehub.github.io/categories/cv/</guid>
       <description></description>
     </item>
     
@@ -56,11 +30,47 @@
     </item>
     
     <item>
+      <title>notes</title>
+      <link>https://kobehub.github.io/categories/notes/</link>
+      <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/categories/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Summary</title>
       <link>https://kobehub.github.io/categories/summary/</link>
       <pubDate>Wed, 13 Feb 2019 13:53:00 +0800</pubDate>
       
       <guid>https://kobehub.github.io/categories/summary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>https://kobehub.github.io/categories/golang/</link>
+      <pubDate>Fri, 25 Jan 2019 14:16:20 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/categories/golang/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>https://kobehub.github.io/categories/deep-learning/</link>
+      <pubDate>Tue, 22 Jan 2019 23:13:21 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/categories/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://kobehub.github.io/categories/machine-learning/</link>
+      <pubDate>Mon, 14 Jan 2019 20:23:39 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/categories/machine-learning/</guid>
       <description></description>
     </item>
     
