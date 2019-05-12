@@ -6,10 +6,23 @@
     <description>Recent content on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 24 Mar 2019 15:29:39 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 12 May 2019 20:13:35 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Introduction to Coomputer Vision</title>
+      <link>https://kobehub.github.io/posts/introduction-to-computer-vision/</link>
+      <pubDate>Sun, 12 May 2019 20:13:35 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/introduction-to-computer-vision/</guid>
+      <description>计算机视觉绪论 1. 概述 1.1 视觉可以分为：  视感觉：从分子层次和观点理解人类对于光反应的基本性质  光的物理特性 刺激视觉感受器官的程度 光作用于视网膜后经视觉系统加工产生的感觉  视知觉：最终目的从狭义上说是要能对于客观场景做出观察者有意义的解释和描述  1.2 计算机视觉的目标  建立CV系统来完成各种视觉任务 加深对于人脑是觉得掌握和理解  2. 图像基础 2.1 图像分类  模拟图像  从连续的客观场景直接观察得到，用一个二维函数$f(x, y)$来表示
+ 数字图像  把连续的模拟图像在*坐标空间XY*以及*性质空间F*都离散化了的图像,基本单位像素
+2.2 图像的表示 函数表示 把图像看作一个由二维空间向一维空间的映射函数，有几个channel则有几个映射函数
+矩阵以及向量 RGB模型 三原色模型需要使用三个灰度值的映射表示： $$ f_c(x, y) = (f_r(x, y), f_g(x, y), f_b(x, y)) $$
+存储  交叉存储[R G B] 为一个基本存储单元 顺序存储  简单照明模型 Phong模型，基于RGB三基色颜色系统的Phong模型： $$ I = kaI{pa} + \sum [kdI{pd}cosi + Ks I{ps}cos^n\theta] $$ 使用三个分量（$I{pa}, I{pd}, I_{ps}$）表示RBG颜色空间,一旦这三个分量以及其对应的系数（$k_a, k_d, k_s n,$）确定， 从物体表面的某一点到达观察者的反射光的颜色就只和光源入射角以及视角$\theta$有关 。</description>
+    </item>
     
     <item>
       <title>Docker 容器配置--多容器通信(Nginx &#43; MongoDB &#43; Tornado)</title>
@@ -156,14 +169,13 @@ Target:最大化margin
  决策过程从根结点开始，一直到叶结点
  最终的结论对应一个目标值
   基本决策树算法描述：
-1. 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个结点2. 重复上述过程构造后代结点3. 遇到以下条件停止： 所有实例具有相同的值 在所有的属性集中，没有属性或者是实例具有相同的值 实例已全部划分 所以关于决策树的构建，最关键的问题在于最优属性的选取，不同的决策树算法实则是不同的属性选取方式
+1. 选择一个最优属性对于剩余样本进行划分，并且将该属性作为一个结点 2. 重复上述过程构造后代结点 3. 遇到以下条件停止： 所有实例具有相同的值 在所有的属性集中，没有属性或者是实例具有相同的值 实例已全部划分 所以关于决策树的构建，最关键的问题在于最优属性的选取，不同的决策树算法实则是不同的属性选取方式
 2. Information Gain 2.1 信息熵 随着划分的进行，我们希望决策树的分支结点所包含的样本尽可能属于同一个类别，即我们希望结点的“纯度”越来越高。信息熵（Information Entropy）可以作为纯度的一个度量标准，信息熵的计算方式：对于一个样本集合D中的第k类样本所占的比例为$p_k(k = 1,2,&amp;hellip;,|y|)$,则该样本集合的信息熵为： $$ Ent(D) = - \sum _{k=1}^{|y|}p_klog_2p_k $$ 信息熵越小，纯度越高。针对二分类问题，信息熵可以形式化为：$Entropy = -p_1log_2p_1-(1-p_1)log_2(1-p_1)$
 当所有的样本属于同一个类别是，信息熵值为0.
 2.2 信息增益 Information Gain可以表述为，一个通过对于一个属性的划分，原来样本集熵的下降情况。是一个属性的信息增益。所以对于一个属性而言，信息增益越大，说明使用该属性划分得到的纯度提升越大。
 对于离散属性a，可能具有k个不同的取值${a^1, a^2,&amp;hellip;,a^k}$ ,所以对该属性进行划分会得到k个结点，将原样本集分为k个样本$D^1 &amp;hellip; D^k$
 $$ Gain(D, a) = Ent(D) - \sum _{i=1}^k \frac{|D^i|}{|D|}Ent(D^i) $$ 有了信息增益，每次选取信息增益最大的属性进行划分。
-2.3 信息增益率 信息增益准则对于可取值数目较多的属性有所偏好，如果把样本的编号作为一个属性添加进去，那么一个编号只有一个样本，“纯度”最高，所以会选取该属性进行样本的划分，但是这样的决策树显然不具有泛化能力，无法进行有效预测。
-所以可以使用信息增益率作为最优属性的选择标准： $$ Gain\_ ratio(D, a) = \frac{Gain(D, a)}{IV(a)} \</description>
+2.3 信息增益率 信息增益准则对于可取值数目较多的属性有所偏好，如果把样本的编号作为一个属性添加进去，那么一个编号只有一个样本，“纯度”最高，所以会选取该属性进行样本的划分，但是这样的决策树显然不具有泛化能力，无法进行有效预测。</description>
     </item>
     
     <item>
