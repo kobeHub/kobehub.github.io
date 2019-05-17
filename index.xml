@@ -21,7 +21,8 @@
  数字图像  把连续的模拟图像在*坐标空间XY*以及*性质空间F*都离散化了的图像,基本单位像素
 2.2 图像的表示 函数表示 把图像看作一个由二维空间向一维空间的映射函数，有几个channel则有几个映射函数
 矩阵以及向量 RGB模型 三原色模型需要使用三个灰度值的映射表示： $$ f_c(x, y) = (f_r(x, y), f_g(x, y), f_b(x, y)) $$
-存储  交叉存储[R G B] 为一个基本存储单元 顺序存储  简单照明模型 Phong模型，基于RGB三基色颜色系统的Phong模型： $$ I = kaI{pa} + \sum [kdI{pd}cosi + Ks I{ps}cos^n\theta] $$ 使用三个分量（$I{pa}, I{pd}, I_{ps}$）表示RBG颜色空间,一旦这三个分量以及其对应的系数（$k_a, k_d, k_s n,$）确定， 从物体表面的某一点到达观察者的反射光的颜色就只和光源入射角以及视角$\theta$有关 。</description>
+存储  交叉存储[R G B] 为一个基本存储单元 顺序存储  简单照明模型 Phong模型，基于RGB三基色颜色系统的Phong模型：
+$$ I = ka I{pa} + \sum [ kd I{pd} cosi + Ks I{ps} cos^n \theta ] $$</description>
     </item>
     
     <item>
