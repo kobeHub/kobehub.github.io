@@ -104,6 +104,7 @@
   <section class="container post">
     <article>
       <header>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <div class="post-title">
           <h1 class="title">[Review] Introduction to Coomputer Vision</h1>
         </div>
@@ -243,11 +244,11 @@ $$</p>
 
 <h4 id="简单照明模型">简单照明模型</h4>
 
-<p>Phong模型，基于RGB三基色颜色系统的Phong模型：
-$$
-I = k<em>aI</em>{pa} + \sum [k<em>dI</em>{pd}cosi + K<em>s I</em>{ps}cos^n\theta]
-$$
-使用三个分量（$I<em>{pa}, I</em>{pd}, I_{ps}$）表示RBG颜色空间,一旦<strong>这三个分量以及其对应的系数（$k_a, k_d, k_s n,$）确定，</strong> 从物体表面的某一点到达观察者的反射光的颜色就只和<strong>光源入射角以及视角$\theta$有关</strong> 。</p>
+<p>Phong模型，基于RGB三基色颜色系统的Phong模型：</p>
+
+<p>$$ I = k<em>a I</em>{pa} + \sum [ k<em>d I</em>{pd} cosi + K<em>s I</em>{ps} cos^n \theta ] $$</p>
+
+<p>使用三个分量（$ I<em>{pa} , I</em>{pd} , I_{ps} $）表示RBG颜色空间,一旦<strong>这三个分量以及其对应的系数（$k_a, k_d, k_s n,$）确定，</strong> 从物体表面的某一点到达观察者的反射光的颜色就只和<strong>光源入射角以及视角$\theta$有关</strong> 。</p>
 
 <p>这是一个纯几何模型。</p>
 
@@ -313,9 +314,9 @@ $$
 
 <p>也叫作距离函数或者斜切算法。描述的是图像中的像素点与某个区域的距离。距离变换给出每一个像素到区域边界的距离，<strong>区域内部的点变换结果全为0</strong>.如下，一个对于1区域的D4距离变换结果:</p>
 
-<p><img src="https://kobehub.github.io/home/inno/Pictures/190512-ju.jpg" alt="ju" /></p>
+<p><img src="//media.innohub.top/190512-ju.jpg" alt="ju" /></p>
 
-<p><img src="https://kobehub.github.io/home/inno/Pictures/190512-juli.jpg" alt="" /></p>
+<p><img src="//media.innohub.top/190512-juli.jpg" alt="" /></p>
 
       </div>
 
@@ -342,8 +343,42 @@ $$
 <a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       </footer>
     </article>
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
 
+MathJax.Hub.Queue(function() {
     
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
   </section>
 
       </div>
