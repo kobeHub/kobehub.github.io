@@ -4,13 +4,13 @@
   
   <url>
     <loc>https://kobehub.github.io/categories/cv/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -26,7 +26,7 @@
   
   <url>
     <loc>https://kobehub.github.io/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -42,19 +42,19 @@
   
   <url>
     <loc>https://kobehub.github.io/posts/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/tags/review/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/tags/</loc>
-    <lastmod>2019-05-12T20:13:35+08:00</lastmod>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -66,6 +66,11 @@
                 hreflang="en"
                 href="https://kobehub.github.io/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/posts/image-preprocess/</loc>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
   </url>
   
   <url>

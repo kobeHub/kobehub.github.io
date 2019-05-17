@@ -6,10 +6,23 @@
     <description>Recent content in Posts on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 12 May 2019 20:13:35 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 May 2019 22:39:33 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>[Review] Image Preprocess</title>
+      <link>https://kobehub.github.io/posts/image-preprocess/</link>
+      <pubDate>Fri, 17 May 2019 22:39:33 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/image-preprocess/</guid>
+      <description>图像预处理 1. 基本的图像处理  在空间坐标删的处理  几何变换  像素处理  代数处理（对于每一个像素点的操作）   2. 代数操作 不改变图像的几何性质，对于图像的灰度级进行加减乘除等算术运算，逐像素的操作。
+2.1 生成图像叠加效果（Alpha Blending）  对于两个图像的合成可以使用加法进行叠加操作： $$ g(x, y) = \alpha*f(x, y) + \beta*f(x, y) \alpha + \beta = 1 $$ 也可以用于任何两张图像的衔接。
+ 使用乘法，可以进行特定区域的提取，可以将除了待提取区域的位置的像素全部置为0 $$ C = \alpha*F + (1-\alpha)B $$
+  2.2 获取图像的前景 可以给定一个当前图像$I$,以及对应的背景图像$B$,然后计算两个图像之间的差异： $$ Diff(x,y) = ||I(x, y) \; - \; B(x,y)||^2 $$ 如果该差异值大于某一个特定值$T$，就可以视为前景图像.在背景保持不变的环境下，对于运动目标的检测：可以使用减法操作完成，在差图像不为零的位置表明出现过运动目标。
+3.逻辑操作  AND: 等价于乘法 OR: 等价于乘法 XOR: 异或操作 NOT： 非  4.</description>
+    </item>
     
     <item>
       <title>[Review] Introduction to Coomputer Vision</title>
