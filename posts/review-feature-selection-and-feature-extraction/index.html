@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.3" />
+    <meta name="generator" content="Hugo 0.55.6" />
   </head>
 
   <body class=" ">
@@ -242,14 +242,13 @@
 <ul>
 <li><p>将分类器包裹进特征选择过程中，将分类错误率作为评估方法。</p></li>
 
-<li><p>Las Vegas Wrapper（LVW）</p></li>
-</ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">  1. 随机搜索一个特征子集，将该特征子集表示的数据用于学习器的输入进行分类
-  2. 根据输出错误率的好坏进行判断，当错误率小于某个阈值，即可以使用
-  3. 再选取新的子集，循环
-  4. 循环终止条件是，经过T次，错误率均没有降低，且特征数量没有减少</pre></div>
-<ul>
-<li>可以减少特征数量，提高准确率。与Filter相比，特征随机产生，可能选到最优特征，同时和分类器相关，可能获取更优的特征。</li>
+<li><p>Las Vegas Wrapper（LVW）</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">1. 随机搜索一个特征子集，将该特征子集表示的数据用于学习器的输入进行分类
+2. 根据输出错误率的好坏进行判断，当错误率小于某个阈值，即可以使用
+3. 再选取新的子集，循环
+4. 循环终止条件是，经过T次，错误率均没有降低，且特征数量没有减少</pre></div></li>
+
+<li><p>可以减少特征数量，提高准确率。与Filter相比，特征随机产生，可能选到最优特征，同时和分类器相关，可能获取更优的特征。</p></li>
 </ul>
 
 <h4 id="c-嵌入式-embedding">c. 嵌入式 （Embedding）</h4>

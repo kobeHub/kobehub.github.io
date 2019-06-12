@@ -6,10 +6,24 @@
     <description>Recent content in Posts on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Fri, 17 May 2019 22:39:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Jun 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C&#43;&#43; Standard Template Library (STL)</title>
+      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</link>
+      <pubDate>Wed, 12 Jun 2019 00:00:00 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</guid>
+      <description>STL 容器简介 C++ STL容器中常用的容器类型可以分为四类:
+ 顺序性容器: 提供对于数据的序列化访问  vector list deque arrays forward_list(c++11 引入)  容器适配器: 提供了对于序列化数据的另一种访问接口  queue priority_queue stack  关联容器: 实现了对于有序数据结构的快速访问(O(logn)) （红黑树）  set multiset map multimap  无序关联容器: 提供对于无序数据的快速访问（hash）(c++11 引入)  unordered_set unordered_multiset unordered_map unordered_multimap   1. vector vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以插入时间可能不一致，删除末尾元素可以在O(1)时间内完成，不发生resize操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（*由于进行连续存储，所以插入以及删除较慢*）.
+vector 上的常见操作复杂度（效率）如下：
+ 随机访问——常数 O(1) 在末尾插入或移除元素——均摊常数 O(1) 插入或移除元素——与到 vector 结尾的距离成线性 O(n)  vector使用的空间大小可以通过capacity()进行查询; （c++ 11）额外的空间可以通过shrink_to_fit()函数返还给系统。
+1.1 成员函数  构造函数  std::vector&amp;lt;T, Allocator&amp;gt;::vector
+ vector&amp;lt;T&amp;gt;(): 默认构造函数，构造一个空容器。若不提供分配器，则从默认构造的实例获得分配器。📚 vector&amp;lt;T&amp;gt;(size_type count, const T&amp;amp; value): 构造具有count个值为value的动态数组 📚 vector&amp;lt;T&amp;gt;(size_type count): 构造具有count个值为T类型默认值的动态数组 📚 vector&amp;lt;T&amp;gt;(InputIt first, InputIt last):构造拥有范围为[first, last)的内容的容器 vector&amp;lt;T&amp;gt;(const vector&amp;amp; other): 复制构造函数 📚 vector&amp;lt;T&amp;gt;(vector&amp;amp;&amp;amp; other): 移动构造函数，实现右值向左值类型的转移 vector&amp;lt;T&amp;gt;(std::initializer_list&amp;lt;T&amp;gt; init):构造具有初始内容的容器 📚   元素访问</description>
+    </item>
     
     <item>
       <title>[Review] Image Preprocess</title>
