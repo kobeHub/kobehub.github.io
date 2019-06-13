@@ -120,7 +120,7 @@
               <i class="fas fa-clock"></i>
               
               
-              Reading time: 7 minutes.
+              Reading time: 14 minutes.
             </span>
           </div>
           <div class="categories">
@@ -153,6 +153,10 @@
 <li><a href="#1-1-成员函数">1.1 成员函数</a></li>
 <li><a href="#1-2-兼容-c-数组">1.2 兼容 C 数组</a></li>
 </ul></li>
+<li><a href="#2-list">2. list</a>
+<ul>
+<li><a href="#2-1-成员函数">2.1 成员函数</a></li>
+</ul></li>
 </ul>
 </nav>
       </aside>
@@ -168,7 +172,7 @@
 
 <ul>
 <li><a href="#1-vector">vector</a></li>
-<li>list</li>
+<li><a href="#2-list">list</a></li>
 <li>deque</li>
 <li>arrays</li>
 <li>forward_list(c++11 引入)</li>
@@ -297,6 +301,116 @@
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">void</span>* memset( <span style="color:#fff;font-weight:bold">void</span>* dest, <span style="color:#fff;font-weight:bold">int</span> ch, std::size_t count );
 </code></pre></div>
 <p>如果你现在有一个<code>std::vector</code>，现在需要把它传递给C，接口你可以调用<code>std::vector::data</code>这个成员变量获取底层的内存空间的首地址。<code>std::vector</code>和其他的容器一个非常重要的区别就是它保证了底层的内存空间的连续性，也就是说，它保证了内存空间和C数组的兼容性，能用C数组的地方都可以使用<code>std::vector</code>，而且它还能保证内存空间的自动管理。</p>
+
+<h1 id="2-list">2. list</h1>
+
+<p>list是一个提供非连续存储的序列化容器，底层依赖于链表进行实现，相对于vector，对于元素的随机访问较慢，但是具有较快的插入删除速度。默认的list是一个双向链表，对于单向链表，对应于forward_list.<strong>与forward_list相比，提供双向迭代，但是空间效率较低。</strong></p>
+
+<h2 id="2-1-成员函数">2.1 成员函数</h2>
+
+<ul>
+<li><p><strong>构造函数</strong></p>
+
+<ol>
+<li><code>list()</code>: 默认构造器，返回一个空的List容器</li>
+<li><code>list(size_type count, const T&amp; value)</code>: 构造具有<code>count</code>值为<code>value</code>的list</li>
+<li><code>list(size_type count)</code>: 构造具有<code>count</code>个T类型的默认值的list</li>
+<li><code>list(InputIt first, InputIt last)</code>: 构造迭代器范围<code>[first, last)</code>的list</li>
+<li><code>list(const list&amp; other)</code>: 复制构造器</li>
+<li><code>list(list&amp;&amp; other)</code>: move 语义构造器</li>
+<li><code>list(initializer_list&lt;T&gt; init)</code>:赋予初始值的list</li>
+</ol></li>
+</ul>
+
+<p><strong>构造函数的时间复杂度为O(n), 与初始值列表的长度成线性关系</strong></p>
+
+<ul>
+<li><p><strong>元素访问</strong></p>
+
+<ol>
+<li><code>front()</code>: 返回到容器首元素的引用</li>
+<li><code>back()</code>:返回容器最后一个元素的引用</li>
+</ol></li>
+
+<li><p><strong>迭代器</strong></p>
+
+<ol>
+<li><code>begin()/cbegin()</code>:返回指向容器第一个元素的迭代器；若容器为空则返回值等同于<code>end()</code></li>
+<li>end()/cend()`:指向最后一个元素的迭代器</li>
+<li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
+<li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
+</ol></li>
+
+<li><p><strong>容量</strong></p>
+
+<ol>
+<li>empty()`:为空时返回1；否则返回0</li>
+<li><code>size</code>：元素数量</li>
+<li><code>max_size</code>: 最多可容纳元素数量</li>
+</ol></li>
+
+<li><p><strong>修改器</strong>:</p>
+
+<ol>
+<li><p><code>clear()</code>:清除内容，但是不释放空间</p></li>
+
+<li><p><code>insert()</code>:一共4个重载版本：</p></li>
+</ol>
+
+<blockquote>
+<p><code>insert(iterator pos, const T&amp; value)</code>:在pos前插入value</p>
+
+<p><code>insert(iterator pos, size_type count, const T&amp; value)</code>:在pos前插入count个value</p>
+
+<p><code>insert(iterator pos, InputIt first, InputIt last)</code>:在pos前插入范围在<code>[first, last)</code>内的元素</p>
+
+<p><code>insert(iterator pos, initializer_list&lt;T&gt; ilist)</code>:在pos前插入多个值</p>
+</blockquote>
+
+<ol>
+<li><p><code>erase(iterator pos, [iterator last])</code>：删除指定位置的元素，可以多个或者单个。<strong>注意：由于list不是连续存储，所以不可以对于迭代器使用类似指针的++, &ndash;, 可以使用<code>std::advance(InputIt&amp; it, Distance n)</code>进行指针的移动，距离可正可负。</strong></p></li>
+
+<li><p><code>push_back(const T&amp; value)</code>: 在list末尾插入元素</p></li>
+
+<li><p><code>pop_back</code>: 末尾删除</p></li>
+
+<li><p><code>pop_front()</code>:移除头部元素</p></li>
+
+<li><p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p></li>
+
+<li><p><code>swap</code>:交换两个list</p></li>
+</ol></li>
+
+<li><p><strong>操作</strong></p>
+
+<ol>
+<li><p><code>merge</code>:合并两个已排序的list。<code>merge(list&amp; other, Compare comp)</code></p></li>
+
+<li><p><code>sort</code>:对于元素进行稳定排序,O(NlogN), <code>sort(Compare comp)</code>,<strong>注意:std::sort不可以用于list，因为其要求元素可以随机访问</strong></p></li>
+
+<li><p><code>unique()</code>:从容器中移除所有相邻的重复元素，只留下第一个，返回移除的元素数。</p></li>
+
+<li><p><code>reverse()</code>:将列表倒序，时间复杂度O(n)</p></li>
+
+<li><p><code>splice</code>:从一个list中转移元素到另一个，不复制或者移动元素，只是简单的指针改变。</p></li>
+</ol>
+
+<blockquote>
+<p><code>splice(const_iterator pos, list&amp; other)</code>: 在pos前将other移入list</p>
+
+<p><code>splice(const_iterator pos, list&amp; other, const_iterator it)</code>:从 <code>other</code> 转移 <code>it</code> 所指向的元素到 *this 。元素被插入到 <code>pos</code> 所指向的元素之前。</p>
+
+<p><code>splice(const_iterator pos, list&amp; other, const_iterator first, const_iterator last)</code>:</p>
+
+<p>从 <code>other</code> 转移范围 <code>[first, last)</code> 中的元素到 *this 。元素被插入到 <code>pos</code> 所指向的元素之前。若 <code>pos</code> 是范围 <code>[first,last)</code> 中的迭代器则行为未定义。</p>
+</blockquote>
+
+<ol>
+<li><p><code>remove/ remove_if()</code>:移除某一个值，或者移除所有满足条件的值</p></li>
+
+<li><p><code>emplace(const_iterator pos, Args&amp;&amp;... args)</code>:直接于pos前构造一个元素，使用传入的参数。使用new关键字；对应于双向链表，还有<code>emplace_front</code>, <code>emplace_back</code>.</p></li>
+</ol></li>
+</ul>
 
       </div>
 
