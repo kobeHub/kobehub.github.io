@@ -120,7 +120,7 @@
               <i class="fas fa-clock"></i>
               
               
-              Reading time: 14 minutes.
+              Reading time: 19 minutes.
             </span>
           </div>
           <div class="categories">
@@ -157,6 +157,10 @@
 <ul>
 <li><a href="#2-1-成员函数">2.1 成员函数</a></li>
 </ul></li>
+<li><a href="#3-deque">3. Deque</a>
+<ul>
+<li><a href="#3-1-成员函数">3.1 成员函数</a></li>
+</ul></li>
 </ul>
 </nav>
       </aside>
@@ -173,7 +177,7 @@
 <ul>
 <li><a href="#1-vector">vector</a></li>
 <li><a href="#2-list">list</a></li>
-<li>deque</li>
+<li><a href="#3-deque">deque</a></li>
 <li>arrays</li>
 <li>forward_list(c++11 引入)</li>
 </ul></li>
@@ -270,7 +274,7 @@
 <li><p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p></li>
 </ol></li>
 
-<li><p>修改器</p>
+<li><p><strong>修改器</strong></p>
 
 <ol>
 <li><p><code>clear()</code>: 清除内容，不释放空间</p></li>
@@ -305,6 +309,11 @@
 <h1 id="2-list">2. list</h1>
 
 <p>list是一个提供非连续存储的序列化容器，底层依赖于链表进行实现，相对于vector，对于元素的随机访问较慢，但是具有较快的插入删除速度。默认的list是一个双向链表，对于单向链表，对应于forward_list.<strong>与forward_list相比，提供双向迭代，但是空间效率较低。</strong></p>
+
+<ul>
+<li>随机访问&ndash;O（n）</li>
+<li>插入删除&ndash;O(1)</li>
+</ul>
 
 <h2 id="2-1-成员函数">2.1 成员函数</h2>
 
@@ -344,7 +353,7 @@
 <li><p><strong>容量</strong></p>
 
 <ol>
-<li>empty()`:为空时返回1；否则返回0</li>
+<li><code>empty()</code>:为空时返回1；否则返回0</li>
 <li><code>size</code>：元素数量</li>
 <li><code>max_size</code>: 最多可容纳元素数量</li>
 </ol></li>
@@ -409,6 +418,86 @@
 <li><p><code>remove/ remove_if()</code>:移除某一个值，或者移除所有满足条件的值</p></li>
 
 <li><p><code>emplace(const_iterator pos, Args&amp;&amp;... args)</code>:直接于pos前构造一个元素，使用传入的参数。使用new关键字；对应于双向链表，还有<code>emplace_front</code>, <code>emplace_back</code>.</p></li>
+</ol></li>
+</ul>
+
+<h1 id="3-deque">3. Deque</h1>
+
+<p>Deque是一个双向队列，可以同时在队列头部以及尾部进行高效的读写，基本API与vector相似，但是添加了在头部的高速的<code>pop_front</code>,<code>push_front</code>.但是数据不一定存储在连续的空间，所以随机读入速度较慢。另外，在 deque 任一端插入或删除不会非法化指向其余元素的指针或引用。deque 的存储按需自动扩展及收缩。扩张 deque 比扩展 <a href="https://zh.cppreference.com/w/cpp/container/vector">std::vector</a> 便宜，因为它不涉及到复制既存元素到新内存位置。另一方面， deque 典型地拥有较大的最小内存开销；只保有一个元素的 deque 必须分配其整个内部数组（例如 64 位 libstdc++ 上为对象大小 8 倍； 64 位 libc++ 上为对象大小 16 倍或 4096 字节的较大者）。</p>
+
+<ul>
+<li>随机访问&ndash;O（1）</li>
+<li>在头尾插入删除&ndash;O(1)</li>
+<li>插入或者移除&ndash;O(n)</li>
+</ul>
+
+<h2 id="3-1-成员函数">3.1 成员函数</h2>
+
+<ul>
+<li><p><strong>构造函数</strong></p>
+
+<ol>
+<li><code>deque(const Allocator&amp; alloc)</code>: 默认构造函数</li>
+<li><code>deque(size_type count, const T&amp; value)</code>:构造拥有<code>count</code>个值为<code>value</code>的deque</li>
+<li><code>deque（size_type count）</code>: 构造拥有<code>count</code>个默认值的deque</li>
+<li><code>deque（InputIt first, InputIt last）</code>:使用范围<code>[first, last)</code>内的元素初始化deque</li>
+<li><code>deque(const deque&amp; other)</code>:复制构造函数</li>
+<li><code>deque(const deque&amp;&amp; other)</code>: move语义</li>
+<li><code>deque(std::initializer_list&lt;T&gt; init,)</code>:初始值的deque</li>
+</ol></li>
+
+<li><p><strong>元素访问</strong></p>
+
+<ol>
+<li><code>at()</code>: 访问指定元素，进行越界检查</li>
+<li><code>[]</code>: 指针式访问</li>
+<li><code>front()</code>:首个元素</li>
+<li><code>back()</code>: 最后一个元素</li>
+</ol></li>
+
+<li><p><strong>迭代器</strong>(所有迭代器的end都是指向NULL, 迭代器支持指针的+, -操作)</p>
+
+<ol>
+<li><code>begin()/cbegin()</code>:返回指向容器首个元素的迭代器</li>
+<li><code>end()/cend()</code>:指向最后一个元素的迭代器</li>
+<li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
+<li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
+</ol></li>
+
+<li><p><strong>容量</strong></p>
+
+<ol>
+<li><p><code>empty()</code>:为空时返回1；否则返回0</p></li>
+
+<li><p><code>size</code>：元素数量</p></li>
+
+<li><p><code>max_size</code>: 最多可容纳元素数量</p></li>
+
+<li><p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p></li>
+</ol></li>
+
+<li><p><strong>修改器</strong></p>
+
+<ol>
+<li><p><code>clear()</code>: 清除内容，不释放空间</p></li>
+
+<li><blockquote>
+<p><code>insert(iterator pos, const T&amp; value)</code>: 在位置pos前插入value</p>
+
+<p><code>insert(iterator pos, size_type count, const T&amp; value)</code>: 在迭代器位置pos前插入<code>count</code>个<code>value</code>.</p>
+
+<p><code>insert(iterator pos, InputIt first, InputIt last)</code>: 在位置pos插入一个序列</p>
+</blockquote></li>
+
+<li><p><code>erase</code>: 删除指定位置或者范围的元素，位置以及范围由迭代器指定。</p></li>
+
+<li><p><code>push_back</code>:元素插入末尾</p></li>
+
+<li><p><code>pop_back</code>: 末尾删除</p></li>
+
+<li><p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p></li>
+
+<li><p><code>swap</code>: 交换两个vector</p></li>
 </ol></li>
 </ul>
 
