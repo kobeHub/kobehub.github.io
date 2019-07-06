@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Language on Inno Jia</title>
-    <link>https://kobehub.github.io/tags/language/</link>
-    <description>Recent content in Language on Inno Jia</description>
+    <title>Python on Inno Jia</title>
+    <link>https://kobehub.github.io/categories/python/</link>
+    <description>Recent content in Python on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 06 Jul 2019 15:50:20 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/tags/language/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://kobehub.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -22,36 +22,6 @@
 类型以及基类对于object至关重要，因为他们确定了对象的具体行为，以及与其他对象的关系。同时需要牢记的是所有的类型以及基类都是object！
 以一个简单的1对象为例:
 &amp;gt;&amp;gt;&amp;gt; a = 1 # 在当前的命名空间给一个整数object名字为a &amp;gt;&amp;gt;&amp;gt; type(a) &amp;lt;class &amp;#39;int&amp;#39;&amp;gt;&amp;gt;&amp;gt;&amp;gt; type(type(a))&amp;lt;class &amp;#39;type&amp;#39;&amp;gt;&amp;gt;&amp;gt;&amp;gt; type(a).__base__&amp;lt;class &amp;#39;object&amp;#39;&amp;gt;&amp;gt;&amp;gt;&amp;gt; type(a).__bases__(&amp;lt;class &amp;#39;object&amp;#39;&amp;gt;,)&amp;gt;&amp;gt;&amp;gt; dir(a)[&amp;#39;__abs__&amp;#39;, &amp;#39;__add__&amp;#39;, &amp;#39;__and__&amp;#39;, &amp;#39;__bool__&amp;#39;, &amp;#39;__ceil__&amp;#39;, &amp;#39;__class__&amp;#39;, &amp;#39;__delattr__&amp;#39;, &amp;#39;__dir__&amp;#39;, &amp;#39;__divmod__&amp;#39;, &amp;#39;__doc__&amp;#39;, &amp;#39;__eq__&amp;#39;, &amp;#39;__float__&amp;#39;, &amp;#39;__floor__&amp;#39;, &amp;#39;__floordiv__&amp;#39;, &amp;#39;__format__&amp;#39;, &amp;#39;__ge__&amp;#39;, &amp;#39;__getattribute__&amp;#39;, &amp;#39;__getnewargs__&amp;#39;, &amp;#39;__gt__&amp;#39;, &amp;#39;__hash__&amp;#39;, &amp;#39;__index__&amp;#39;, &amp;#39;__init__&amp;#39;, &amp;#39;__init_subclass__&amp;#39;, &amp;#39;__int__&amp;#39;, &amp;#39;__invert__&amp;#39;, &amp;#39;__le__&amp;#39;, &amp;#39;__lshift__&amp;#39;, &amp;#39;__lt__&amp;#39;, &amp;#39;__mod__&amp;#39;, &amp;#39;__mul__&amp;#39;, &amp;#39;__ne__&amp;#39;, &amp;#39;__neg__&amp;#39;, &amp;#39;__new__&amp;#39;, &amp;#39;__or__&amp;#39;, &amp;#39;__pos__&amp;#39;, &amp;#39;__pow__&amp;#39;, &amp;#39;__radd__&amp;#39;, &amp;#39;__rand__&amp;#39;, &amp;#39;__rdivmod__&amp;#39;, &amp;#39;__reduce__&amp;#39;, &amp;#39;__reduce_ex__&amp;#39;, &amp;#39;__repr__&amp;#39;, &amp;#39;__rfloordiv__&amp;#39;, &amp;#39;__rlshift__&amp;#39;, &amp;#39;__rmod__&amp;#39;, &amp;#39;__rmul__&amp;#39;, &amp;#39;__ror__&amp;#39;, &amp;#39;__round__&amp;#39;, &amp;#39;__rpow__&amp;#39;, &amp;#39;__rrshift__&amp;#39;, &amp;#39;__rshift__&amp;#39;, &amp;#39;__rsub__&amp;#39;, &amp;#39;__rtruediv__&amp;#39;, &amp;#39;__rxor__&amp;#39;, &amp;#39;__setattr__&amp;#39;, &amp;#39;__sizeof__&amp;#39;, &amp;#39;__str__&amp;#39;, &amp;#39;__sub__&amp;#39;, &amp;#39;__subclasshook__&amp;#39;, &amp;#39;__truediv__&amp;#39;, &amp;#39;__trunc__&amp;#39;, &amp;#39;__xor__&amp;#39;, &amp;#39;bit_length&amp;#39;, &amp;#39;conjugate&amp;#39;, &amp;#39;denominator&amp;#39;, &amp;#39;from_bytes&amp;#39;, &amp;#39;imag&amp;#39;, &amp;#39;numerator&amp;#39;, &amp;#39;real&amp;#39;, &amp;#39;to_bytes&amp;#39;] 一个object有一个名字（name），但是却不属于对象本身，对象的名称在对象之外，存在于命名空间中，或者作为另一个对象的属性。对于一个object，可以使用__bases__属性获取其所有基类的元组，使用dir()函数获取所有的方法以及属性。</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43; Standard Template Library (STL)(part 2)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</link>
-      <pubDate>Wed, 03 Jul 2019 16:01:36 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</guid>
-      <description>STL 容器适配器 c++ STL提供了对于顺序容器的不同的访问接口：
- queue priority_queue stack  1. queue queue是一个典型的容器适配器对象，提供（FIFO）的用户接口，所有的元素都是在尾部插入，在头部删除。容器必须满足顺序容器的要求，必须提供以下接口:
-back, front,pop_front, push_back.标准库中的std::list, std::deque满足该要求。注意容器适配器不支持遍历以及随机访问。
-1.1 成员函数  构造函数  可以使用copy, move语义的构造函数，以及初始列表的构造函数。
- 元素访问
- front():访问第一个元素 end():访问最后一个元素  容量
- empty():检查底层的容器是否为空 size()：容器的大小  修改
- push pop emplace:与队列的末尾构造元素 swap   2. priority_queue 一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用Compare更改顺序。不支持元素的随机访问，底层实现可以是最大堆。</description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43; Standard Template Library (STL)(part 1)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</link>
-      <pubDate>Wed, 12 Jun 2019 00:00:00 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</guid>
-      <description>STL 容器简介 C++ STL容器中常用的容器类型可以分为四类:
- 顺序性容器: 提供对于数据的序列化访问  vector list deque arrays forward_list(c++11 引入)  容器适配器: 提供了对于序列化数据的另一种访问接口  queue priority_queue stack  关联容器: 实现了对于有序数据结构的快速访问(O(logn)) （红黑树）  set multiset map multimap  无序关联容器: 提供对于无序数据的快速访问（hash）(c++11 引入)  unordered_set unordered_multiset unordered_map unordered_multimap   1. vector vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以插入时间可能不一致，删除末尾元素可以在O(1)时间内完成，不发生resize操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（*由于进行连续存储，所以插入以及删除较慢*）.
-vector 上的常见操作复杂度（效率）如下：
- 随机访问——常数 O(1) 在末尾插入或移除元素——均摊常数 O(1) 插入或移除元素——与到 vector 结尾的距离成线性 O(n)  vector使用的空间大小可以通过capacity()进行查询; （c++ 11）额外的空间可以通过shrink_to_fit()函数返还给系统。
-1.1 成员函数  构造函数  std::vector&amp;lt;T, Allocator&amp;gt;::vector
- vector&amp;lt;T&amp;gt;(): 默认构造函数，构造一个空容器。若不提供分配器，则从默认构造的实例获得分配器。📚 vector&amp;lt;T&amp;gt;(size_type count, const T&amp;amp; value): 构造具有count个值为value的动态数组 📚 vector&amp;lt;T&amp;gt;(size_type count): 构造具有count个值为T类型默认值的动态数组 📚 vector&amp;lt;T&amp;gt;(InputIt first, InputIt last):构造拥有范围为[first, last)的内容的容器 vector&amp;lt;T&amp;gt;(const vector&amp;amp; other): 复制构造函数 📚 vector&amp;lt;T&amp;gt;(vector&amp;amp;&amp;amp; other): 移动构造函数，实现右值向左值类型的转移 vector&amp;lt;T&amp;gt;(std::initializer_list&amp;lt;T&amp;gt; init):构造具有初始内容的容器 📚   元素访问</description>
     </item>
     
   </channel>
