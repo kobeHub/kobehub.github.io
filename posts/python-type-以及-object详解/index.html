@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
+    <meta name="author" content="Inno Jia">
+    <meta name="description" content="Inno Jia&#39;s personal website">
+    <meta name="keywords" content="blog,developer,personal">
+
+    <base href="https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/">
+    <title>
+  Python type 以及 object详解 · Inno Jia
+</title>
+
+    <link rel="canonical" href="https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Merriweather:300,700|Source+Code+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" integrity="sha256-oSrCnRYXvHG31SBifqP2PM1uje7SJUyX0nTwO2RJV54=" crossorigin="anonymous" />
+
+    
+      
+      
+      <link rel="stylesheet" href="https://kobehub.github.io/css/coder.min.c69bf5954f7fea8f2a0bb71d82d5219e668649fdab3dad0d1844dfbe049df7e9.css" integrity="sha256-xpv1lU9/6o8qC7cdgtUhnmaGSf2rPa0NGETfvgSd9&#43;k=" crossorigin="anonymous" media="screen" />
+    
+
+    
+
+    
+
+    
+
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://kobehub.github.io/images/favicon-16x16.png" sizes="16x16">
+
+    
+
+    <meta name="generator" content="Hugo 0.55.6" />
+  </head>
+
+  <body class=" ">
+    <main class="wrapper">
+      <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="https://kobehub.github.io">
+      Inno Jia
+    </a>
+    <input type="checkbox" id="menu-toggle" />
+    <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
+    <ul class="navigation-list">
+      
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/about/">About</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/posts/">Blog</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/projects/">Projects</a>
+          </li>
+        
+          <li class="navigation-item">
+            <a class="navigation-link" href="https://kobehub.github.io/contact/">Contact me</a>
+          </li>
+        
+      
+      
+        
+        
+        
+          
+        
+          
+            
+              <li class="navigation-item menu-separator">
+                <span>|</span>
+              </li>
+              
+            
+            <li class="navigation-item">
+              <a href="https://kobehub.github.io/zh-cn/">zh-CN</a>
+            </li>
+          
+        
+      
+    </ul>
+  </section>
+</nav>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css"></link>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+      <div class="content">
+        
+  <section class="container post">
+    <article>
+      <header>
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <div class="post-title">
+          <h1 class="title">Python type 以及 object详解</h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fas fa-calendar"></i>
+              <time datetime='July 6, 2019'>
+                July 6, 2019
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fas fa-clock"></i>
+              
+              
+              Reading time: 11 minutes.
+            </span>
+          </div>
+          <div class="categories">
+  <i class="fas fa-folder"></i>
+    <a href="https://kobehub.github.io/categories/python/">Python</a></div>
+
+          <div class="tags">
+  <i class="fas fa-tag"></i>
+    <a href="https://kobehub.github.io/tags/language/">Language</a></div>
+
+        </div>
+        <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				tex2jax: {
+  					inlineMath: [['$','$'], ['\\(','\\)']],
+  					processEscapes: true
+  				}
+			});
+		</script>
+		
+		<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      </header>
+
+      <aside>
+        <nav id="TableOfContents">
+<ul>
+<li><a href="#基础概念">基础概念</a>
+<ul>
+<li><a href="#1-什么是object">1. 什么是object?</a></li>
+<li><a href="#2-第一箴言-一切皆对象">2. 第一箴言：一切皆对象</a>
+<ul>
+<li><a href="#2-1-第一对象">2.1 第一对象</a></li>
+<li><a href="#2-2-类型对象">2.2 类型对象</a></li>
+<li><a href="#2-3-更多内置类型">2.3 更多内置类型</a></li>
+</ul></li>
+<li><a href="#3-创建对象">3. 创建对象</a>
+<ul>
+<li><a href="#3-1-通过子类创建新的对象">3.1 通过子类创建新的对象</a></li>
+<li><a href="#3-2-通过实例化创建新对象">3.2 通过实例化创建新对象</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
+</nav>
+      </aside>
+      <div>
+        
+
+<h1 id="基础概念">基础概念</h1>
+
+<h2 id="1-什么是object">1. 什么是object?</h2>
+
+<p>在python中，遵守着“一切皆对象”的箴言。所有的类型、实例、类均为对象。这是在本文开始前需要明确的。那么在python中，对象的定义到底是什么呢？所有表示实体的概念都可以视为一个对象，一般具有以下特征:</p>
+
+<ul>
+<li><strong>标识符（Identity）</strong>： 用于唯一标示一个对象的标志</li>
+<li><strong>值(value)</strong>: 对象所存储的值，可能包含很多属性（可以使用<code>object.attr</code>对于属性进行操作）</li>
+<li><strong>类型(type)</strong>: 每个对象<strong>有且仅有一个</strong>类型</li>
+<li><strong>基类（bases）</strong>： 可以有一个或者多个基类，类似于面向对象语言的父类或者超类，支持多继承。并不是所有的对象都有基类。</li>
+</ul>
+
+<p>如果对于python对象的内存分布更感兴趣，其实可以通过理解<strong>元数据（meta）</strong>抽象，加深理解。所有的对象在内存中都有一个特定的地址，可以通过<code>id()</code>函数获取其地址。</p>
+
+<p>类型以及基类对于object至关重要，因为他们确定了对象的具体行为，以及与其他对象的关系。同时需要牢记的是所有的类型以及基类都是object！</p>
+
+<p>以一个简单的<code>1</code>对象为例:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; a = <span style="color:#ff0;font-weight:bold">1</span>     			<span style="color:#007f7f"># 在当前的命名空间给一个整数object名字为a</span>
+&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(a)
+&lt;<span style="color:#fff;font-weight:bold">class</span> <span style="color:#f00">&#39;</span>int<span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type(type(a))</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">type</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type(a).__base__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">object</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type(a).__bases__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">(&lt;class &#39;</span><span style="color:#fff;font-weight:bold">object</span><span style="color:#0ff;font-weight:bold">&#39;&gt;,)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; dir(a)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">[&#39;</span>__abs__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__add__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__and__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__bool__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__ceil__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__class__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__delattr__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__dir__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__divmod__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__doc__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__eq__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__float__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__floor__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__floordiv__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__format__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__ge__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__getattribute__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__getnewargs__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__gt__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__hash__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__index__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__init__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__init_subclass__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__int__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__invert__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__le__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__lshift__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__lt__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__mod__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__mul__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__ne__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__neg__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__new__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__or__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__pos__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__pow__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__radd__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rand__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rdivmod__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__reduce__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__reduce_ex__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__repr__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rfloordiv__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rlshift__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rmod__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rmul__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__ror__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__round__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rpow__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rrshift__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rshift__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rsub__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rtruediv__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__rxor__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__setattr__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__sizeof__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__str__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__sub__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__subclasshook__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__truediv__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__trunc__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>__xor__<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>bit_length<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>conjugate<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>denominator<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>from_bytes<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>imag<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>numerator<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>real<span style="color:#0ff;font-weight:bold">&#39;, &#39;</span>to_bytes<span style="color:#0ff;font-weight:bold">&#39;]</span></code></pre></div>
+<p>一个object有一个<strong>名字（name）</strong>，但是却不属于对象本身，对象的名称在对象之外，存在于命名空间中，或者作为另一个对象的属性。对于一个object，可以使用<code>__bases__</code>属性获取其所有基类的元组，使用<code>dir()</code>函数获取所有的方法以及属性。</p>
+
+<hr />
+
+<p><em>注意</em></p>
+
+<p>以上测试在python 2.x中<code>type（）</code>输出是<code>&lt;type 'type_name'&gt;</code> 这是语言最初设计时的遗留问题.最初<code>type</code>是cpython是现实的内置类型，而<code>class</code>语句用于声明一个类，由于命名不同，所以两者不可以混用，不可以用<code>class</code>扩展<code>type</code>。在python2.2之后，开发者开始逐渐统一两个概念，python3.X中所有的内置类型也都是标签式的<code>class</code>,所以可以对于内置类型进行继承.</p>
+
+<p>python type与class关系:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">Type(Metaclass) -&gt; Class -&gt; Instance</pre></div>
+<hr />
+
+<h2 id="2-第一箴言-一切皆对象">2. 第一箴言：一切皆对象</h2>
+
+<p>这句话不仅仅意味着<code>23， 88</code>等<code>int</code>的实例是对象，而且<code>int</code>本身也是对象，他可能在内存中就坐落在某一个数字实例的旁边，可以查看其地址:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">id</span>(<span style="color:#fff;font-weight:bold">int</span>)
+<span style="color:#ff0;font-weight:bold">140268716333408</span></code></pre></div>
+<p>实际上，所有的<code>int</code>实例都使用它们的<code>__class__</code>属性指向该地址，表示<em>&ldquo;That guy really knows me!&rdquo;</em>.使用<code>type()</code>函数，实际返回的对象的<code>__class__</code>属性。</p>
+
+<p>此时需要将先入为主的面向对象的概念放到一边，而把一切视为对象，然后开始探究对象间的关系。不同对象间的主要关系包括<strong>子类和父类的关系、类型以及实例的关系。</strong></p>
+
+<h3 id="2-1-第一对象">2.1 第一对象</h3>
+
+<p>python中最重要的两个对象是<code>&lt;class type&gt;</code>, <code>&lt;class object&gt;</code>.这两个对象是python中的原始对象。我们可以逐一的介绍这两个对象，但是无疑会陷入“鸡生蛋还是蛋生鸡”的问题。其实两者是相互依赖的，不能独立存在，因为他们是依据彼此进行定义的。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">object</span>
+&lt;<span style="color:#fff;font-weight:bold">class</span> <span style="color:#f00">&#39;</span>object<span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">type</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; object.__class__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">type</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; object.__bases__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">()</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type.__bases__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">(&lt;class &#39;</span><span style="color:#fff;font-weight:bold">object</span><span style="color:#0ff;font-weight:bold">&#39;&gt;,)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type.__class__</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">type</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; isinstance(object, object)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">True</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; isinstance(object, type)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">True</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; isinstance(type, type)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">True</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; isinstance(type, object)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">True</span></code></pre></div>
+<p>可以惊喜的看到，<code>object, type</code>的类型都是<code>type</code>,而<code>type</code>的基类是<code>object</code>,<strong>所以二者互为对方的实例，同时由于双箭头的存在，所以他们自身又是自身的实例。</strong></p>
+
+<p><img src="http://media.innohub.top/190706-py.png" alt="type and object" /></p>
+
+<h3 id="2-2-类型对象">2.2 类型对象</h3>
+
+<p>在第一对象的基础上，可以引入类型对象。例如：<code>int</code>， <code>User</code>等预定义或者自定义的对象。实际上，<code>&lt;class type&gt;</code>可以看作是一个<code>trait</code>（Rust概念），规定了<strong>类型对象</strong>具有以下特征:</p>
+
+<ul>
+<li>类型对象用于<strong>表示抽象数据类型</strong>，例如：一个<code>User</code>的对象可以表示系统中的所有用户，<code>int</code>的对象可以表示所有的整数</li>
+<li><strong>可以被子类化</strong>，也就是可以根据现有的类型对象创建一个具有类似行为的类型对象。此时现有的对象就是基类。</li>
+<li><strong>可以被实例化</strong>，可以根据一个类型对象创建任意多个实例，实例的<code>__class__</code>属性是该对象</li>
+<li><strong>该对象的类型为<code>&lt;class type&gt;</code></strong></li>
+<li>类型对象一般被称为<code>class</code>或者<code>type</code></li>
+</ul>
+
+<p>在python2.2之后,type与class的你语义相同，所以<code>type()</code>函数与<code>__class__</code>属性获取的结果是一样的。类型以及非类型对象都是对象，但是只有<strong>类型</strong>才可以具有子类，其他的对象不可以被继承。</p>
+
+<p>判断一个对象是否为类型对象？</p>
+
+<p><strong>如果<code>type(obj) == type</code>,那么就是类型对象!!!</strong></p>
+
+<p><em>总结</em></p>
+
+<blockquote>
+<ol>
+<li><code>object</code>是<code>type</code>的一个实例</li>
+<li><code>object</code>不是任何对象的子类</li>
+<li><code>type</code>， <code>object</code>是本身的一个实例</li>
+<li><code>type</code>是<code>object</code>的子类</li>
+</ol>
+</blockquote>
+
+<h3 id="2-3-更多内置类型">2.3 更多内置类型</h3>
+
+<p><img src="http://media.innohub.top/190706-ty.png" alt="list dict tuple" /></p>
+
+<p>python还有很多其他的原始类型，他们都继承自<code>object</code>,同时是<code>type</code>的一种实现，都是类型对象。</p>
+
+<h2 id="3-创建对象">3. 创建对象</h2>
+
+<h3 id="3-1-通过子类创建新的对象">3.1 通过子类创建新的对象</h3>
+
+<p>可以通过创建子类的方式创建新的对象：</p>
+
+<ul>
+<li>使用<code>class</code>关键字创建一个新的类型</li>
+<li>支持多个基类</li>
+<li>大多数的内置类型都是可以被继承的（并不是全部）</li>
+<li>任何 object 的子类(以及他们的子类)的类型都是 type</li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#fff;font-weight:bold">class</span> AtheletList(<span style="color:#fff;font-weight:bold">list</span>):
+    <span style="color:#fff;font-weight:bold">def</span> __init__(self, name=None, des=None, times=[]):
+        <span style="color:#fff;font-weight:bold">list</span>.__init__([])
+        self.name = name
+        self.des = des
+        self.extend(times)
+
+    <span style="color:#fff;font-weight:bold">def</span> top3(self):
+        <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#fff;font-weight:bold">sorted</span>(self)[<span style="color:#ff0;font-weight:bold">0</span>:<span style="color:#ff0;font-weight:bold">3</span>])</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A:
+...     <span style="color:#fff;font-weight:bold">pass</span>
+... 
+&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(A)
+&lt;<span style="color:#fff;font-weight:bold">class</span> <span style="color:#f00">&#39;</span>type<span style="color:#0ff;font-weight:bold">&#39;&gt;</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; class B(A):</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">...     pass</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">... </span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&gt;&gt;&gt; type(B)</span><span style="color:#f00">
+</span><span style="color:#f00"></span><span style="color:#0ff;font-weight:bold">&lt;class &#39;</span><span style="color:#fff;font-weight:bold">type</span><span style="color:#0ff;font-weight:bold">&#39;&gt;</span></code></pre></div>
+<h3 id="3-2-通过实例化创建新对象">3.2 通过实例化创建新对象</h3>
+
+<p>通过使用<code>()</code>操作符调用一个类型对象用以实例化一个该类型的实例。那么python进行实例化时到底发生了什么呢?</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#ff0;font-weight:bold">1.</span> <span style="color:#f00">首先，</span>python创建一个新的对象时<span style="color:#f00">，需要根据一个具体的类型</span>
+<span style="color:#ff0;font-weight:bold">2.</span> <span style="color:#f00">调用该类型对象的</span> __new__ <span style="color:#f00">方法为该实例分配空间，然后再调用</span> __init__ <span style="color:#f00">方法进行初始化</span>
+<span style="color:#ff0;font-weight:bold">3.</span> <span style="color:#f00">此时，该类型作为一个工厂生产出新的对象</span>
+</code></pre></div>
+<p><em>最终的对象图谱：</em></p>
+
+<p><img src="http://media.innohub.top/190706-map.png" alt="object map" /></p>
+
+<p>可以把对象分为三类:</p>
+
+<ul>
+<li>元类</li>
+<li>类</li>
+<li>实例</li>
+</ul>
+
+<p>图中的实线表示继承，虚线可以表示实现。</p>
+
+<h1 id="reference">Reference</h1>
+
+<p><a href="https://www.oreilly.com/library/view/learning-python-3rd/9780596513986/ch04.html">https://www.oreilly.com/library/view/learning-python-3rd/9780596513986/ch04.html</a></p>
+
+<p><a href="https://www.cs.utexas.edu/~cannata/cs345/Class Notes/15 Python Types and Objects.pdf">https://www.cs.utexas.edu/~cannata/cs345/Class%20Notes/15%20Python%20Types%20and%20Objects.pdf</a></p>
+
+<p><a href="https://stackoverflow.com/questions/35958961/class-vs-type-in-python">https://stackoverflow.com/questions/35958961/class-vs-type-in-python</a></p>
+
+      </div>
+
+      <footer>
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Inno" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </footer>
+    </article>
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+  </section>
+
+      </div>
+
+      <footer class="footer">
+  <section class="container">
+    
+      <p>It&#39;s not a bug, it&#39;s future</p>
+    
+     © 2019
+    
+       · 
+      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+    
+       · 
+      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+    
+  </section>
+</footer>
+
+    </main>
+
+    
+
+  </body>
+
+  <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+</html>
