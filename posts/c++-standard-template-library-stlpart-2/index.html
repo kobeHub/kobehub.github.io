@@ -120,7 +120,7 @@
               <i class="fas fa-clock"></i>
               
               
-              Reading time: 1 minutes.
+              Reading time: 5 minutes.
             </span>
           </div>
           <div class="categories">
@@ -152,7 +152,14 @@
 <ul>
 <li><a href="#1-1-成员函数">1.1 成员函数</a></li>
 </ul></li>
-<li><a href="#2-priority-queue">2. priority_queue</a></li>
+<li><a href="#2-priority-queue">2. priority_queue</a>
+<ul>
+<li><a href="#2-1-成员函数">2.1 成员函数</a></li>
+</ul></li>
+<li><a href="#3-stack">3. stack</a>
+<ul>
+<li><a href="#3-1-成员函数">3.1 成员函数</a></li>
+</ul></li>
 </ul>
 </nav>
       </aside>
@@ -164,9 +171,9 @@
 <p>c++ STL提供了对于顺序容器的不同的访问接口：</p>
 
 <ul>
-<li><strong><a href="#-1.queue">queue</a></strong></li>
-<li><strong><a href="#-2.priority_queue">priority_queue</a></strong></li>
-<li><strong><a href="#-3.stack">stack</a></strong></li>
+<li><strong><a href="#1-queue">queue</a></strong></li>
+<li><strong><a href="#2-priority-queue">priority_queue</a></strong></li>
+<li><strong><a href="#3-stack">stack</a></strong></li>
 </ul>
 
 <h1 id="1-queue">1. queue</h1>
@@ -181,7 +188,7 @@
 <li><strong>构造函数</strong></li>
 </ul>
 
-<p>可以使用<code>copy</code>, <code>move</code>语义的构造函数，以及初始列表的构造函数。</p>
+<p>可以使用<code>copy</code>, <code>move</code>语义的构造函数，以及初始列表的构造函数。底层使用的默认容器是<code>deque</code></p>
 
 <ul>
 <li><p><strong>元素访问</strong></p>
@@ -210,7 +217,109 @@
 
 <h1 id="2-priority-queue">2. priority_queue</h1>
 
-<p>一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用<code>Compare</code>更改顺序。不支持元素的随机访问，底层实现可以是最大堆。</p>
+<p>一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用<code>Compare</code>更改顺序。不支持元素的随机访问，底层实现可以是最大堆。可以使用用户提供的<code>Compare</code>更改顺序，例如，使用<code>std::greater&lt;T&gt;</code>将元素按照非增序排列.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt;
+	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T,
+	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Container = std::vector&lt;T&gt;,
+	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Compare = std::less&lt;<span style="color:#fff;font-weight:bold">typename</span> Contianer::value_type&gt;
+&gt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>priority_queue;
+</code></pre></div>
+<h2 id="2-1-成员函数">2.1 成员函数</h2>
+
+<ul>
+<li><strong>构造函数</strong></li>
+</ul>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  priority_queue()
+  <span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare) : priority_queue(compare, Container) {}
+  <span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Contianer&amp; cont)
+</code></pre></div>
+<p>支持默认构造函数；传入<code>Compare</code>的构造函数，传入<code>Compare, Contianer</code>的构造函数，复制，move语义的构造函数。</p>
+
+<p>使用默认的底层容器是<code>std::vector&lt;T&gt;</code>.</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  <span style="color:#fff;font-weight:bold">template</span>&lt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>InputIt &gt;
+  priority_queue( InputIt first, InputIt last,
+                  <span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Container&amp; cont );
+</code></pre></div>
+<p>该构造函数从<code>cont</code>复制构造c，从compare复制构造comp。然后调用<code>c.insert(c.end(), first, last)</code>,再调用<code>std::make_heap(c.begin(), c.end(), comp)</code></p>
+
+<ul>
+<li><strong>元素访问</strong></li>
+</ul>
+
+<p><code>top（）</code>：返回堆顶元素</p>
+
+<ul>
+<li><p><strong>容量</strong></p>
+
+<ol>
+<li><p><code>empty()</code></p></li>
+
+<li><p><code>size()</code></p></li>
+</ol></li>
+
+<li><p><strong>修改器</strong></p>
+
+<ol>
+<li><code>push</code>:插入元素并对底层容器排序</li>
+<li><code>pop</code>:闪出栈顶元素，并排序</li>
+<li><code>emplace</code>:构造一个对象并且push</li>
+<li><code>swap</code>:交换两个队列的数据</li>
+</ol></li>
+
+<li><p><strong>成员对象</strong></p>
+
+<ol>
+<li>Container c</li>
+<li>Compare comp</li>
+</ol></li>
+</ul>
+
+<h1 id="3-stack">3. stack</h1>
+
+<p>容器适配器，提供了FILO的访问顺序，该类底层容器为双向队列(deque),该类模板表现为底层容器的包装器&ndash;只提供特定的函数集合，栈的所有操作均位于栈顶。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt;
+    <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T,
+    <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Container = std::deque&lt;T&gt;
+&gt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>stack;
+</code></pre></div>
+<h2 id="3-1-成员函数">3.1 成员函数</h2>
+
+<ul>
+<li><strong>构造函数</strong></li>
+</ul>
+
+<p>提供了默认构造函数、传入<code>Container</code>的构造函数，复制、move语义的构造函数</p>
+
+<ul>
+<li><strong>元素访问</strong></li>
+</ul>
+
+<p><code>top（）</code>：返回堆顶元素</p>
+
+<ul>
+<li><p><strong>容量</strong></p>
+
+<ol>
+<li><p><code>empty()</code></p></li>
+
+<li><p><code>size()</code></p></li>
+</ol></li>
+
+<li><p><strong>修改器</strong></p>
+
+<ol>
+<li><code>push</code>:插入元素并对底层容器排序</li>
+<li><code>pop</code>:闪出栈顶元素，并排序</li>
+<li><code>emplace</code>:构造一个对象并且push</li>
+<li><code>swap</code>:交换两个队列的数据</li>
+</ol></li>
+
+<li><p><strong>成员对象</strong></p>
+
+<ol>
+<li>Container c</li>
+</ol></li>
+</ul>
 
       </div>
 
