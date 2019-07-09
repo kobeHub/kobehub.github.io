@@ -20,11 +20,12 @@
       <description>STL 容器适配器 c++ STL提供了对于顺序容器的不同的访问接口：
  queue priority_queue stack  1. queue queue是一个典型的容器适配器对象，提供（FIFO）的用户接口，所有的元素都是在尾部插入，在头部删除。容器必须满足顺序容器的要求，必须提供以下接口:
 back, front,pop_front, push_back.标准库中的std::list, std::deque满足该要求。注意容器适配器不支持遍历以及随机访问。
-1.1 成员函数  构造函数  可以使用copy, move语义的构造函数，以及初始列表的构造函数。
+1.1 成员函数  构造函数  可以使用copy, move语义的构造函数，以及初始列表的构造函数。底层使用的默认容器是deque
  元素访问
  front():访问第一个元素 end():访问最后一个元素  容量
  empty():检查底层的容器是否为空 size()：容器的大小  修改
- push pop emplace:与队列的末尾构造元素 swap   2. priority_queue 一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用Compare更改顺序。不支持元素的随机访问，底层实现可以是最大堆。</description>
+ push pop emplace:与队列的末尾构造元素 swap   2. priority_queue 一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用Compare更改顺序。不支持元素的随机访问，底层实现可以是最大堆。可以使用用户提供的Compare更改顺序，例如，使用std::greater&amp;lt;T&amp;gt;将元素按照非增序排列.
+template&amp;lt; classT, classContainer = std::vector&amp;lt;T&amp;gt;, classCompare = std::less&amp;lt;typename Contianer::value_type&amp;gt; &amp;gt; classpriority_queue;  2.1 成员函数  构造函数  priority_queue() explicit priority_queue(const Compare&amp;amp; compare) : priority_queue(compare, Container) {} explicit priority_queue(const Compare&amp;amp; compare, const Contianer&amp;amp; cont)  支持默认构造函数；传入Compare的构造函数，传入Compare, Contianer的构造函数，复制，move语义的构造函数。</description>
     </item>
     
     <item>
