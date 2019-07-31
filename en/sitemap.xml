@@ -4,7 +4,7 @@
   
   <url>
     <loc>https://kobehub.github.io/categories/</loc>
-    <lastmod>2019-07-06T15:50:20+08:00</lastmod>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -19,8 +19,14 @@
   </url>
   
   <url>
+    <loc>https://kobehub.github.io/tags/docker/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/</loc>
-    <lastmod>2019-07-06T15:50:20+08:00</lastmod>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -35,13 +41,46 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/tags/language/</loc>
-    <lastmod>2019-07-06T15:50:20+08:00</lastmod>
+    <loc>https://kobehub.github.io/posts/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/posts/</loc>
+    <loc>https://kobehub.github.io/categories/record/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/tags/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://kobehub.github.io/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://kobehub.github.io/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/tags/k8s/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</loc>
+    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/tags/language/</loc>
     <lastmod>2019-07-06T15:50:20+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -55,22 +94,6 @@
   <url>
     <loc>https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</loc>
     <lastmod>2019-07-06T15:50:20+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kobehub.github.io/tags/</loc>
-    <lastmod>2019-07-06T15:50:20+08:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://kobehub.github.io/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://kobehub.github.io/tags/"
-                />
   </url>
   
   <url>
@@ -112,20 +135,8 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/tags/docker/</loc>
-    <lastmod>2019-03-24T15:29:39+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</loc>
     <lastmod>2019-03-24T15:29:39+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://kobehub.github.io/categories/record/</loc>
-    <lastmod>2019-03-24T15:29:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
