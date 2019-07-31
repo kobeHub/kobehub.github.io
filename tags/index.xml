@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 06 Jul 2019 15:50:20 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2019 10:36:43 +0800</lastBuildDate>
     
 	<atom:link href="https://kobehub.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker</title>
+      <link>https://kobehub.github.io/tags/docker/</link>
+      <pubDate>Fri, 26 Jul 2019 10:36:43 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k8s</title>
+      <link>https://kobehub.github.io/tags/k8s/</link>
+      <pubDate>Fri, 26 Jul 2019 10:36:43 +0800</pubDate>
+      
+      <guid>https://kobehub.github.io/tags/k8s/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Language</title>
@@ -26,15 +44,6 @@
       <pubDate>Fri, 17 May 2019 22:39:33 +0800</pubDate>
       
       <guid>https://kobehub.github.io/tags/review/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
-      <link>https://kobehub.github.io/tags/docker/</link>
-      <pubDate>Sun, 24 Mar 2019 15:29:39 +0800</pubDate>
-      
-      <guid>https://kobehub.github.io/tags/docker/</guid>
       <description></description>
     </item>
     
