@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://kobehub.github.io/categories/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -21,41 +20,26 @@
   <url>
     <loc>https://kobehub.github.io/tags/docker/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/</loc>
+    <loc>https://kobehub.github.io/tags/k8s/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://kobehub.github.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://kobehub.github.io/"
-                />
   </url>
   
   <url>
     <loc>https://kobehub.github.io/posts/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/record/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/tags/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -69,12 +53,6 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/tags/k8s/</loc>
-    <lastmod>2019-07-26T10:36:43+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</loc>
     <lastmod>2019-07-26T10:36:43+08:00</lastmod>
   </url>
@@ -82,13 +60,11 @@
   <url>
     <loc>https://kobehub.github.io/tags/language/</loc>
     <lastmod>2019-07-06T15:50:20+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/python/</loc>
     <lastmod>2019-07-06T15:50:20+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -104,7 +80,6 @@
   <url>
     <loc>https://kobehub.github.io/categories/summary/</loc>
     <lastmod>2019-07-03T16:01:36+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -113,19 +88,17 @@
   </url>
   
   <url>
+    <loc>https://kobehub.github.io/posts/image-preprocess/</loc>
+    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/categories/cv/</loc>
     <lastmod>2019-05-17T22:39:33+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/tags/review/</loc>
-    <lastmod>2019-05-17T22:39:33+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://kobehub.github.io/posts/image-preprocess/</loc>
     <lastmod>2019-05-17T22:39:33+08:00</lastmod>
   </url>
   
@@ -147,13 +120,16 @@
   <url>
     <loc>https://kobehub.github.io/tags/leetcode/</loc>
     <lastmod>2019-02-18T12:56:03+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/notes/</loc>
     <lastmod>2019-02-18T12:56:03+08:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://kobehub.github.io/tags/computer-science/</loc>
+    <lastmod>2019-02-13T13:53:00+08:00</lastmod>
   </url>
   
   <url>
@@ -162,15 +138,13 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/tags/computer-science/</loc>
-    <lastmod>2019-02-13T13:53:00+08:00</lastmod>
-    <priority>0</priority>
+    <loc>https://kobehub.github.io/categories/golang/</loc>
+    <lastmod>2019-01-25T14:16:20+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/categories/golang/</loc>
+    <loc>https://kobehub.github.io/tags/reprint/</loc>
     <lastmod>2019-01-25T14:16:20+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -179,21 +153,13 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/tags/reprint/</loc>
-    <lastmod>2019-01-25T14:16:20+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://kobehub.github.io/tags/cnn/</loc>
     <lastmod>2019-01-22T23:13:21+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://kobehub.github.io/categories/deep-learning/</loc>
     <lastmod>2019-01-22T23:13:21+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -202,13 +168,12 @@
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/categories/machine-learning/</loc>
+    <loc>https://kobehub.github.io/posts/review-neural-networks/</loc>
     <lastmod>2019-01-14T20:23:39+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://kobehub.github.io/posts/review-neural-networks/</loc>
+    <loc>https://kobehub.github.io/categories/machine-learning/</loc>
     <lastmod>2019-01-14T20:23:39+08:00</lastmod>
   </url>
   
@@ -243,6 +208,21 @@
   </url>
   
   <url>
+    <loc>https://kobehub.github.io/</loc>
+    <lastmod>2019-01-08T20:24:57+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://kobehub.github.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://kobehub.github.io/"
+                />
+  </url>
+  
+  <url>
     <loc>https://kobehub.github.io/projects/</loc>
     <lastmod>2019-01-08T20:24:57+08:00</lastmod>
   </url>
@@ -255,7 +235,6 @@
   <url>
     <loc>https://kobehub.github.io/tags/hugo/</loc>
     <lastmod>2019-01-08T10:10:02+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -266,7 +245,6 @@
   <url>
     <loc>https://kobehub.github.io/tags/tutorial/</loc>
     <lastmod>2019-01-08T10:10:02+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

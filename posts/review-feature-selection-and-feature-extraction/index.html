@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   <body class=" ">
@@ -146,218 +146,169 @@
 
       <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#特征选择与特征提取">特征选择与特征提取</a>
-<ul>
-<li><a href="#1-特征介绍">1. 特征介绍</a></li>
-<li><a href="#2-特征选取">2. 特征选取</a>
-<ul>
-<li><a href="#2-1-选取准则">2.1 选取准则</a></li>
-<li><a href="#2-2-特征选择的一般步骤">2.2 特征选择的一般步骤</a></li>
-<li><a href="#2-3-特征选取方法-relief-lvw-l1-norm">2.3 特征选取方法（ Relief / LVW / L1-Norm ）</a>
-<ul>
-<li><a href="#a-过滤式-filter">a. 过滤式（Filter）</a></li>
-<li><a href="#b-包裹式-wrapper">b. 包裹式（Wrapper）</a></li>
-<li><a href="#c-嵌入式-embedding">c. 嵌入式 （Embedding）</a></li>
-</ul></li>
-<li><a href="#2-4-子集搜索">2.4 子集搜索</a></li>
-<li><a href="#2-5-子集评估">2.5 子集评估</a></li>
-</ul></li>
-<li><a href="#3-特征提取">3. 特征提取</a>
-<ul>
-<li><a href="#3-1-主成成分分析-pca">3.1 主成成分分析 PCA</a></li>
-<li><a href="#3-2-线性判别分析-lda">3.2 线性判别分析 LDA</a></li>
-<li><a href="#3-3-kernel-pca">3.3 Kernel-PCA</a></li>
-<li><a href="#3-4-流形学习方法-manifold-learning">3.4 流形学习方法（Manifold Learning）</a></li>
-</ul></li>
-<li><a href="#4-特征学习">4. 特征学习</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-特征介绍">1. 特征介绍</a></li>
+    <li><a href="#2-特征选取">2. 特征选取</a>
+      <ul>
+        <li><a href="#21-选取准则">2.1 选取准则</a></li>
+        <li><a href="#22-特征选择的一般步骤">2.2 特征选择的一般步骤</a></li>
+        <li><a href="#23-特征选取方法-relief--lvw--l1-norm-">2.3 特征选取方法（ Relief / LVW / L1-Norm ）</a></li>
+        <li><a href="#24-子集搜索">2.4 子集搜索</a></li>
+        <li><a href="#25-子集评估">2.5 子集评估</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-特征提取">3. 特征提取</a>
+      <ul>
+        <li><a href="#31-主成成分分析-pca">3.1 主成成分分析 PCA</a></li>
+        <li><a href="#32-线性判别分析-lda">3.2 线性判别分析 LDA</a></li>
+        <li><a href="#33-kernel-pca">3.3 Kernel-PCA</a></li>
+        <li><a href="#34-流形学习方法manifold-learning">3.4 流形学习方法（Manifold Learning）</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-特征学习">4. 特征学习</a></li>
+  </ul>
 </nav>
       </aside>
       <div>
-        
-
-<h1 id="特征选择与特征提取">特征选择与特征提取</h1>
-
+        <h1 id="特征选择与特征提取">特征选择与特征提取</h1>
 <h2 id="1-特征介绍">1. 特征介绍</h2>
-
 <p>通常用于机器学习任务的特征集，可以使用一个 $l$ 维向量表示。称之为特征向量</p>
-
 <p>$x = [x_1, x_2, &hellip;, x_l]^T$</p>
-
 <p>对于特征的产生，可以通过先验知识手工设定，也可以通过学习自动获取。对于先验知识较为明确，区分度大的样本，可以直接设计较好的特征将其分开；对于先验知识不明确，的特征集可以通学习获取。</p>
-
 <p>继续以分类系统为例：针对一个典型的分类系统的基本步骤，有关特征工程（Feature Engineering）主要有两部分：</p>
-
 <ul>
 <li>特征产生 （feature generation）
-
 <ul>
 <li>特征设计 （design）</li>
 <li>特征提取 （extraction）</li>
-</ul></li>
+</ul>
+</li>
 <li>特征选择
-
 <ul>
 <li>子集搜索 （subset search）</li>
 <li>子集评估 （subset evaluation）</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="2-特征选取">2. 特征选取</h2>
-
-<h3 id="2-1-选取准则">2.1 选取准则</h3>
-
+<h3 id="21-选取准则">2.1 选取准则</h3>
 <p><strong>选取与任务相关度最高的特征集，特征间相关性较低</strong></p>
-
 <p>特征与任务的相关性越大越好，特征间的相关性越小越好</p>
-
-<h3 id="2-2-特征选择的一般步骤">2.2 特征选择的一般步骤</h3>
-
+<h3 id="22-特征选择的一般步骤">2.2 特征选择的一般步骤</h3>
 <ul>
 <li>从原始的特征集出发对于子集进行搜索</li>
 <li>对于特征子集进行评估</li>
 <li>观察是否达到临界条件，达到即可以使用，否则继续上述操作</li>
 </ul>
-
-<p><img src="http://media.innohub.top/190112-fea.png" alt="selection" /></p>
-
-<h3 id="2-3-特征选取方法-relief-lvw-l1-norm">2.3 特征选取方法（ Relief / LVW / L1-Norm ）</h3>
-
-<h4 id="a-过滤式-filter">a. 过滤式（Filter）</h4>
-
+<p><img src="http://media.innohub.top/190112-fea.png" alt="selection"></p>
+<h3 id="23-特征选取方法-relief--lvw--l1-norm-">2.3 特征选取方法（ Relief / LVW / L1-Norm ）</h3>
+<h4 id="a-过滤式filter">a. 过滤式（Filter）</h4>
 <ul>
-<li><p>在训练之前进行，与分类器无关。</p></li>
-
-<li><p>对数据集进行特征选取之后，根据一些评估方法，选出最优特征</p></li>
-
-<li><p>代表方法：relief。首先给定一个相关统计量（一种评估方法），可以将其理解为基于距离的，也可以是基于概率的评估。如果基于距离，如果只选取一个特征作为特征集，相当于把所有的数据放在一个一维的直线上，我们希望类内尽可能聚集，类间尽可能分离，也就是说希望 <code>类间距离 与 类内距离</code> 的比值尽可能大。可以计算该比值。</p></li>
-</ul>
-
+<li>
+<p>在训练之前进行，与分类器无关。</p>
+</li>
+<li>
+<p>对数据集进行特征选取之后，根据一些评估方法，选出最优特征</p>
+</li>
+<li>
+<p>代表方法：relief。首先给定一个相关统计量（一种评估方法），可以将其理解为基于距离的，也可以是基于概率的评估。如果基于距离，如果只选取一个特征作为特征集，相当于把所有的数据放在一个一维的直线上，我们希望类内尽可能聚集，类间尽可能分离，也就是说希望 <code>类间距离 与 类内距离 </code> 的比值尽可能大。可以计算该比值。</p>
 <p>现在可以设置一个阈值<code>t</code> 如果对于一个特征而言，经过评估其比值超过该阈值，就可以将该特征加入特征集。</p>
-
-<h4 id="b-包裹式-wrapper">b. 包裹式（Wrapper）</h4>
-
+</li>
+</ul>
+<h4 id="b-包裹式wrapper">b. 包裹式（Wrapper）</h4>
 <ul>
-<li><p>将分类器包裹进特征选择过程中，将分类错误率作为评估方法。</p></li>
-
-<li><p>Las Vegas Wrapper（LVW）</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">1. 随机搜索一个特征子集，将该特征子集表示的数据用于学习器的输入进行分类
+<li>
+<p>将分类器包裹进特征选择过程中，将分类错误率作为评估方法。</p>
+</li>
+<li>
+<p>Las Vegas Wrapper（LVW）</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1. 随机搜索一个特征子集，将该特征子集表示的数据用于学习器的输入进行分类
 2. 根据输出错误率的好坏进行判断，当错误率小于某个阈值，即可以使用
 3. 再选取新的子集，循环
-4. 循环终止条件是，经过T次，错误率均没有降低，且特征数量没有减少</pre></div></li>
-
-<li><p>可以减少特征数量，提高准确率。与Filter相比，特征随机产生，可能选到最优特征，同时和分类器相关，可能获取更优的特征。</p></li>
+4. 循环终止条件是，经过T次，错误率均没有降低，且特征数量没有减少
+</code></pre></div></li>
+<li>
+<p>可以减少特征数量，提高准确率。与Filter相比，特征随机产生，可能选到最优特征，同时和分类器相关，可能获取更优的特征。</p>
+</li>
 </ul>
-
 <h4 id="c-嵌入式-embedding">c. 嵌入式 （Embedding）</h4>
-
 <ul>
-<li><p>将子集搜索以及评估都嵌入到了训练学习的过程中</p></li>
-
-<li><p>优化目标：
+<li>
+<p>将子集搜索以及评估都嵌入到了训练学习的过程中</p>
+</li>
+<li>
+<p>优化目标：
 $$
 t = min\sum_{i=1}^{m}(y - w^Tx_i) + \lambda||w||_1
 $$
-特征选择以及特征提取可以同时完成，使用<code>L-1</code> 范数更容易获得稀疏解，为了实现特征提取。前一个项使得$x_i$ 经过$W$的映射，和标记越接近越好，相当于通过w的选择，可以得到更接近目标的特征，后一项通过使用<code>L-1</code> 范数，进行特征提取。</p></li>
+特征选择以及特征提取可以同时完成，使用<code>L-1</code> 范数更容易获得稀疏解，为了实现特征提取。前一个项使得$x_i$ 经过$W$的映射，和标记越接近越好，相当于通过w的选择，可以得到更接近目标的特征，后一项通过使用<code>L-1</code> 范数，进行特征提取。</p>
+</li>
 </ul>
-
-<h3 id="2-4-子集搜索">2.4 子集搜索</h3>
-
-<h3 id="2-5-子集评估">2.5 子集评估</h3>
-
+<h3 id="24-子集搜索">2.4 子集搜索</h3>
+<h3 id="25-子集评估">2.5 子集评估</h3>
 <h2 id="3-特征提取">3. 特征提取</h2>
-
 <p>特征提取是特征选择的后续步骤。特征选择是在特征中选取与任务相关的部分特征，特征提取是将特征进行线性或者非线性变换，将特征映射到另一个空间，得到新的特征表示。特征提取也是特征工程的一种,特征选择以及特征学习都是特征工程的一种。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已</pre></div>
-<h3 id="3-1-主成成分分析-pca">3.1 主成成分分析 PCA</h3>
-
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">数据和特征决定了机器学习的上限，而模型和算法只是逼近这个上限而已
+</code></pre></div><h3 id="31-主成成分分析-pca">3.1 主成成分分析 PCA</h3>
 <p>主成成分分析（Principle Component Analysis）。基于某个具体的任务将特征的主要成分提取出来。PCA不需要数据的类别信息。</p>
-
 <p>PCA的主要目标是使得数据具有<strong>最大可分性</strong>，同时<strong>保留原始数据</strong>尽可能多的<strong>信息</strong>。通过<strong>线性</strong>的方法变换到新的空间，尽可能保持原来信息，同时使得特征之间互不关联。</p>
-
 <blockquote>
-<p>例如：对于一个N维的特征向量$X_n$，使用一个dxN维的矩阵$W_d$进行特征映射, 得到一个新的特征向量$Z_d$  ，d &lt;&lt; N,相当于将特征降维
+<p>例如：对于一个N维的特征向量$X_n$，使用一个dxN维的矩阵$W_d$进行特征映射, 得到一个新的特征向量$Z_d$  ，d &laquo; N,相当于将特征降维
 $$
-Z = W^Tx , Z= (z_1; z_2; &hellip;;z_d) , d &lt;&lt; n
+Z = W^Tx , Z= (z_1; z_2; &hellip;;z_d) , d &laquo; n
 $$</p>
 </blockquote>
-
 <p>为了在新的特征空间上使得样本最大可分，要求经过变换的样本集方差最大，如果每一个经过变换的特征都可以使得样本集方差最大，那么最后的特征集一定可以实现最大可分。因为我们要将原来的n维特征，转化为新的d维特征表示。那么我们需要求解出d个W向量，组成投影矩阵W。最终通过特征值分解求解W。挑选出最大的d个特征值对应的特征向量，组成投影矩阵W。</p>
-
 <ul>
 <li>保证了新空间中特征之间不相关的情况下，实现特征降维以及特征提取</li>
 <li>局限：被忽略的部分可能含有一些相对独立的信息</li>
 </ul>
-
-<h3 id="3-2-线性判别分析-lda">3.2 线性判别分析 LDA</h3>
-
-<p><strong>Linear Discrimination Analysis</strong> 经典的有监督的线性降维方法。使用的是线性组合<code>y =WT*x</code> 。LDA的目标是使得映射后的样本，<strong>同类之间更紧致，不同类之间更分离</strong>。因为使用到类别信息，更适用于分类任务。</p>
-
+<h3 id="32-线性判别分析-lda">3.2 线性判别分析 LDA</h3>
+<p><strong>Linear Discrimination Analysis</strong> 经典的有监督的线性降维方法。使用的是线性组合<code>y =WT*x </code> 。LDA的目标是使得映射后的样本，<strong>同类之间更紧致，不同类之间更分离</strong>。因为使用到类别信息，更适用于分类任务。</p>
 <p>LDA是Fisher Linear Discriminant（费舍尔线性判别式）的推广。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">1. 通过求取原始特征空间以及新的特征空间的平均值，方差，类内离散度，类间离散度
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">1. 通过求取原始特征空间以及新的特征空间的平均值，方差，类内离散度，类间离散度
 2. 定义目标函数为新的特征空间的类间离散度与类内离散度的比值，将目标最大化
 3. 使用最优化方法，求解W
-4. 有新的样本可以直接通过投影矩阵投影，得到新的特征表示</pre></div>
-<p><strong>注意特征降维对于C分类任务，最多可以降到C-1维。因为：W也是通过奇异值分解求解的，奇异值分解时，特征向量个数最多为C-1个</strong> <a href="http://www.doc88.com/p-602277996097.html">link</a></p>
-
+4. 有新的样本可以直接通过投影矩阵投影，得到新的特征表示
+</code></pre></div><p><strong>注意特征降维对于C分类任务，最多可以降到C-1维。因为：W也是通过奇异值分解求解的，奇异值分解时，特征向量个数最多为C-1个</strong> <a href="http://www.doc88.com/p-602277996097.html">link</a></p>
 <p><em>特点：</em></p>
-
 <ul>
-<li>对于C类的数据，最多只能提取到C-1维的新特征，会有信息损失<br /></li>
-<li>LDA要求数据服从高斯分布<br /></li>
+<li>对于C类的数据，最多只能提取到C-1维的新特征，会有信息损失</li>
+<li>LDA要求数据服从高斯分布</li>
 <li>由于是通过训练集类别标签引导获得的特征，在分类时容易存在overfitting（过拟合） 现象。</li>
 </ul>
-
-<h3 id="3-3-kernel-pca">3.3 Kernel-PCA</h3>
-
+<h3 id="33-kernel-pca">3.3 Kernel-PCA</h3>
 <p>对于线性组合无法获得最优特征表示的数据，kernel-PCA是PCA方法的扩展，利用核函数，可以将原始空间的特征映射到一个高维的再生核希尔伯特空间，在新的空间中再利用线性PCA提取特征。属于非线性变换。</p>
-
 <p>目标函数比较：</p>
-
-<p><img src="http://media.innohub.top/190112-pca.png" alt="target" /></p>
-
+<p><img src="http://media.innohub.top/190112-pca.png" alt="target"></p>
 <p>经过$\phi(x)$的高维变换，再计算其内积，结果太高，计算复杂度较高。高维空间的向量内积使用低维空间的核函数。</p>
-
 <p><strong>核函数类型：</strong></p>
-
 <ul>
 <li>线性核</li>
 <li>多项式核</li>
 <li>高斯核</li>
 <li>指数核</li>
 </ul>
-
 <p><em>特点：</em></p>
-
 <ul>
 <li>解决了低维空间的线性不可分问题，通过使用核技巧，没有增加计算复杂度</li>
 <li>核函数的选取没有固定标准</li>
 </ul>
-
-<h3 id="3-4-流形学习方法-manifold-learning">3.4 流形学习方法（Manifold Learning）</h3>
-
+<h3 id="34-流形学习方法manifold-learning">3.4 流形学习方法（Manifold Learning）</h3>
 <p>流形空间是在局部与欧式空间同胚的空间，换言之，他在局部具有欧式空间的性质，可以使用欧氏距离进行距离计算。其数据分布进过可视化表示通常呈现为流体形。对于流形数据，任意两个数据间的距离都需要沿着曲面计算，不可以使用欧氏距离。</p>
-
-<p><img src="http://media.innohub.top/190112-is.png" alt="isomap" /></p>
-
+<p><img src="http://media.innohub.top/190112-is.png" alt="isomap"></p>
 <p>如图所示，假设数据有标记，图中不同类间的欧氏距离都小于同类点在曲面上的距离，所以只可以使用曲面上的距离叫做测地距离（Geodesic distance）。这种分布为流形分布。</p>
-
 <p>流形学习的主要目标是将流形分布的数据特征转化到欧式空间上，并且保留原来的数据信息。</p>
-
 <ul>
-<li>等距离特征映射（Isometric Mapping）简称isomap。原始流形分布上的测地距离，转化为或者近似为欧式空间中的欧氏距离。数据特征也随之由原来的高维转换为了低维特征表示所以这也是一种非线性的特征提取方法。</li>
-</ul>
-
+<li>
+<p>等距离特征映射（Isometric Mapping）简称isomap。原始流形分布上的测地距离，转化为或者近似为欧式空间中的欧氏距离。数据特征也随之由原来的高维转换为了低维特征表示所以这也是一种非线性的特征提取方法。</p>
 <p>优点在于新的特征空间保留了原来空间中的样本之间的距离信息；但同时带来了缺点，只保留了距离信息，那么原来离得近的点还近，远的点还远，类边界不明显，所以不可以对边界数据进行有效划分。</p>
-
-<ul>
-<li>局部线性嵌入（Locally Linear Embedding）。这种方法希望保持局部数据之间的线性关系的同时，实现空间变换以及特征提取 优点是可以处理分线性数据，保持局部特征；缺点在于是一个局部方法对于噪声敏感。</li>
+</li>
+<li>
+<p>局部线性嵌入（Locally Linear Embedding）。这种方法希望保持局部数据之间的线性关系的同时，实现空间变换以及特征提取 优点是可以处理分线性数据，保持局部特征；缺点在于是一个局部方法对于噪声敏感。</p>
+</li>
 </ul>
-
 <h2 id="4-特征学习">4. 特征学习</h2>
-
 <p>对于深度学习模型，模型具有很多层，每一层可能提取不同的特征信息，每一层都可以作为一种特征表示。前面的层属于低级特征，后面的层属于高级特征。</p>
 
       </div>
@@ -430,14 +381,17 @@ code.has-jax {
     
       <p>It&#39;s not a bug, it&#39;s future</p>
     
-     © 2019
+     © 2020
+    
+              
+      Author <a href="https://github.com/kobeHub">Inno Jia</a>
+      <div> · </div>
+      ICP 备案: <a href="http://www.beian.miit.gov.cn">鲁ICP备18009756号</a>
+      
+    
     
        · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-       · 
-      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+      <a href="https://github.com/luizdepra/hugo-coder/tree/"></a>
     
   </section>
 </footer>

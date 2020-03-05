@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Record on Inno Jia</title>
@@ -20,7 +20,9 @@
       <description>Kubernetes 是用于自动部署、扩展和管理容器化应用的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理以及服务，其抽象性允许将容器化应用部署到集群，而不必专门绑定到一个计算机。同时可以提供24/7的全天候使用能力，支持不停机的发布以及更新。Kubernetes 用于协调高度可用的计算机集群，这些计算机群集被连接作为单个单元工作。对于一个Kubernetes集群而言具有两种类型的资源：
  Master: 集群的调度节点 Nodes：应用程序实际运行的工作节点  kubeadm是Kubernetes官方提供的用于快速安装Kubernetes集群的工具, 可以通过该工具快速部署一个集群。本次部署使用虚拟机，基于Ubuntu 16.04进行。
 1. 准备  首先确定三台虚拟机的IP，修改每一台的/etc/hosts文件:  192.168.118.128 node1 192.168.118.129 master 192.168.118.130 node2 除此之外，每一台虚拟机(或者物理机)必须满足至少双CPU， 内存大于2G, 拥有root权限
- 然后修改每一个主机的hostname  hostnamectl set-hostname &amp;lt;name&amp;gt;  配置内核参数，将桥接流量传递到iptables的链  cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 net.ipv4.ip_forward = 1 EOFmodprobe br_netfilter sysctl -p /etc/sysctl.d/k8s.conf  开启kube-proxy ipvs模式的前提条件，由于ipvs已经加入到了内核的主干，所以为kube-proxy开启ipvs的前提需要加载以下的内核模块：  ip_vs ip_vs_rr ip_vs_wrr ip_vs_sh nf_conntrack_ipv4 可以建立k8s的工作目录，将其作为一个shell脚本：
+然后修改每一个主机的hostname  hostnamectl set-hostname &amp;lt;name&amp;gt;  配置内核参数，将桥接流量传递到iptables的链
+cat &amp;gt; /etc/sysctl.d/k8s.conf &amp;lt;&amp;lt;EOF net.bridge.bridge-nf-call-ip6tables = 1 net.bridge.bridge-nf-call-iptables = 1 net.ipv4.ip_forward = 1 EOF modprobe br_netfilter sysctl -p /etc/sysctl.d/k8s.conf   开启kube-proxy ipvs模式的前提条件，由于ipvs已经加入到了内核的主干，所以为kube-proxy开启ipvs的前提需要加载以下的内核模块：
+ip_vs ip_vs_rr ip_vs_wrr ip_vs_sh nf_conntrack_ipv4 可以建立k8s的工作目录，将其作为一个shell脚本：
 cat &amp;gt; ipvsset.sh &amp;lt;&amp;lt;EOF #!/bin/bash modprobe -- ip_vs modprobe -- ip_vs_rr modprobe -- ip_vs_wrr modprobe -- ip_vs_sh modprobe -- nf_conntrack_ipv4 EOF chmod +x ipvsset.</description>
     </item>
     
@@ -30,11 +32,11 @@ cat &amp;gt; ipvsset.sh &amp;lt;&amp;lt;EOF #!/bin/bash modprobe -- ip_vs modpro
       <pubDate>Sun, 24 Mar 2019 15:29:39 +0800</pubDate>
       
       <guid>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
-      <description>Docker 容器化部署尝试 1. 背景浅谈 作为学期中的项目实训，我们打算做一个基于 web 的 LaTex 编辑工具。为了方便环境的配置以及服务的分离，选用Docker 进行环境的搭建。初始想法是基于一个 Nginx + MongoDB + Tornado + xeLaTex 的基本架构，至少使用4个容器满足基本的需求，下面进行一下简单的记录。
+      <description>Docker 容器化部署尝试 1. 背景浅谈 作为学期中的项目实训，我们打算做一个基于 web 的 LaTex 编辑工具。为了方便环境的配置以及服务的分离，选用Docker 进行环境的搭建。初始想法是基于一个 Nginx + MongoDB + Tornado + xeLaTex  的基本架构，至少使用4个容器满足基本的需求，下面进行一下简单的记录。
 2. Dockerfile 自定义容器 该项目分为四个部分，对于数据库，可以直接使用 dockerhub 中的Mongodb。不需要额外的定制，直接pull 最新版即可：
 docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，只是添加了一些需要额外挂载的目录：
 # Define mountable directories. VOLUME [&amp;#34;/etc/nginx/sites-enabled&amp;#34;, &amp;#34;/etc/nginx/certs&amp;#34;, &amp;#34;/etc/nginx/conf.d&amp;#34;, &amp;#34;/var/log/nginx&amp;#34;, &amp;#34;/var/www/html&amp;#34;] 对于 Tornado 服务端，暂时先拟定一个最为简单的Demo，对于以后的版本再进行迭代：
-# Base ENVFROMpython:3.7-slim# set workdir to /appWORKDIR/app# Copy the current directory contents at /appCOPY . /app# Install needed packageRUN pip install --trusted-host pypi.python.org -r requirements.txt# Make port 80 available to the world outside this contanerEXPOSE8888# Define environment variableENVNAME World# Run app.</description>
+# Base ENVFROMpython:3.7-slim# set workdir to /appWORKDIR/app# Copy the current directory contents at /appCOPY . /app# Install needed packageRUN pip install --trusted-host pypi.python.org -r requirements.txt# Make port 80 available to the world outside this contanerEXPOSE8888# Define environment variableENV NAME World# Run app.</description>
     </item>
     
     <item>
@@ -47,11 +49,12 @@ docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，�
 apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
 首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装
 git clone https://github.com/gohugoio/hugo.git cd hugo go install 2. 建立的站点 在工作目录下，建立一个新的站点
-hugo new site Hugo-site cd Hugo-site git init  该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
-git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml  然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
+hugo new site Hugo-site cd Hugo-site git init 该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
+git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml 然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
 3. 编辑新的文章 hugo new posts/title.md
 hugo使用markdown进行文章书写，可以使用该命令建立一篇新的文章，新的文件出现在content/posts/ 文件夹下。注意需要将文件头的draft 改为false,才可以正式发布。
-4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。</description>
+4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。
+搭建到GitHub 1. 搭建脚本 首先写一个自动构建网站的脚本，每次有新的内容或者网站布局有所改变都可以使用该脚本推送到远程服务器。</description>
     </item>
     
   </channel>

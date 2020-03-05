@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   <body class=" ">
@@ -146,251 +146,198 @@
 
       <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#图像预处理">图像预处理</a>
-<ul>
-<li><a href="#1-基本的图像处理">1. 基本的图像处理</a></li>
-<li><a href="#2-代数操作">2. 代数操作</a>
-<ul>
-<li><a href="#2-1-生成图像叠加效果-alpha-blending">2.1 生成图像叠加效果（Alpha Blending）</a></li>
-<li><a href="#2-2-获取图像的前景">2.2 获取图像的前景</a></li>
-</ul></li>
-<li><a href="#3-逻辑操作">3.逻辑操作</a></li>
-<li><a href="#4-几何操作">4. 几何操作</a>
-<ul>
-<li><a href="#4-1-空间变换">4.1 空间变换</a></li>
-<li><a href="#4-2-灰度级插值">4.2 灰度级插值</a></li>
-<li><a href="#4-3-基本几何操作">4.3 基本几何操作</a></li>
-</ul></li>
-<li><a href="#5-灰度映射">5. 灰度映射</a>
-<ul>
-<li><a href="#5-1-灰度值变换">5.1 灰度值变换</a>
-<ul>
-<li><a href="#强度调整">强度调整</a></li>
-<li><a href="#对比度调整">对比度调整</a></li>
-<li><a href="#突出特定的灰度级">突出特定的灰度级</a></li>
-<li><a href="#位平面切片">位平面切片</a></li>
-</ul></li>
-<li><a href="#5-2-直方图均衡化">5.2 直方图均衡化</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1-基本的图像处理">1. 基本的图像处理</a></li>
+    <li><a href="#2-代数操作">2. 代数操作</a>
+      <ul>
+        <li><a href="#21-生成图像叠加效果alpha-blending">2.1 生成图像叠加效果（Alpha Blending）</a></li>
+        <li><a href="#22-获取图像的前景">2.2 获取图像的前景</a></li>
+      </ul>
+    </li>
+    <li><a href="#3逻辑操作">3.逻辑操作</a></li>
+    <li><a href="#4-几何操作">4. 几何操作</a>
+      <ul>
+        <li><a href="#41-空间变换">4.1 空间变换</a></li>
+        <li><a href="#42-灰度级插值">4.2 灰度级插值</a></li>
+        <li><a href="#43-基本几何操作">4.3 基本几何操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-灰度映射">5. 灰度映射</a>
+      <ul>
+        <li><a href="#51-灰度值变换">5.1 灰度值变换</a></li>
+        <li><a href="#52-直方图均衡化">5.2 直方图均衡化</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
       </aside>
       <div>
-        
-
-<h1 id="图像预处理">图像预处理</h1>
-
+        <h1 id="图像预处理">图像预处理</h1>
 <h2 id="1-基本的图像处理">1. 基本的图像处理</h2>
-
 <ul>
 <li>在空间坐标删的处理
-
 <ul>
 <li>几何变换</li>
-</ul></li>
+</ul>
+</li>
 <li>像素处理
-
 <ul>
 <li>代数处理（对于每一个像素点的操作）</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h2 id="2-代数操作">2. 代数操作</h2>
-
 <p>不改变图像的几何性质，对于图像的<strong>灰度级</strong>进行加减乘除等算术运算，逐像素的操作。</p>
-
-<h3 id="2-1-生成图像叠加效果-alpha-blending">2.1 生成图像叠加效果（Alpha Blending）</h3>
-
+<h3 id="21-生成图像叠加效果alpha-blending">2.1 生成图像叠加效果（Alpha Blending）</h3>
 <ul>
-<li><p>对于两个图像的<strong>合成</strong>可以使用加法进行叠加操作：
+<li>
+<p>对于两个图像的<strong>合成</strong>可以使用加法进行叠加操作：
 $$
-g(x, y) = \alpha*f(x, y) + \beta*f(x, y) <br />
+g(x, y) = \alpha<em>f(x, y) + \beta</em>f(x, y) \<br>
 \alpha + \beta = 1
 $$
-也可以用于任何两张图像的衔接。</p></li>
-
-<li><p>使用乘法，可以进行特定区域的提取，可以将除了待提取区域的位置的像素全部置为0
+也可以用于任何两张图像的衔接。</p>
+</li>
+<li>
+<p>使用乘法，可以进行特定区域的提取，可以将除了待提取区域的位置的像素全部置为0
 $$
 C = \alpha*F + (1-\alpha)B
-$$</p></li>
+$$</p>
+</li>
 </ul>
-
-<h3 id="2-2-获取图像的前景">2.2 获取图像的前景</h3>
-
+<h3 id="22-获取图像的前景">2.2 获取图像的前景</h3>
 <p>可以给定一个当前图像$I$,以及对应的背景图像$B$,然后计算两个图像之间的差异：
 $$
-Diff(x,y) = ||I(x, y) \; - \; B(x,y)||^2
+Diff(x,y) = ||I(x, y) ; - ; B(x,y)||^2
 $$
 如果该差异值大于某一个特定值$T$，就可以视为前景图像.<strong>在背景保持不变的环境下，对于运动目标的检测：可以使用减法操作完成，在差图像不为零的位置表明出现过运动目标。</strong></p>
-
-<h2 id="3-逻辑操作">3.逻辑操作</h2>
-
+<h2 id="3逻辑操作">3.逻辑操作</h2>
 <ul>
 <li>AND: 等价于乘法</li>
 <li>OR: 等价于乘法</li>
 <li>XOR: 异或操作</li>
 <li>NOT： 非</li>
 </ul>
-
 <h2 id="4-几何操作">4. 几何操作</h2>
-
 <p>通过像素位置的变换，运算后直接确定该像素的灰度值的运算，集合运算可以改变图像中的物体之间的位置关系。几何变换需要两个独立的算法：</p>
-
 <ul>
 <li>空间变换：确定变换后的位置</li>
 <li>灰度级插值：对于变换后的非整数的位置，以及由于放大、平移、旋转造成的图像中的位缺需要进行插值。</li>
 </ul>
-
-<h3 id="4-1-空间变换">4.1 空间变换</h3>
-
+<h3 id="41-空间变换">4.1 空间变换</h3>
 <p>要求变换后保持图像中曲线性特征的连续性以及各物体间的连通性。
 $$
 g(x,y) = f(\hat{x}, \hat{y}) = f[a(x, y), b(a, y)]
 $$</p>
-
-<h3 id="4-2-灰度级插值">4.2 灰度级插值</h3>
-
+<h3 id="42-灰度级插值">4.2 灰度级插值</h3>
 <p>再输入图像中，灰度值仅仅在整数位置（x,y）被定义，但是在上式中的$g(x, y)$的像素值一般由处于非整数位置的像素点确定。所以需要使用取样的方法，确定目标点的灰度值。</p>
-
 <ul>
 <li>最近邻： x = int(x+ 0.5), y = int(y + 0.5)</li>
 <li>双线性插值: 假设每一个像素间的颜色变化是线性的</li>
 </ul>
-
 <blockquote>
 <p>2次水平，1次垂直</p>
-
 <p>2次垂直， 1此水平</p>
 </blockquote>
-
 <ul>
 <li>双三次插值：假设每一个像素间的颜色分布为三次函数分布，需要确定一个一元三次方程的四个参数，只需要四个点即可</li>
 </ul>
-
-<h3 id="4-3-基本几何操作">4.3 基本几何操作</h3>
-
+<h3 id="43-基本几何操作">4.3 基本几何操作</h3>
 <ul>
-<li>平移:</li>
-</ul>
-
+<li>
+<p>平移:</p>
 <p>像素点平移向量(x0, y0), 基本变换的公式:</p>
-
 <blockquote>
 <p>a(x, y) = x + x0</p>
-
 <p>b(x, y) = x + y0</p>
 </blockquote>
-
-<ul>
-<li>放缩：不是一一映射，为了避免“方块效应”，需要插值操作</li>
-</ul>
-
+</li>
+<li>
+<p>放缩：不是一一映射，为了避免“方块效应”，需要插值操作</p>
 <blockquote>
 <p>a(x, y) = s1 * x</p>
-
 <p>b(x, y) = s2 * y</p>
 </blockquote>
-
-<ul>
-<li>旋转:</li>
-</ul>
-
+</li>
+<li>
+<p>旋转:</p>
 <p>绕原点逆时针旋转$\theta$角，可以使用以下公式得到变换后的位置坐标：</p>
-
 <blockquote>
 <p>$$
-a(x, y) = xcos(\theta) - ysin(\theta) <br />
+a(x, y) = xcos(\theta) - ysin(\theta) \<br>
 b(x, y) = xsin(\theta) + ycos(\theta)
 $$</p>
 </blockquote>
-
-<ul>
-<li><p>仿射变换</p></li>
-
-<li><p>Homograph(单应性矩阵)</p></li>
+</li>
+<li>
+<p>仿射变换</p>
+</li>
+<li>
+<p>Homograph(单应性矩阵)</p>
+</li>
 </ul>
-
 <p><strong>向左平移，逆时针旋转为正！</strong></p>
-
 <p>复杂变换可以使用变换矩阵的形式给出。</p>
-
 <h2 id="5-灰度映射">5. 灰度映射</h2>
-
 <p>灰度映射是基于图像像素的点操作，关键在于更具增强的需要设计映射函数。</p>
-
 <p>空间域上的图像增强:</p>
-
 <ul>
 <li>点操作
-
 <ul>
 <li>灰度值变换</li>
 <li>直方图操作</li>
-</ul></li>
+</ul>
+</li>
 <li>空间处理
-
 <ul>
 <li>全局算术操作</li>
-<li>基于局部的空间滤波</li>
+<li>基于局部的空间滤波
+<ul>
 <li>平滑</li>
 <li>锐化</li>
-</ul></li>
 </ul>
-
-<h3 id="5-1-灰度值变换">5.1 灰度值变换</h3>
-
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="51-灰度值变换">5.1 灰度值变换</h3>
 <h4 id="强度调整">强度调整</h4>
-
 <p>基本的变换函数:</p>
-
 <ol>
-<li><p>线性变换</p></li>
-
-<li><p>对数变换，$s = c×log(1+r)$ 其c为常数，r非负。</p></li>
-</ol>
-
-<p><img src="http://media.innohub.top/190517-bm.png" alt="" /></p>
-
-<ol>
-<li>幂律变换，$s = c × r^\gamma$, 即Gamma纠正，其中$x, \gamma$均为正实数</li>
-</ol>
-
-<p><img src="http://media.innohub.top/190517-gam1.png" alt="不同的gamma纠正" /></p>
-
+<li>
+<p>线性变换</p>
+</li>
+<li>
+<p>对数变换，$s = c×log(1+r)$ 其c为常数，r非负。</p>
+<p><img src="http://media.innohub.top/190517-bm.png" alt=""></p>
+</li>
+<li>
+<p>幂律变换，$s = c × r^\gamma$, 即Gamma纠正，其中$x, \gamma$均为正实数</p>
+<p><img src="http://media.innohub.top/190517-gam1.png" alt="不同的gamma纠正"></p>
 <p>$\gamma$大于1，压缩暗部，增强亮部（<strong>整体亮度减低</strong>）；小于1，压缩亮部（<strong>整体亮度提高</strong>），增强暗部。用以改变对比度。灰度值变换函数的基本要求：连续的增函数，保证变换后从白到黑的顺序不变。</p>
-
+</li>
+</ol>
 <h4 id="对比度调整">对比度调整</h4>
-
 <p>二值化方法:</p>
-
 <ol>
-<li>isodata 法</li>
-</ol>
-
+<li>
+<p>isodata 法</p>
 <p>选定一个初始阈值T,将图像分为两部分R1, R2。计算R1, R2 的灰度均值u1, u2；使用(u1+u2)/2作为新的阈值，直到不再变化。</p>
-
-<ol>
-<li>Ostu算法</li>
-</ol>
-
+</li>
+<li>
+<p>Ostu算法</p>
 <p><strong>最大类间方差法。</strong> 把图像的灰度级数分为两个部分，使得两个部分类间差异最大，类内差异最小。通过计算方差确定一个合适的灰度级别进行划分。</p>
-
+</li>
+</ol>
 <h4 id="突出特定的灰度级">突出特定的灰度级</h4>
-
 <p>二值化图像或者仅提亮感兴趣的部分。</p>
-
 <h4 id="位平面切片">位平面切片</h4>
-
-<h3 id="5-2-直方图均衡化">5.2 直方图均衡化</h3>
-
+<h3 id="52-直方图均衡化">5.2 直方图均衡化</h3>
 <p>直方图均衡化的基本思想是把原始图像的直方图，变换为在整个灰度范围内均匀分布的形式，这样就增加了像素灰度值的动态范围，从而达到了图像对比度增强的效果。
 $$
-s_k = T(r<em>k) = (L-1)\sum</em>{j=0}^{k}\frac{n_j}{n} = (L-1)\sum p(r_j)
+s_k = T(r_k) = (L-1)\sum_{j=0}^{k}\frac{n_j}{n} = (L-1)\sum p(r_j)
 $$
 基本步骤:</p>
-
 <ol>
 <li>归一化，将所有的离散灰度等级进行归一化</li>
 <li>每一个累加归一化后的值乘以（L-1）,L为灰度等级，取最近的灰度级作为结果</li>
@@ -467,14 +414,17 @@ code.has-jax {
     
       <p>It&#39;s not a bug, it&#39;s future</p>
     
-     © 2019
+     © 2020
+    
+              
+      Author <a href="https://github.com/kobeHub">Inno Jia</a>
+      <div> · </div>
+      ICP 备案: <a href="http://www.beian.miit.gov.cn">鲁ICP备18009756号</a>
+      
+    
     
        · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-       · 
-      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+      <a href="https://github.com/luizdepra/hugo-coder/tree/"></a>
     
   </section>
 </footer>

@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   <body class=" ">
@@ -146,179 +146,157 @@
 
       <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#stl-容器适配器">STL 容器适配器</a></li>
-<li><a href="#1-queue">1. queue</a>
-<ul>
-<li><a href="#1-1-成员函数">1.1 成员函数</a></li>
-</ul></li>
-<li><a href="#2-priority-queue">2. priority_queue</a>
-<ul>
-<li><a href="#2-1-成员函数">2.1 成员函数</a></li>
-</ul></li>
-<li><a href="#3-stack">3. stack</a>
-<ul>
-<li><a href="#3-1-成员函数">3.1 成员函数</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#11-成员函数">1.1 成员函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-成员函数">2.1 成员函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-成员函数">3.1 成员函数</a></li>
+  </ul>
 </nav>
       </aside>
       <div>
-        
-
-<h1 id="stl-容器适配器">STL 容器适配器</h1>
-
+        <h1 id="stl-容器适配器">STL 容器适配器</h1>
 <p>c++ STL提供了对于顺序容器的不同的访问接口：</p>
-
 <ul>
 <li><strong><a href="#1-queue">queue</a></strong></li>
 <li><strong><a href="#2-priority-queue">priority_queue</a></strong></li>
 <li><strong><a href="#3-stack">stack</a></strong></li>
 </ul>
-
 <h1 id="1-queue">1. queue</h1>
-
 <p>queue是一个典型的容器适配器对象，提供（FIFO）的用户接口，所有的元素都是在尾部插入，在头部删除。容器必须满足<strong>顺序容器</strong>的要求，必须提供以下接口:</p>
-
 <p><code>back</code>, <code>front</code>,<code>pop_front</code>, <code>push_back</code>.标准库中的<code>std::list</code>, <code>std::deque</code>满足该要求。注意容器适配器不支持遍历以及随机访问。</p>
-
-<h2 id="1-1-成员函数">1.1 成员函数</h2>
-
+<h2 id="11-成员函数">1.1 成员函数</h2>
 <ul>
-<li><strong>构造函数</strong></li>
-</ul>
-
+<li>
+<p><strong>构造函数</strong></p>
 <p>可以使用<code>copy</code>, <code>move</code>语义的构造函数，以及初始列表的构造函数。底层使用的默认容器是<code>deque</code></p>
-
-<ul>
-<li><p><strong>元素访问</strong></p>
-
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <ol>
 <li><code>front()</code>:访问第一个元素</li>
 <li><code>end()</code>:访问最后一个元素</li>
-</ol></li>
-
-<li><p><strong>容量</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
 <li><code>empty()</code>:检查底层的容器是否为空</li>
 <li><code>size()</code>：容器的大小</li>
-</ol></li>
-
-<li><p><strong>修改</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>修改</strong></p>
 <ol>
 <li><code>push</code></li>
 <li><code>pop</code></li>
 <li><code>emplace</code>:与队列的末尾构造元素</li>
 <li><code>swap</code></li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
-<h1 id="2-priority-queue">2. priority_queue</h1>
-
+<h1 id="2-priority_queue">2. priority_queue</h1>
 <p>一种容器适配器，默认提供对于最大元素的常数时间的查找，对数代价的插入以及删除，可以使用<code>Compare</code>更改顺序。不支持元素的随机访问，底层实现可以是最大堆。可以使用用户提供的<code>Compare</code>更改顺序，例如，使用<code>std::greater&lt;T&gt;</code>将元素按照非增序排列.</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt;
-	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T,
-	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Container = std::vector&lt;T&gt;,
-	<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Compare = std::less&lt;<span style="color:#fff;font-weight:bold">typename</span> Contianer::value_type&gt;
-&gt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>priority_queue;
-</code></pre></div>
-<h2 id="2-1-成员函数">2.1 成员函数</h2>
-
+	<span style="color:#fff;font-weight:bold">class</span> T,
+	<span style="color:#fff;font-weight:bold">class</span> Container = std::vector&lt;T&gt;,
+	<span style="color:#fff;font-weight:bold">class</span> Compare = std::less&lt;<span style="color:#fff;font-weight:bold">typename</span> Contianer::value_type&gt;
+&gt; <span style="color:#fff;font-weight:bold">class</span> priority_queue;
+</code></pre></div><h2 id="21-成员函数">2.1 成员函数</h2>
 <ul>
-<li><strong>构造函数</strong></li>
-</ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  priority_queue()
-  <span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare) : priority_queue(compare, Container) {}
-  <span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Contianer&amp; cont)
-</code></pre></div>
-<p>支持默认构造函数；传入<code>Compare</code>的构造函数，传入<code>Compare, Contianer</code>的构造函数，复制，move语义的构造函数。</p>
-
+<li>
+<p><strong>构造函数</strong></p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">priority_queue()
+<span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare) : priority_queue(compare, Container) {}
+<span style="color:#fff;font-weight:bold">explicit</span> priority_queue(<span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Contianer&amp; cont)
+</code></pre></div><p>支持默认构造函数；传入<code>Compare</code>的构造函数，传入<code>Compare, Contianer</code>的构造函数，复制，move语义的构造函数。</p>
 <p>使用默认的底层容器是<code>std::vector&lt;T&gt;</code>.</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  <span style="color:#fff;font-weight:bold">template</span>&lt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>InputIt &gt;
-  priority_queue( InputIt first, InputIt last,
-                  <span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Container&amp; cont );
-</code></pre></div>
-<p>该构造函数从<code>cont</code>复制构造c，从compare复制构造comp。然后调用<code>c.insert(c.end(), first, last)</code>,再调用<code>std::make_heap(c.begin(), c.end(), comp)</code></p>
-
-<ul>
-<li><strong>元素访问</strong></li>
-</ul>
-
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt; <span style="color:#fff;font-weight:bold">class</span> InputIt &gt;
+priority_queue( InputIt first, InputIt last,
+                <span style="color:#fff;font-weight:bold">const</span> Compare&amp; compare, <span style="color:#fff;font-weight:bold">const</span> Container&amp; cont );
+</code></pre></div><p>该构造函数从<code>cont</code>复制构造c，从compare复制构造comp。然后调用<code>c.insert(c.end(), first, last)</code>,再调用<code>std::make_heap(c.begin(), c.end(), comp)</code></p>
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <p><code>top（）</code>：返回堆顶元素</p>
-
-<ul>
-<li><p><strong>容量</strong></p>
-
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
-<li><p><code>empty()</code></p></li>
-
-<li><p><code>size()</code></p></li>
-</ol></li>
-
-<li><p><strong>修改器</strong></p>
-
+<li>
+<p><code>empty()</code></p>
+</li>
+<li>
+<p><code>size()</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>修改器</strong></p>
 <ol>
 <li><code>push</code>:插入元素并对底层容器排序</li>
 <li><code>pop</code>:闪出栈顶元素，并排序</li>
 <li><code>emplace</code>:构造一个对象并且push</li>
 <li><code>swap</code>:交换两个队列的数据</li>
-</ol></li>
-
-<li><p><strong>成员对象</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>成员对象</strong></p>
 <ol>
 <li>Container c</li>
 <li>Compare comp</li>
-</ol></li>
+</ol>
+</li>
 </ul>
-
 <h1 id="3-stack">3. stack</h1>
-
 <p>容器适配器，提供了FILO的访问顺序，该类底层容器为双向队列(deque),该类模板表现为底层容器的包装器&ndash;只提供特定的函数集合，栈的所有操作均位于栈顶。</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt;
-    <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T,
-    <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Container = std::deque&lt;T&gt;
-&gt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>stack;
-</code></pre></div>
-<h2 id="3-1-成员函数">3.1 成员函数</h2>
-
+    <span style="color:#fff;font-weight:bold">class</span> T,
+    <span style="color:#fff;font-weight:bold">class</span> Container = std::deque&lt;T&gt;
+&gt; <span style="color:#fff;font-weight:bold">class</span> stack;
+</code></pre></div><h2 id="31-成员函数">3.1 成员函数</h2>
 <ul>
-<li><strong>构造函数</strong></li>
-</ul>
-
+<li>
+<p><strong>构造函数</strong></p>
 <p>提供了默认构造函数、传入<code>Container</code>的构造函数，复制、move语义的构造函数</p>
-
-<ul>
-<li><strong>元素访问</strong></li>
+</li>
 </ul>
-
-<p><code>top（）</code>：返回堆顶元素</p>
-
 <ul>
-<li><p><strong>容量</strong></p>
-
+<li>
+<p><strong>元素访问</strong></p>
+<p><code>top（）</code>：返回堆顶元素</p>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
-<li><p><code>empty()</code></p></li>
-
-<li><p><code>size()</code></p></li>
-</ol></li>
-
-<li><p><strong>修改器</strong></p>
-
+<li>
+<p><code>empty()</code></p>
+</li>
+<li>
+<p><code>size()</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>修改器</strong></p>
 <ol>
 <li><code>push</code>:插入元素并对底层容器排序</li>
 <li><code>pop</code>:闪出栈顶元素，并排序</li>
 <li><code>emplace</code>:构造一个对象并且push</li>
 <li><code>swap</code>:交换两个队列的数据</li>
-</ol></li>
-
-<li><p><strong>成员对象</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>成员对象</strong></p>
 <ol>
 <li>Container c</li>
-</ol></li>
+</ol>
+</li>
 </ul>
 
       </div>
@@ -391,14 +369,17 @@ code.has-jax {
     
       <p>It&#39;s not a bug, it&#39;s future</p>
     
-     © 2019
+     © 2020
+    
+              
+      Author <a href="https://github.com/kobeHub">Inno Jia</a>
+      <div> · </div>
+      ICP 备案: <a href="http://www.beian.miit.gov.cn">鲁ICP备18009756号</a>
+      
+    
     
        · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-       · 
-      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+      <a href="https://github.com/luizdepra/hugo-coder/tree/"></a>
     
   </section>
 </footer>

@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   <body class=" ">
@@ -148,103 +148,93 @@
 
       <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#1-准备">1. 准备</a></li>
-<li><a href="#2-docker-以及k8s安装">2. Docker 以及k8s安装</a>
-<ul>
-<li><a href="#2-1-docker">2.1 Docker</a></li>
-<li><a href="#2-2-kubeadm-kubelet-kubectl">2.2 Kubeadm, kubelet, kubectl</a></li>
-</ul></li>
-<li><a href="#3-配置集群">3. 配置集群</a>
-<ul>
-<li><a href="#3-1-初始化集群">3.1 初始化集群</a></li>
-<li><a href="#3-2-配置pod网络">3.2 配置pod网络</a></li>
-<li><a href="#3-3-添加节点">3.3 添加节点</a></li>
-<li><a href="#3-4-节点的移除以及集群销毁">3.4 节点的移除以及集群销毁</a>
-<ul>
-<li><a href="#移除node2结点">移除node2结点</a></li>
-<li><a href="#集群销毁">集群销毁</a></li>
-</ul></li>
-<li><a href="#3-5-kube-proxy设置ipvs">3.5 kube-proxy设置ipvs</a></li>
-</ul></li>
-<li><a href="#4-kubernetes-常用组件">4. Kubernetes 常用组件</a>
-<ul>
-<li><a href="#4-1-helm">4.1 Helm</a></li>
-<li><a href="#4-2-使用helm部署nginx-ingress">4.2 使用Helm部署Nginx Ingress</a></li>
-<li><a href="#4-3-使用helm部署dashboard">4.3 使用Helm部署dashboard</a></li>
-<li><a href="#4-4-使用helm部署metrics-server">4.4 使用Helm部署metrics-server</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#21-docker">2.1 Docker</a></li>
+    <li><a href="#22-kubeadm-kubelet-kubectl">2.2 Kubeadm, kubelet, kubectl</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-初始化集群">3.1 初始化集群</a></li>
+    <li><a href="#32-配置pod网络">3.2 配置pod网络</a></li>
+    <li><a href="#33-添加节点">3.3 添加节点</a></li>
+    <li><a href="#34-节点的移除以及集群销毁">3.4 节点的移除以及集群销毁</a>
+      <ul>
+        <li><a href="#移除node2结点">移除node2结点</a></li>
+        <li><a href="#集群销毁">集群销毁</a></li>
+      </ul>
+    </li>
+    <li><a href="#35-kube-proxy设置ipvs">3.5 kube-proxy设置ipvs</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-helm">4.1 Helm</a></li>
+    <li><a href="#42-使用helm部署nginx-ingress">4.2 使用Helm部署Nginx Ingress</a></li>
+    <li><a href="#43-使用helm部署dashboard">4.3 使用Helm部署dashboard</a></li>
+    <li><a href="#44-使用helm部署metrics-server">4.4 使用Helm部署metrics-server</a></li>
+  </ul>
 </nav>
       </aside>
       <div>
-        
-
-<p>Kubernetes 是用于自动部署、扩展和管理容器化应用的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理以及服务，其抽象性允许将容器化应用部署到集群，而不必专门绑定到一个计算机。同时可以提供24/7的全天候使用能力，支持不停机的发布以及更新。<strong>Kubernetes 用于协调高度可用的计算机集群，这些计算机群集被连接作为单个单元工作</strong>。对于一个Kubernetes集群而言具有两种类型的资源：</p>
-
+        <p>Kubernetes 是用于自动部署、扩展和管理容器化应用的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理以及服务，其抽象性允许将容器化应用部署到集群，而不必专门绑定到一个计算机。同时可以提供24/7的全天候使用能力，支持不停机的发布以及更新。<strong>Kubernetes 用于协调高度可用的计算机集群，这些计算机群集被连接作为单个单元工作</strong>。对于一个Kubernetes集群而言具有两种类型的资源：</p>
 <ul>
 <li><strong>Master</strong>: 集群的调度节点</li>
 <li><strong>Nodes</strong>：应用程序实际运行的工作节点</li>
 </ul>
-
-<p><img src="https://d33wubrfki0l68.cloudfront.net/99d9808dcbf2880a996ed50d308a186b5900cec9/40b94/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg" alt="cluster" /></p>
-
+<p><img src="https://d33wubrfki0l68.cloudfront.net/99d9808dcbf2880a996ed50d308a186b5900cec9/40b94/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg" alt="cluster"></p>
 <p>kubeadm是Kubernetes官方提供的用于快速安装Kubernetes集群的工具, 可以通过该工具快速部署一个集群。本次部署使用虚拟机，基于Ubuntu 16.04进行。</p>
-
 <h1 id="1-准备">1. 准备</h1>
-
 <ol>
 <li>首先确定三台虚拟机的IP，修改每一台的<code>/etc/hosts</code>文件:</li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff0;font-weight:bold">192</span>.168.118.128 node1
-<span style="color:#ff0;font-weight:bold">192</span>.168.118.129 master
-<span style="color:#ff0;font-weight:bold">192</span>.168.118.130 node2</code></pre></div>
-<p><em>除此之外，每一台虚拟机(或者物理机)必须满足至少双CPU， 内存大于2G, 拥有root权限</em></p>
-
-<ol>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">192.168.118.128 node1
+192.168.118.129 master
+192.168.118.130 node2
+</code></pre></div><p><em>除此之外，每一台虚拟机(或者物理机)必须满足至少双CPU， 内存大于2G, 拥有root权限</em></p>
+<ol start="2">
 <li>然后修改每一个主机的<code>hostname</code></li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hostnamectl set-hostname &lt;name&gt;</code></pre></div>
-<ol>
-<li>配置内核参数，将桥接流量传递到iptables的链</li>
-</ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">   cat &gt; /etc/sysctl.d/k8s.conf <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF
-</span><span style="color:#0ff;font-weight:bold">   net.bridge.bridge-nf-call-ip6tables = 1
-</span><span style="color:#0ff;font-weight:bold">   net.bridge.bridge-nf-call-iptables = 1
-</span><span style="color:#0ff;font-weight:bold">   net.ipv4.ip_forward = 1
-</span><span style="color:#0ff;font-weight:bold">   EOF</span></code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">   modprobe br_netfilter
-   sysctl -p /etc/sysctl.d/k8s.conf</code></pre></div>
-<ol>
-<li>开启kube-proxy ipvs模式的前提条件，由于ipvs已经加入到了内核的主干，所以为kube-proxy开启ipvs的前提需要加载以下的内核模块：</li>
-</ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">   ip_vs
-   ip_vs_rr
-   ip_vs_wrr
-   ip_vs_sh
-   nf_conntrack_ipv4</code></pre></div>
-<p>可以建立<code>k8s</code>的工作目录，将其作为一个shell脚本：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">   cat &gt; ipvsset.sh <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF
-</span><span style="color:#0ff;font-weight:bold">   #!/bin/bash
-</span><span style="color:#0ff;font-weight:bold">   modprobe -- ip_vs
-</span><span style="color:#0ff;font-weight:bold">   modprobe -- ip_vs_rr
-</span><span style="color:#0ff;font-weight:bold">   modprobe -- ip_vs_wrr
-</span><span style="color:#0ff;font-weight:bold">   modprobe -- ip_vs_sh
-</span><span style="color:#0ff;font-weight:bold">   modprobe -- nf_conntrack_ipv4
-</span><span style="color:#0ff;font-weight:bold">   EOF</span>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">hostnamectl set-hostname &lt;name&gt;
+</code></pre></div><ol start="3">
+<li>
+<p>配置内核参数，将桥接流量传递到iptables的链</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat &gt; /etc/sysctl.d/k8s.conf <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF
+</span><span style="color:#0ff;font-weight:bold">net.bridge.bridge-nf-call-ip6tables = 1
+</span><span style="color:#0ff;font-weight:bold">net.bridge.bridge-nf-call-iptables = 1
+</span><span style="color:#0ff;font-weight:bold">net.ipv4.ip_forward = 1
+</span><span style="color:#0ff;font-weight:bold">EOF</span>
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">modprobe br_netfilter
+sysctl -p /etc/sysctl.d/k8s.conf
+</code></pre></div></li>
+<li>
+<p>开启kube-proxy ipvs模式的前提条件，由于ipvs已经加入到了内核的主干，所以为kube-proxy开启ipvs的前提需要加载以下的内核模块：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ip_vs
+ip_vs_rr
+ip_vs_wrr
+ip_vs_sh
+nf_conntrack_ipv4
+</code></pre></div><p>可以建立<code>k8s</code>的工作目录，将其作为一个shell脚本：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat &gt; ipvsset.sh <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF
+</span><span style="color:#0ff;font-weight:bold">#!/bin/bash
+</span><span style="color:#0ff;font-weight:bold">modprobe -- ip_vs
+</span><span style="color:#0ff;font-weight:bold">modprobe -- ip_vs_rr
+</span><span style="color:#0ff;font-weight:bold">modprobe -- ip_vs_wrr
+</span><span style="color:#0ff;font-weight:bold">modprobe -- ip_vs_sh
+</span><span style="color:#0ff;font-weight:bold">modprobe -- nf_conntrack_ipv4
+</span><span style="color:#0ff;font-weight:bold">EOF</span>
    
-   chmod +x ipvsset.sh &amp;&amp; sudo ./ipvsset.sh
-   lsmod | grep -e ip_vs -e nf_conntrack_ipv4</code></pre></div>
-<p>然后需要在每一个节点上安装<code>ipset</code>,为了便于ipvs的代理查看，可以安装管理工具<code>ipvsadm</code>.</p>
-
-<ol>
-<li>Kubectl 的运行要求在<code>swap</code>分区关闭的前提下，同时<code>coredns</code>的运行需要以<code>/etc/resolv.conf</code>为配置文件</li>
+chmod +x ipvsset.sh &amp;&amp; sudo ./ipvsset.sh
+lsmod | grep -e ip_vs -e nf_conntrack_ipv4
+</code></pre></div><p>然后需要在每一个节点上安装<code>ipset</code>,为了便于ipvs的代理查看，可以安装管理工具<code>ipvsadm</code>.</p>
+</li>
+<li>
+<p>Kubectl 的运行要求在<code>swap</code>分区关闭的前提下，同时<code>coredns</code>的运行需要以<code>/etc/resolv.conf</code>为配置文件</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo swapoff -a -v
+sudo sed -i <span style="color:#0ff;font-weight:bold">&#39;/^127.0.0.1/a\nameserver 8.8.8.8&#39;</span> /etc/resolv.conf
+sudo sed -i <span style="color:#0ff;font-weight:bold">&#39;/8.8.8.8$/a\nameserver 8.8.4.4&#39;</span> /etc/resolv.conf
+</code></pre></div></li>
 </ol>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">   sudo swapoff -a -v
-   sudo sed -i <span style="color:#0ff;font-weight:bold">&#39;/^127.0.0.1/a\nameserver 8.8.8.8&#39;</span> /etc/resolv.conf
-   sudo sed -i <span style="color:#0ff;font-weight:bold">&#39;/8.8.8.8$/a\nameserver 8.8.4.4&#39;</span> /etc/resolv.conf</code></pre></div>
 <h1 id="2-docker-以及k8s安装">2. Docker 以及k8s安装</h1>
-
-<h2 id="2-1-docker">2.1 Docker</h2>
+<h2 id="21-docker">2.1 Docker</h2>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># Install Docker CE</span>
 <span style="color:#007f7f">## Set up the repository:</span>
 <span style="color:#007f7f">### Install packages to allow apt to use a repository over HTTPS</span>
@@ -260,7 +250,7 @@ add-apt-repository <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold">  stable&#34;</span>
 
 <span style="color:#007f7f">## Install Docker CE.</span>
-apt-get update &amp;&amp; apt-get install docker-ce=<span style="color:#ff0;font-weight:bold">18</span>.06.2~ce~3-0~ubuntu
+apt-get update &amp;&amp; apt-get install docker-ce=18.06.2~ce~3-0~ubuntu
 
 <span style="color:#007f7f"># Setup daemon.</span>
 cat &gt; /etc/docker/daemon.json <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF
@@ -278,8 +268,8 @@ mkdir -p /etc/systemd/system/docker.service.d
 
 <span style="color:#007f7f"># Restart docker.</span>
 systemctl daemon-reload
-systemctl restart docker</code></pre></div>
-<h2 id="2-2-kubeadm-kubelet-kubectl">2.2 Kubeadm, kubelet, kubectl</h2>
+systemctl restart docker
+</code></pre></div><h2 id="22-kubeadm-kubelet-kubectl">2.2 Kubeadm, kubelet, kubectl</h2>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt-get update &amp;&amp; apt-get install -y apt-transport-https curl
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list
@@ -287,69 +277,70 @@ cat <span style="color:#0ff;font-weight:bold">&lt;&lt;EOF &gt;/etc/apt/sources.l
 </span><span style="color:#0ff;font-weight:bold">EOF</span>
 apt-get update
 apt-get install -y kubelet kubeadm kubectl
-apt-mark hold kubelet kubeadm kubectl</code></pre></div>
-<p>然后在每一个节点开启docker， kubelet服务</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl ebable --now docker</code></pre></div>
-<h1 id="3-配置集群">3. 配置集群</h1>
-
-<h2 id="3-1-初始化集群">3.1 初始化集群</h2>
-
+apt-mark hold kubelet kubeadm kubectl
+</code></pre></div><p>然后在每一个节点开启docker， kubelet服务</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl ebable --now docker
+</code></pre></div><h1 id="3-配置集群">3. 配置集群</h1>
+<h2 id="31-初始化集群">3.1 初始化集群</h2>
 <p>进入k8s工作目录,可以打印kubeadm的默认配置文件<code>kubeadm config print init-defaults</code>，修改使用如下的启动文件：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: kubeadm.k8s.io/v1beta2
-kind: InitConfiguration
-localAPIEndpoint:
-  advertiseAddress: <span style="color:#ff0;font-weight:bold">192.168</span>.<span style="color:#ff0;font-weight:bold">118.129</span>       <span style="color:#007f7f"># master ip</span>
-  bindPort: <span style="color:#ff0;font-weight:bold">6443</span>
-nodeRegistration:
-  taints:
-  - effect: PreferNoSchedule
-    key: node-role.kubernetes.io/master
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">apiVersion</span>: kubeadm.k8s.io/v1beta2
+<span style="color:#fff;font-weight:bold">kind</span>: InitConfiguration
+<span style="color:#fff;font-weight:bold">localAPIEndpoint</span>:
+  <span style="color:#fff;font-weight:bold">advertiseAddress</span>: <span style="color:#ff0;font-weight:bold">192.168.118.129</span>       <span style="color:#007f7f"># master ip</span>
+  <span style="color:#fff;font-weight:bold">bindPort</span>: <span style="color:#ff0;font-weight:bold">6443</span>
+<span style="color:#fff;font-weight:bold">nodeRegistration</span>:
+  <span style="color:#fff;font-weight:bold">taints</span>:
+  - <span style="color:#fff;font-weight:bold">effect</span>: PreferNoSchedule
+    <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
 ---
-apiVersion: kubeadm.k8s.io/v1beta2
-kind: ClusterConfiguration
-kubernetesVersion: v1.<span style="color:#ff0;font-weight:bold">15.1</span>   <span style="color:#007f7f"># 版本需要与k8s版本一致</span>
-networking:
-  podSubnet: <span style="color:#ff0;font-weight:bold">10.244</span>.<span style="color:#ff0;font-weight:bold">0.0</span>/<span style="color:#ff0;font-weight:bold">16</span>   <span style="color:#007f7f"># 子网不可与节点的ip在同一字段</span></code></pre></div>
-<p>在启动之前可以在每个节点使用<code>kubeadm config imags pull</code>拉取必要的镜像（注意：如果无法科学上网，可以自行配置阿里云个人镜像。）</p>
-
+<span style="color:#fff;font-weight:bold">apiVersion</span>: kubeadm.k8s.io/v1beta2
+<span style="color:#fff;font-weight:bold">kind</span>: ClusterConfiguration
+<span style="color:#fff;font-weight:bold">kubernetesVersion</span>: v1<span style="color:#ff0;font-weight:bold">.15.1</span>   <span style="color:#007f7f"># 版本需要与k8s版本一致</span>
+<span style="color:#fff;font-weight:bold">networking</span>:
+  <span style="color:#fff;font-weight:bold">podSubnet</span>: <span style="color:#ff0;font-weight:bold">10.244.0.0</span>/<span style="color:#ff0;font-weight:bold">16</span>   <span style="color:#007f7f"># 子网不可与节点的ip在同一字段</span>
+</code></pre></div><p>在启动之前可以在每个节点使用<code>kubeadm config imags pull</code>拉取必要的镜像（注意：如果无法科学上网，可以自行配置阿里云个人镜像。）</p>
 <p>初始化集群：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubeadm init --config kubeadm.yaml</code></pre></div>
-<p>log记录了完成的初始化输出的内容，根据输出的内容基本上可以看出手动初始化安装一个Kubernetes集群所需要的关键步骤。 其中有以下关键内容：</p>
-
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubeadm init --config kubeadm.yaml
+</code></pre></div><p>log记录了完成的初始化输出的内容，根据输出的内容基本上可以看出手动初始化安装一个Kubernetes集群所需要的关键步骤。 其中有以下关键内容：</p>
 <ul>
-<li><p>[kubelet-start] 生成kubelet的配置文件”/var/lib/kubelet/config.yaml”</p></li>
-
-<li><p>[certs]生成相关的各种证书</p></li>
-
-<li><p>[kubeconfig]生成相关的kubeconfig文件</p></li>
-
-<li><p>[control-plane]使用/etc/kubernetes/manifests目录中的yaml文件创建apiserver、controller-manager、scheduler的静态pod</p></li>
-
-<li><p>[bootstraptoken]生成token记录下来，后边使用kubeadm join往集群中添加节点时会用到</p></li>
-
-<li><p>下面的命令是配置常规用户如何使用kubectl访问集群：</p></li>
-
-<li><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4">mkdir -p $HOME/.kube
+<li>
+<p>[kubelet-start] 生成kubelet的配置文件”/var/lib/kubelet/config.yaml”</p>
+</li>
+<li>
+<p>[certs]生成相关的各种证书</p>
+</li>
+<li>
+<p>[kubeconfig]生成相关的kubeconfig文件</p>
+</li>
+<li>
+<p>[control-plane]使用/etc/kubernetes/manifests目录中的yaml文件创建apiserver、controller-manager、scheduler的静态pod</p>
+</li>
+<li>
+<p>[bootstraptoken]生成token记录下来，后边使用kubeadm join往集群中添加节点时会用到</p>
+</li>
+<li>
+<p>下面的命令是配置常规用户如何使用kubectl访问集群：</p>
+</li>
+<li>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config</pre></div>
-<ul>
-<li>最后给出了将节点加入集群的命令kubeadm join 192.168.118.129:6443 –token xxxxx.xxxxxxxxxxx \ –discovery-token-ca-cert-hash shaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+</code></pre></div></li>
+<li>
+<p>最后给出了将节点加入集群的命令kubeadm join 192.168.118.129:6443 –token xxxxx.xxxxxxxxxxx \ –discovery-token-ca-cert-hash shaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+</li>
 </ul>
-
 <p>查看一下集群状态，确认个组件都处于healthy状态：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get cs
 NAME                 STATUS    MESSAGE             ERROR
 controller-manager   Healthy   ok                  
 scheduler            Healthy   ok                  
-etcd-0               Healthy   {<span style="color:#0ff;font-weight:bold">&#34;health&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;true&#34;</span>}</code></pre></div></li>
-</ul>
-
-<h2 id="3-2-配置pod网络">3.2 配置pod网络</h2>
-
+etcd-0               Healthy   {<span style="color:#0ff;font-weight:bold">&#34;health&#34;</span>:<span style="color:#0ff;font-weight:bold">&#34;true&#34;</span>}
+</code></pre></div><h2 id="32-配置pod网络">3.2 配置pod网络</h2>
 <p>使用flannel插件进行网络配置:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -O https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-kubectl apply -f  kube-flannel.yml</code></pre></div>
-<p>如果Node有多个网卡的话，参考<a href="https://github.com/kubernetes/kubernetes/issues/39701">flannel issues 39701</a>，目前需要在kube-flannel.yml中使用–iface参数指定集群主机内网网卡的名称，否则可能会出现dns无法解析。需要将kube-flannel.yml下载到本地，flanneld启动参数加上–iface=<iface-name></p>
+kubectl apply -f  kube-flannel.yml
+</code></pre></div><p>如果Node有多个网卡的话，参考<a href="https://github.com/kubernetes/kubernetes/issues/39701">flannel issues 39701</a>，目前需要在kube-flannel.yml中使用–iface参数指定集群主机内网网卡的名称，否则可能会出现dns无法解析。需要将kube-flannel.yml下载到本地，flanneld启动参数加上–iface=<!-- raw HTML omitted --></p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">containers:
       - name: kube-flannel
         image: quay.io/coreos/flannel:v0.11.0-amd64
@@ -359,17 +350,16 @@ kubectl apply -f  kube-flannel.yml</code></pre></div>
         - --ip-masq
         - --kube-subnet-mgr
         - --iface=eth1
-......</code></pre></div>
-<p>使用kubectl get pod –all-namespaces -o wide确保所有的Pod都处于Running状态。</p>
-
-<p>我在这里遇到了<code>coredns</code>的崩溃，原因是coredns配置文件中的<code>loop</code>参数导致,使用<code>kubectl -n kube-system edit configmap coredns</code>:</p>
+......
+</code></pre></div><p>使用kubectl get pod –all-namespaces -o wide确保所有的Pod都处于Running状态。</p>
+<p>我在这里遇到了<code>coredns</code>的崩溃，原因是coredns配置文件中的<code>loop</code>参数导致,使用<code>kubectl -n kube-system edit configmap coredns </code>:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#007f7f"># Please edit the object below. Lines beginning with a &#39;#&#39; will be ignored,</span>
 <span style="color:#007f7f"># and an empty file will abort the edit. If an error occurs while saving this file will be</span>
 <span style="color:#007f7f"># reopened with the relevant failures.</span>
 <span style="color:#007f7f">#</span>
-apiVersion: v1
-data:
-  Corefile: <span style="color:#0ff;font-weight:bold">|
+<span style="color:#fff;font-weight:bold">apiVersion</span>: v1
+<span style="color:#fff;font-weight:bold">data</span>:
+  <span style="color:#fff;font-weight:bold">Corefile</span>: <span style="color:#0ff;font-weight:bold">|
 </span><span style="color:#0ff;font-weight:bold">    .:53 {</span>
         errors
         health
@@ -386,206 +376,199 @@ data:
         reload
         loadbalance
     }
-kind: ConfigMap
-metadata:
-  creationTimestamp: <span style="color:#0ff;font-weight:bold">&#34;2019-07-29T11:20:38Z&#34;</span>
-  name: coredns
-  namespace: kube-system
-  resourceVersion: <span style="color:#0ff;font-weight:bold">&#34;13188&#34;</span>
-  selfLink: /api/v1/namespaces/kube-system/configmaps/coredns</code></pre></div>
-<p>删除即可，然后重启服务:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> kubectl get pods -n kube-system -oname |grep coredns |xargs kubectl delete -n kube-system</code></pre></div>
-<h2 id="3-3-添加节点">3.3 添加节点</h2>
+<span style="color:#fff;font-weight:bold">kind</span>: ConfigMap
+<span style="color:#fff;font-weight:bold">metadata</span>:
+  <span style="color:#fff;font-weight:bold">creationTimestamp</span>: <span style="color:#0ff;font-weight:bold">&#34;2019-07-29T11:20:38Z&#34;</span>
+  <span style="color:#fff;font-weight:bold">name</span>: coredns
+  <span style="color:#fff;font-weight:bold">namespace</span>: kube-system
+  <span style="color:#fff;font-weight:bold">resourceVersion</span>: <span style="color:#0ff;font-weight:bold">&#34;13188&#34;</span>
+  <span style="color:#fff;font-weight:bold">selfLink</span>: /api/v1/namespaces/kube-system/configmaps/coredns
 
+</code></pre></div><p>删除即可，然后重启服务:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> kubectl get pods -n kube-system -oname |grep coredns |xargs kubectl delete -n kube-system
+</code></pre></div><h2 id="33-添加节点">3.3 添加节点</h2>
 <p>使用kubeadm输出的join提示，分别在两个工作节点上执行,使用<code>kubectl get nodes</code>:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">NAME     STATUS   ROLES         AGE   VERSION                                                        master   Ready    master   <span style="color:#ff0;font-weight:bold">39</span>h   v1<span style="color:#ff0;font-weight:bold">.15.1</span>                                                       
 node1    Ready    &lt;none&gt;        <span style="color:#ff0;font-weight:bold">39</span>h   v1<span style="color:#ff0;font-weight:bold">.15.1</span>                                                       node2    Ready    &lt;none&gt;        <span style="color:#ff0;font-weight:bold">39</span>h   v1<span style="color:#ff0;font-weight:bold">.15.1</span> 
-</code></pre></div>
-<h2 id="3-4-节点的移除以及集群销毁">3.4 节点的移除以及集群销毁</h2>
-
+</code></pre></div><h2 id="34-节点的移除以及集群销毁">3.4 节点的移除以及集群销毁</h2>
 <h3 id="移除node2结点">移除node2结点</h3>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl drain node2 --delete-local-data --force --ignore-daemonsets
-kubectl delete node node2</code></pre></div>
-<p>node2 执行:</p>
+kubectl delete node node2
+</code></pre></div><p>node2 执行:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubeadm reset
 ifconfig cni0 down
 ip link delete cni0
 ifconfig flannel.1 down
 ip link delete flannel.1
 rm -rf /var/lib/cni/
-ipvsadm --clear</code></pre></div>
-<h3 id="集群销毁">集群销毁</h3>
+ipvsadm --clear
+</code></pre></div><h3 id="集群销毁">集群销毁</h3>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubeadm reset
 ifconfig cni0 down
 ip link delete cni0
 ifconfig flannel.1 down
 ip link delete flannel.1
-rm -rf /etc/cni/</code></pre></div>
-<h2 id="3-5-kube-proxy设置ipvs">3.5 kube-proxy设置ipvs</h2>
-
+rm -rf /etc/cni/
+</code></pre></div><h2 id="35-kube-proxy设置ipvs">3.5 kube-proxy设置ipvs</h2>
 <p>修改ConfigMap的kube-system/kube-proxy中的config.conf，mode: “ipvs”</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl edit cm kube-proxy -n kube-system</code></pre></div>
-<p>之后重启各个节点上的kube-proxy pod：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl edit cm kube-proxy -n kube-system
+</code></pre></div><p>之后重启各个节点上的kube-proxy pod：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get pod -n kube-system | grep kube-proxy | awk <span style="color:#0ff;font-weight:bold">&#39;{system(&#34;kubectl delete pod &#34;$1&#34; -n kube-system&#34;)}&#39;</span>
 kubectl get pod -n kube-system | grep kube-proxy
-kube-proxy-7fsrg                <span style="color:#ff0;font-weight:bold">1</span>/1     Running   <span style="color:#ff0;font-weight:bold">0</span>          3s
-kube-proxy-k8vhm                <span style="color:#ff0;font-weight:bold">1</span>/1     Running   <span style="color:#ff0;font-weight:bold">0</span>          9s
+kube-proxy-7fsrg                1/1     Running   <span style="color:#ff0;font-weight:bold">0</span>          3s
+kube-proxy-k8vhm                1/1     Running   <span style="color:#ff0;font-weight:bold">0</span>          9s
 
 kubectl logs kube-proxy-7fsrg  -n kube-system
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.308289       <span style="color:#ff0;font-weight:bold">1</span> server_others.go:170] Using ipvs Proxier.
-W0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.309074       <span style="color:#ff0;font-weight:bold">1</span> proxier.go:401] IPVS scheduler not specified, use rr by default
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.309831       <span style="color:#ff0;font-weight:bold">1</span> server.go:534] Version: v1.15.0
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.320088       <span style="color:#ff0;font-weight:bold">1</span> conntrack.go:52] Setting nf_conntrack_max to <span style="color:#ff0;font-weight:bold">131072</span>
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.320365       <span style="color:#ff0;font-weight:bold">1</span> config.go:96] Starting endpoints config controller
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.320393       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1029] Waiting <span style="color:#fff;font-weight:bold">for</span> caches to sync <span style="color:#fff;font-weight:bold">for</span> endpoints config controller
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.320455       <span style="color:#ff0;font-weight:bold">1</span> config.go:187] Starting service config controller
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.320470       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1029] Waiting <span style="color:#fff;font-weight:bold">for</span> caches to sync <span style="color:#fff;font-weight:bold">for</span> service config controller
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.420899       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1036] Caches are synced <span style="color:#fff;font-weight:bold">for</span> endpoints config controller
-I0703 <span style="color:#ff0;font-weight:bold">04</span>:42:33.420969       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1036] Caches are synced <span style="color:#fff;font-weight:bold">for</span> service config controller</code></pre></div>
-<p>日志中打印出了Using ipvs Proxier，说明ipvs模式已经开启。</p>
-
+I0703 04:42:33.308289       <span style="color:#ff0;font-weight:bold">1</span> server_others.go:170] Using ipvs Proxier.
+W0703 04:42:33.309074       <span style="color:#ff0;font-weight:bold">1</span> proxier.go:401] IPVS scheduler not specified, use rr by default
+I0703 04:42:33.309831       <span style="color:#ff0;font-weight:bold">1</span> server.go:534] Version: v1.15.0
+I0703 04:42:33.320088       <span style="color:#ff0;font-weight:bold">1</span> conntrack.go:52] Setting nf_conntrack_max to <span style="color:#ff0;font-weight:bold">131072</span>
+I0703 04:42:33.320365       <span style="color:#ff0;font-weight:bold">1</span> config.go:96] Starting endpoints config controller
+I0703 04:42:33.320393       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1029] Waiting <span style="color:#fff;font-weight:bold">for</span> caches to sync <span style="color:#fff;font-weight:bold">for</span> endpoints config controller
+I0703 04:42:33.320455       <span style="color:#ff0;font-weight:bold">1</span> config.go:187] Starting service config controller
+I0703 04:42:33.320470       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1029] Waiting <span style="color:#fff;font-weight:bold">for</span> caches to sync <span style="color:#fff;font-weight:bold">for</span> service config controller
+I0703 04:42:33.420899       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1036] Caches are synced <span style="color:#fff;font-weight:bold">for</span> endpoints config controller
+I0703 04:42:33.420969       <span style="color:#ff0;font-weight:bold">1</span> controller_utils.go:1036] Caches are synced <span style="color:#fff;font-weight:bold">for</span> service config controller
+</code></pre></div><p>日志中打印出了Using ipvs Proxier，说明ipvs模式已经开启。</p>
 <h1 id="4-kubernetes-常用组件">4. Kubernetes 常用组件</h1>
-
-<h2 id="4-1-helm">4.1 Helm</h2>
-
+<h2 id="41-helm">4.1 Helm</h2>
 <p>Helm由客户端命helm令行工具和服务端tiller组成，Helm的安装十分简单。 下载helm命令行工具到master节点node1的/usr/local/bin下，这里下载的2.14.1版本：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -O https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz
 tar -zxvf helm-v2.14.1-linux-amd64.tar.gz
 <span style="color:#fff;font-weight:bold">cd</span> linux-amd64/
-cp helm /usr/local/bin/</code></pre></div>
-<p>因为Kubernetes APIServer开启了RBAC访问控制，所以需要创建tiller使用的service account: tiller并分配合适的角色给它。 详细内容可以查看helm文档中的<a href="https://docs.helm.sh/using_helm/#role-based-access-control">Role-based Access Control</a>。 这里简单起见直接分配cluster-admin这个集群内置的ClusterRole给它。创建helm-rbac.yaml文件：</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: tiller
-  namespace: kube-system
+cp helm /usr/local/bin/
+</code></pre></div><p>因为Kubernetes APIServer开启了RBAC访问控制，所以需要创建tiller使用的service account: tiller并分配合适的角色给它。 详细内容可以查看helm文档中的<a href="https://docs.helm.sh/using_helm/#role-based-access-control">Role-based Access Control</a>。 这里简单起见直接分配cluster-admin这个集群内置的ClusterRole给它。创建helm-rbac.yaml文件：</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">apiVersion</span>: v1
+<span style="color:#fff;font-weight:bold">kind</span>: ServiceAccount
+<span style="color:#fff;font-weight:bold">metadata</span>:
+  <span style="color:#fff;font-weight:bold">name</span>: tiller
+  <span style="color:#fff;font-weight:bold">namespace</span>: kube-system
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: tiller
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: tiller
-    namespace: kube-system</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f helm-rbac.yaml
+<span style="color:#fff;font-weight:bold">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#fff;font-weight:bold">kind</span>: ClusterRoleBinding
+<span style="color:#fff;font-weight:bold">metadata</span>:
+  <span style="color:#fff;font-weight:bold">name</span>: tiller
+<span style="color:#fff;font-weight:bold">roleRef</span>:
+  <span style="color:#fff;font-weight:bold">apiGroup</span>: rbac.authorization.k8s.io
+  <span style="color:#fff;font-weight:bold">kind</span>: ClusterRole
+  <span style="color:#fff;font-weight:bold">name</span>: cluster-admin
+<span style="color:#fff;font-weight:bold">subjects</span>:
+  - <span style="color:#fff;font-weight:bold">kind</span>: ServiceAccount
+    <span style="color:#fff;font-weight:bold">name</span>: tiller
+    <span style="color:#fff;font-weight:bold">namespace</span>: kube-system
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create -f helm-rbac.yaml
 serviceaccount/tiller created
-clusterrolebinding.rbac.authorization.k8s.io/tiller created</code></pre></div>
-<p>使用helm部署tiller:</p>
+clusterrolebinding.rbac.authorization.k8s.io/tiller created
+</code></pre></div><p>使用helm部署tiller:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm init --service-account tiller --skip-refresh
-kubectl get pod -n kube-system -l app=helm</code></pre></div>
-<p>对于无法科学上网时，可以配置azure的helm repo:</p>
+kubectl get pod -n kube-system -l app=helm
+</code></pre></div><p>对于无法科学上网时，可以配置azure的helm repo:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo add stable http://mirror.azure.cn/kubernetes/charts
-helm repo list</code></pre></div>
-<h2 id="4-2-使用helm部署nginx-ingress">4.2 使用Helm部署Nginx Ingress</h2>
-
+helm repo list
+</code></pre></div><h2 id="42-使用helm部署nginx-ingress">4.2 使用Helm部署Nginx Ingress</h2>
 <p>为了便于将集群中的服务暴露到集群外部，需要使用Ingress。接下来使用Helm将Nginx Ingress部署到Kubernetes上。 Nginx Ingress Controller被部署在Kubernetes的边缘节点上.</p>
-
 <p>将master作为边缘节点，加上label:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl label node master node-role.kubernetes.io/edge=</code></pre></div>
-<p>stable/nginx-ingress chart的值文件ingress-nginx.yaml如下:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">controller:
-  replicaCount: <span style="color:#ff0;font-weight:bold">1</span>
-  hostNetwork: <span style="color:#fff;font-weight:bold">true</span>
-  nodeSelector:
-    node-role.kubernetes.io/edge: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
-  affinity:
-    podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app
-              operator: In
-              values:
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl label node master node-role.kubernetes.io/edge=
+</code></pre></div><p>stable/nginx-ingress chart的值文件ingress-nginx.yaml如下:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">controller</span>:
+  <span style="color:#fff;font-weight:bold">replicaCount</span>: <span style="color:#ff0;font-weight:bold">1</span>
+  <span style="color:#fff;font-weight:bold">hostNetwork</span>: <span style="color:#fff;font-weight:bold">true</span>
+  <span style="color:#fff;font-weight:bold">nodeSelector</span>:
+    <span style="color:#fff;font-weight:bold">node-role.kubernetes.io/edge</span>: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
+  <span style="color:#fff;font-weight:bold">affinity</span>:
+    <span style="color:#fff;font-weight:bold">podAntiAffinity</span>:
+        <span style="color:#fff;font-weight:bold">requiredDuringSchedulingIgnoredDuringExecution</span>:
+        - <span style="color:#fff;font-weight:bold">labelSelector</span>:
+            <span style="color:#fff;font-weight:bold">matchExpressions</span>:
+            - <span style="color:#fff;font-weight:bold">key</span>: app
+              <span style="color:#fff;font-weight:bold">operator</span>: In
+              <span style="color:#fff;font-weight:bold">values</span>:
               - nginx-ingress
-            - key: component
-              operator: In
-              values:
+            - <span style="color:#fff;font-weight:bold">key</span>: component
+              <span style="color:#fff;font-weight:bold">operator</span>: In
+              <span style="color:#fff;font-weight:bold">values</span>:
               - controller
-          topologyKey: kubernetes.io/hostname
-  tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: PreferNoSchedule
-defaultBackend:
-  nodeSelector:
-    node-role.kubernetes.io/edge: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
-  tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: PreferNoSchedule</code></pre></div>
-<p>部署安装:</p>
+          <span style="color:#fff;font-weight:bold">topologyKey</span>: kubernetes.io/hostname
+  <span style="color:#fff;font-weight:bold">tolerations</span>:
+      - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+        <span style="color:#fff;font-weight:bold">operator</span>: Exists
+        <span style="color:#fff;font-weight:bold">effect</span>: NoSchedule
+      - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+        <span style="color:#fff;font-weight:bold">operator</span>: Exists
+        <span style="color:#fff;font-weight:bold">effect</span>: PreferNoSchedule
+<span style="color:#fff;font-weight:bold">defaultBackend</span>:
+  <span style="color:#fff;font-weight:bold">nodeSelector</span>:
+    <span style="color:#fff;font-weight:bold">node-role.kubernetes.io/edge</span>: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
+  <span style="color:#fff;font-weight:bold">tolerations</span>:
+      - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+        <span style="color:#fff;font-weight:bold">operator</span>: Exists
+        <span style="color:#fff;font-weight:bold">effect</span>: NoSchedule
+      - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+        <span style="color:#fff;font-weight:bold">operator</span>: Exists
+        <span style="color:#fff;font-weight:bold">effect</span>: PreferNoSchedule
+</code></pre></div><p>部署安装:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm repo update
 
 helm install stable/nginx-ingress <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>-n nginx-ingress <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>--namespace ingress-nginx  <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>-f ingress-nginx.yaml</code></pre></div>
-<p>查看:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get pod -n ingress-nginx -o wide</code></pre></div>
-<p>如果访问<a href="http://192.168.118.129返回default">http://192.168.118.129返回default</a> backend，则部署完成。</p>
-
-<h2 id="4-3-使用helm部署dashboard">4.3 使用Helm部署dashboard</h2>
-
+</span><span style="color:#0ff;font-weight:bold"></span>-f ingress-nginx.yaml
+</code></pre></div><p>查看:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get pod -n ingress-nginx -o wide
+</code></pre></div><p>如果访问http://192.168.118.129返回default backend，则部署完成。</p>
+<h2 id="43-使用helm部署dashboard">4.3 使用Helm部署dashboard</h2>
 <p>对应配置文件:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">image:
-  repository: k8s.gcr.io/kubernetes-dashboard-amd64
-  tag: v1.<span style="color:#ff0;font-weight:bold">10.1</span>
-ingress:
-  enabled: <span style="color:#fff;font-weight:bold">true</span>
-  hosts: 
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">image</span>:
+  <span style="color:#fff;font-weight:bold">repository</span>: k8s.gcr.io/kubernetes-dashboard-amd64
+  <span style="color:#fff;font-weight:bold">tag</span>: v1<span style="color:#ff0;font-weight:bold">.10.1</span>
+<span style="color:#fff;font-weight:bold">ingress</span>:
+  <span style="color:#fff;font-weight:bold">enabled</span>: <span style="color:#fff;font-weight:bold">true</span>
+  <span style="color:#fff;font-weight:bold">hosts</span>: 
     - k8s.frognew.com
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: <span style="color:#0ff;font-weight:bold">&#34;true&#34;</span>
-    nginx.ingress.kubernetes.io/backend-protocol: <span style="color:#0ff;font-weight:bold">&#34;HTTPS&#34;</span>
-  tls:
-    - secretName: frognew-com-tls-secret
-      hosts:
+  <span style="color:#fff;font-weight:bold">annotations</span>:
+    <span style="color:#fff;font-weight:bold">nginx.ingress.kubernetes.io/ssl-redirect</span>: <span style="color:#0ff;font-weight:bold">&#34;true&#34;</span>
+    <span style="color:#fff;font-weight:bold">nginx.ingress.kubernetes.io/backend-protocol</span>: <span style="color:#0ff;font-weight:bold">&#34;HTTPS&#34;</span>
+  <span style="color:#fff;font-weight:bold">tls</span>:
+    - <span style="color:#fff;font-weight:bold">secretName</span>: frognew-com-tls-secret
+      <span style="color:#fff;font-weight:bold">hosts</span>:
       - k8s.frognew.com
-nodeSelector:
-    node-role.kubernetes.io/edge: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
-tolerations:
-    - key: node-role.kubernetes.io/master
-      operator: Exists
-      effect: NoSchedule
-    - key: node-role.kubernetes.io/master
-      operator: Exists
-      effect: PreferNoSchedule
-rbac:
-  clusterAdminRole: <span style="color:#fff;font-weight:bold">true</span></code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install stable/kubernetes-dashboard <span style="color:#0ff;font-weight:bold">\
+<span style="color:#fff;font-weight:bold">nodeSelector</span>:
+    <span style="color:#fff;font-weight:bold">node-role.kubernetes.io/edge</span>: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
+<span style="color:#fff;font-weight:bold">tolerations</span>:
+    - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+      <span style="color:#fff;font-weight:bold">operator</span>: Exists
+      <span style="color:#fff;font-weight:bold">effect</span>: NoSchedule
+    - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+      <span style="color:#fff;font-weight:bold">operator</span>: Exists
+      <span style="color:#fff;font-weight:bold">effect</span>: PreferNoSchedule
+<span style="color:#fff;font-weight:bold">rbac</span>:
+  <span style="color:#fff;font-weight:bold">clusterAdminRole</span>: <span style="color:#fff;font-weight:bold">true</span>
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install stable/kubernetes-dashboard <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>-n kubernetes-dashboard <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>--namespace kube-system  <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>-f kubernetes-dashboard.yaml</code></pre></div>
-<h2 id="4-4-使用helm部署metrics-server">4.4 使用Helm部署metrics-server</h2>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">args:
+</span><span style="color:#0ff;font-weight:bold"></span>-f kubernetes-dashboard.yaml
+</code></pre></div><h2 id="44-使用helm部署metrics-server">4.4 使用Helm部署metrics-server</h2>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#fff;font-weight:bold">args</span>:
 - --logtostderr
 - --kubelet-insecure-tls
 - --kubelet-preferred-address-types=InternalIP
-nodeSelector:
-    node-role.kubernetes.io/edge: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
-tolerations:
-    - key: node-role.kubernetes.io/master
-      operator: Exists
-      effect: NoSchedule
-    - key: node-role.kubernetes.io/master
-      operator: Exists
-      effect: PreferNoSchedule</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install stable/metrics-server <span style="color:#0ff;font-weight:bold">\
+<span style="color:#fff;font-weight:bold">nodeSelector</span>:
+    <span style="color:#fff;font-weight:bold">node-role.kubernetes.io/edge</span>: <span style="color:#0ff;font-weight:bold">&#39;&#39;</span>
+<span style="color:#fff;font-weight:bold">tolerations</span>:
+    - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+      <span style="color:#fff;font-weight:bold">operator</span>: Exists
+      <span style="color:#fff;font-weight:bold">effect</span>: NoSchedule
+    - <span style="color:#fff;font-weight:bold">key</span>: node-role.kubernetes.io/master
+      <span style="color:#fff;font-weight:bold">operator</span>: Exists
+      <span style="color:#fff;font-weight:bold">effect</span>: PreferNoSchedule
+</code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install stable/metrics-server <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>-n metrics-server <span style="color:#0ff;font-weight:bold">\
 </span><span style="color:#0ff;font-weight:bold"></span>--namespace kube-system <span style="color:#0ff;font-weight:bold">\
-</span><span style="color:#0ff;font-weight:bold"></span>-f metrics-server.yaml</code></pre></div>
-<p>使用下面的命令可以获取到关于集群节点基本的指标信息：</p>
+</span><span style="color:#0ff;font-weight:bold"></span>-f metrics-server.yaml
+</code></pre></div><p>使用下面的命令可以获取到关于集群节点基本的指标信息：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl top node
-kubectl top pod -n kube-system</code></pre></div>
-<p>使用到镜像:</p>
+kubectl top pod -n kube-system
+</code></pre></div><p>使用到镜像:</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#007f7f"># network and dns</span>
 quay.io/coreos/flannel:v0.11.0-amd64
 k8s.gcr.io/coredns:1.3.1
@@ -600,7 +583,8 @@ k8s.gcr.io/defaultbackend:1.5
 
 <span style="color:#007f7f"># dashboard and metric-sever</span>
 k8s.gcr.io/kubernetes-dashboard-amd64:v1.10.1
-gcr.io/google_containers/metrics-server-amd64:v0.3.2</code></pre></div>
+gcr.io/google_containers/metrics-server-amd64:v0.3.2
+</code></pre></div>
       </div>
 
       <footer>
@@ -671,14 +655,17 @@ code.has-jax {
     
       <p>It&#39;s not a bug, it&#39;s future</p>
     
-     © 2019
+     © 2020
+    
+              
+      Author <a href="https://github.com/kobeHub">Inno Jia</a>
+      <div> · </div>
+      ICP 备案: <a href="http://www.beian.miit.gov.cn">鲁ICP备18009756号</a>
+      
+    
     
        · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-       · 
-      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+      <a href="https://github.com/luizdepra/hugo-coder/tree/"></a>
     
   </section>
 </footer>
