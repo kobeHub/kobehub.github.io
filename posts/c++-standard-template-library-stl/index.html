@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="generator" content="Hugo 0.65.3" />
   </head>
 
   <body class=" ">
@@ -146,97 +146,80 @@
 
       <aside>
         <nav id="TableOfContents">
-<ul>
-<li><a href="#stl-容器简介">STL 容器简介</a></li>
-<li><a href="#1-vector">1. vector</a>
-<ul>
-<li><a href="#1-1-成员函数">1.1 成员函数</a></li>
-<li><a href="#1-2-兼容-c-数组">1.2 兼容 C 数组</a></li>
-</ul></li>
-<li><a href="#2-list">2. list</a>
-<ul>
-<li><a href="#2-1-成员函数">2.1 成员函数</a></li>
-</ul></li>
-<li><a href="#3-deque">3. deque</a>
-<ul>
-<li><a href="#3-1-成员函数">3.1 成员函数</a></li>
-<li><a href="#3-2-非成员函数">3.2 非成员函数</a></li>
-</ul></li>
-<li><a href="#4-arrays">4. arrays</a>
-<ul>
-<li><a href="#4-1-成员函数">4.1 成员函数</a></li>
-</ul></li>
-<li><a href="#5-forward-list">5. forward_list</a>
-<ul>
-<li><a href="#5-1-成员函数">5.1 成员函数</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#11-成员函数">1.1 成员函数</a></li>
+    <li><a href="#12-兼容-c-数组">1.2 兼容 C 数组</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-成员函数">2.1 成员函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-成员函数">3.1 成员函数</a></li>
+    <li><a href="#32-非成员函数">3.2 非成员函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41-成员函数">4.1 成员函数</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-成员函数">5.1 成员函数</a></li>
+  </ul>
 </nav>
       </aside>
       <div>
-        
-
-<h1 id="stl-容器简介">STL 容器简介</h1>
-
+        <h1 id="stl-容器简介">STL 容器简介</h1>
 <p>C++ STL容器中常用的容器类型可以分为四类:</p>
-
 <ul>
 <li>顺序性容器: 提供对于数据的序列化访问
-
 <ul>
 <li><a href="#1-vector">vector</a></li>
 <li><a href="#2-list">list</a></li>
 <li><a href="#3-deque">deque</a></li>
 <li><a href="#4-arrays">arrays</a></li>
 <li><a href="#5-forward_list">forward_list(c++11 引入)</a></li>
-</ul></li>
+</ul>
+</li>
 <li>容器适配器: 提供了对于序列化数据的另一种访问接口
-
 <ul>
 <li>queue</li>
 <li>priority_queue</li>
 <li>stack</li>
-</ul></li>
+</ul>
+</li>
 <li>关联容器: 实现了对于有序数据结构的快速访问(O(logn)) （红黑树）
-
 <ul>
 <li>set</li>
 <li>multiset</li>
 <li>map</li>
 <li>multimap</li>
-</ul></li>
+</ul>
+</li>
 <li>无序关联容器: 提供对于无序数据的快速访问（hash）(c++11 引入)
-
 <ul>
 <li>unordered_set</li>
 <li>unordered_multiset</li>
 <li>unordered_map</li>
 <li>unordered_multimap</li>
-</ul></li>
 </ul>
-
+</li>
+</ul>
 <h1 id="1-vector">1. vector</h1>
-
-<p>vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以<strong>插入时间可能不一致</strong>，删除末尾元素可以在O(1)时间内完成，不发生<code>resize</code>操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（*由于进行连续存储，所以插入以及删除较慢*）.</p>
-
+<p>vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以<strong>插入时间可能不一致</strong>，删除末尾元素可以在O(1)时间内完成，不发生<code>resize</code>操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（<em>由于进行连续存储，所以插入以及删除较慢</em>）.</p>
 <p>vector 上的常见操作复杂度（效率）如下：</p>
-
 <ul>
 <li>随机访问——常数 <em>O(1)</em></li>
 <li>在末尾插入或移除元素——均摊常数 <em>O(1)</em></li>
 <li>插入或移除元素——与到 vector 结尾的距离成线性 <em>O(n)</em></li>
 </ul>
-
 <p><strong>vector使用的空间大小可以通过<code>capacity()</code>进行查询; （c++ 11）额外的空间可以通过<code>shrink_to_fit()</code>函数返还给系统。</strong></p>
-
-<h2 id="1-1-成员函数">1.1 成员函数</h2>
-
+<h2 id="11-成员函数">1.1 成员函数</h2>
 <ul>
-<li><strong>构造函数</strong></li>
-</ul>
-
+<li>
+<p><strong>构造函数</strong></p>
 <p><strong><code>std::vector&lt;T, Allocator&gt;::vector</code></strong></p>
-
 <ol>
 <li><code>vector&lt;T&gt;()</code>: 默认构造函数，构造一个空容器。若不提供分配器，则从默认构造的实例获得分配器。📚</li>
 <li><code>vector&lt;T&gt;(size_type count, const T&amp; value)</code>: 构造具有<code>count</code>个值为<code>value</code>的动态数组 📚</li>
@@ -246,89 +229,94 @@
 <li><code>vector&lt;T&gt;(vector&amp;&amp; other)</code>: 移动构造函数，实现右值向左值类型的转移</li>
 <li><code>vector&lt;T&gt;(std::initializer_list&lt;T&gt; init)</code>:构造具有初始内容的容器 📚</li>
 </ol>
-
-<ul>
-<li><p><strong>元素访问</strong></p>
-
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <ol>
 <li><code>at()</code>: 访问指定元素，进行越界检查</li>
 <li><code>[]</code>: 指针式访问</li>
 <li><code>front()</code>:首个元素</li>
 <li><code>back()</code>: 最后一个元素</li>
 <li><code>data()</code>:返回指向内存数组第一个元素的指针</li>
-</ol></li>
-
-<li><p><strong>迭代器</strong>(所有迭代器的end都是指向NULL, 迭代器支持指针的+, -操作)</p>
-
+</ol>
+</li>
+<li>
+<p><strong>迭代器</strong>(所有迭代器的end都是指向NULL, 迭代器支持指针的+, -操作)</p>
 <ol>
 <li><code>begin()/cbegin()</code>:返回指向容器首个元素的迭代器</li>
 <li><code>end()/cend()</code>:指向最后一个元素的迭代器</li>
 <li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
 <li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
-</ol></li>
-
-<li><p><strong>容量</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
-<li><p><code>empty()</code>:为空时返回1；否则返回0</p></li>
-
-<li><p><code>size</code>：元素数量</p></li>
-
-<li><p><code>max_size</code>: 最多可容纳元素数量</p></li>
-
-<li><p><code>reserve(size_type new_cap)</code>:增加vector的容量，直到大于或等于<code>new_cap</code></p></li>
-
-<li><p><code>capacity()</code>:容器容量</p></li>
-
-<li><p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p></li>
-</ol></li>
-
-<li><p><strong>修改器</strong></p>
-
+<li>
+<p><code>empty()</code>:为空时返回1；否则返回0</p>
+</li>
+<li>
+<p><code>size</code>：元素数量</p>
+</li>
+<li>
+<p><code>max_size</code>: 最多可容纳元素数量</p>
+</li>
+<li>
+<p><code>reserve(size_type new_cap)</code>:增加vector的容量，直到大于或等于<code>new_cap</code></p>
+</li>
+<li>
+<p><code>capacity()</code>:容器容量</p>
+</li>
+<li>
+<p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>修改器</strong></p>
 <ol>
-<li><p><code>clear()</code>: 清除内容，不释放空间</p></li>
-
-<li><blockquote>
+<li>
+<p><code>clear()</code>: 清除内容，不释放空间</p>
+</li>
+<li>
+<blockquote>
 <p><code>insert(iterator pos, const T&amp; value)</code>: 在位置pos前插入value</p>
-
 <p><code>insert(iterator pos, size_type count, const T&amp; value)</code>: 在迭代器位置pos前插入<code>count</code>个<code>value</code>.</p>
-
 <p><code>insert(iterator pos, InputIt first, InputIt last)</code>: 在位置pos插入一个序列</p>
-</blockquote></li>
-
-<li><p><code>erase</code>: 删除指定位置或者范围的元素，位置以及范围由迭代器指定。</p></li>
-
-<li><p><code>push_back</code>:元素插入末尾</p></li>
-
-<li><p><code>pop_back</code>: 末尾删除</p></li>
-
-<li><p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p></li>
-
-<li><p><code>swap</code>: 交换两个vector</p></li>
-</ol></li>
+</blockquote>
+</li>
+<li>
+<p><code>erase</code>: 删除指定位置或者范围的元素，位置以及范围由迭代器指定。</p>
+</li>
+<li>
+<p><code>push_back</code>:元素插入末尾</p>
+</li>
+<li>
+<p><code>pop_back</code>: 末尾删除</p>
+</li>
+<li>
+<p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p>
+</li>
+<li>
+<p><code>swap</code>: 交换两个vector</p>
+</li>
+</ol>
+</li>
 </ul>
-
-<h2 id="1-2-兼容-c-数组">1.2 兼容 C 数组</h2>
-
+<h2 id="12-兼容-c-数组">1.2 兼容 C 数组</h2>
 <p>C++很重要的一个特性就是兼容C语言，C的接口中，如果需要传入一个数组，通常的方式s是传入一个起始地址加上一个长度，如下：</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">void</span>* memset( <span style="color:#fff;font-weight:bold">void</span>* dest, <span style="color:#fff;font-weight:bold">int</span> ch, std::size_t count );
-</code></pre></div>
-<p>如果你现在有一个<code>std::vector</code>，现在需要把它传递给C，接口你可以调用<code>std::vector::data</code>这个成员变量获取底层的内存空间的首地址。<code>std::vector</code>和其他的容器一个非常重要的区别就是它保证了底层的内存空间的连续性，也就是说，它保证了内存空间和C数组的兼容性，能用C数组的地方都可以使用<code>std::vector</code>，而且它还能保证内存空间的自动管理。</p>
-
+</code></pre></div><p>如果你现在有一个<code>std::vector</code>，现在需要把它传递给C，接口你可以调用<code>std::vector::data</code>这个成员变量获取底层的内存空间的首地址。<code>std::vector</code>和其他的容器一个非常重要的区别就是它保证了底层的内存空间的连续性，也就是说，它保证了内存空间和C数组的兼容性，能用C数组的地方都可以使用<code>std::vector</code>，而且它还能保证内存空间的自动管理。</p>
 <h1 id="2-list">2. list</h1>
-
 <p>list是一个提供非连续存储的序列化容器，底层依赖于链表进行实现，相对于vector，对于元素的随机访问较慢，但是具有较快的插入删除速度。默认的list是一个双向链表，对于单向链表，对应于forward_list.<strong>与forward_list相比，提供双向迭代，但是空间效率较低。</strong></p>
-
 <ul>
 <li>随机访问&ndash;O（n）</li>
 <li>插入删除&ndash;O(1)</li>
 </ul>
-
-<h2 id="2-1-成员函数">2.1 成员函数</h2>
-
+<h2 id="21-成员函数">2.1 成员函数</h2>
 <ul>
-<li><p><strong>构造函数</strong></p>
-
+<li>
+<p><strong>构造函数</strong></p>
 <ol>
 <li><code>list()</code>: 默认构造器，返回一个空的List容器</li>
 <li><code>list(size_type count, const T&amp; value)</code>: 构造具有<code>count</code>值为<code>value</code>的list</li>
@@ -337,114 +325,112 @@
 <li><code>list(const list&amp; other)</code>: 复制构造器</li>
 <li><code>list(list&amp;&amp; other)</code>: move 语义构造器</li>
 <li><code>list(initializer_list&lt;T&gt; init)</code>:赋予初始值的list</li>
-</ol></li>
-</ul>
-
+</ol>
 <p><strong>构造函数的时间复杂度为O(n), 与初始值列表的长度成线性关系</strong></p>
-
-<ul>
-<li><p><strong>元素访问</strong></p>
-
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <ol>
 <li><code>front()</code>: 返回到容器首元素的引用</li>
 <li><code>back()</code>:返回容器最后一个元素的引用</li>
-</ol></li>
-
-<li><p><strong>迭代器</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>迭代器</strong></p>
 <ol>
 <li><code>begin()/cbegin()</code>:返回指向容器第一个元素的迭代器；若容器为空则返回值等同于<code>end()</code></li>
 <li>end()/cend()`:指向最后一个元素的迭代器</li>
 <li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
 <li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
-</ol></li>
-
-<li><p><strong>容量</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
 <li><code>empty()</code>:为空时返回1；否则返回0</li>
 <li><code>size</code>：元素数量</li>
 <li><code>max_size</code>: 最多可容纳元素数量</li>
-</ol></li>
-
-<li><p><strong>修改器</strong>:</p>
-
-<ol>
-<li><p><code>clear()</code>:清除内容，但是不释放空间</p></li>
-
-<li><p><code>insert()</code>:一共4个重载版本：</p></li>
 </ol>
-
+</li>
+<li>
+<p><strong>修改器</strong>:</p>
+<ol>
+<li>
+<p><code>clear()</code>:清除内容，但是不释放空间</p>
+</li>
+<li>
+<p><code>insert()</code>:一共4个重载版本：</p>
 <blockquote>
 <p><code>insert(iterator pos, const T&amp; value)</code>:在pos前插入value</p>
-
 <p><code>insert(iterator pos, size_type count, const T&amp; value)</code>:在pos前插入count个value</p>
-
 <p><code>insert(iterator pos, InputIt first, InputIt last)</code>:在pos前插入范围在<code>[first, last)</code>内的元素</p>
-
 <p><code>insert(iterator pos, initializer_list&lt;T&gt; ilist)</code>:在pos前插入多个值</p>
 </blockquote>
-
-<ol>
-<li><p><code>erase(iterator pos, [iterator last])</code>：删除指定位置的元素，可以多个或者单个。<strong>注意：由于list不是连续存储，所以不可以对于迭代器使用类似指针的+n, -n, 可以使用<code>std::advance(InputIt&amp; it, Distance n)</code>进行指针的移动，距离可正可负。但是list的迭代器可以使用++, &ndash;.</strong></p></li>
-
-<li><p><code>push_back(const T&amp; value)</code>: 在list末尾插入元素</p></li>
-
-<li><p><code>pop_back</code>: 末尾删除</p></li>
-
-<li><p><code>pop_front()</code>:移除头部元素</p></li>
-
-<li><p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p></li>
-
-<li><p><code>swap</code>:交换两个list</p></li>
-</ol></li>
-
-<li><p><strong>操作</strong></p>
-
-<ol>
-<li><p><code>merge</code>:合并两个已排序的list。<code>merge(list&amp; other, Compare comp)</code></p></li>
-
-<li><p><code>sort</code>:对于元素进行稳定排序,O(NlogN), <code>sort(Compare comp)</code>,<strong>注意:std::sort不可以用于list，因为其要求元素可以随机访问</strong></p></li>
-
-<li><p><code>unique()</code>:从容器中移除所有相邻的重复元素，只留下第一个，返回移除的元素数。</p></li>
-
-<li><p><code>reverse()</code>:将列表倒序，时间复杂度O(n)</p></li>
-
-<li><p><code>splice</code>:从一个list中转移元素到另一个，不复制或者移动元素，只是简单的指针改变。</p></li>
+</li>
+<li>
+<p><code>erase(iterator pos, [iterator last])</code>：删除指定位置的元素，可以多个或者单个。<strong>注意：由于list不是连续存储，所以不可以对于迭代器使用类似指针的+n, -n, 可以使用<code>std::advance(InputIt&amp; it, Distance n)</code>进行指针的移动，距离可正可负。但是list的迭代器可以使用++, &ndash;.</strong></p>
+</li>
+<li>
+<p><code>push_back(const T&amp; value)</code>: 在list末尾插入元素</p>
+</li>
+<li>
+<p><code>pop_back</code>: 末尾删除</p>
+</li>
+<li>
+<p><code>pop_front()</code>:移除头部元素</p>
+</li>
+<li>
+<p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p>
+</li>
+<li>
+<p><code>swap</code>:交换两个list</p>
+</li>
 </ol>
-
+</li>
+<li>
+<p><strong>操作</strong></p>
+<ol>
+<li>
+<p><code>merge</code>:合并两个已排序的list。<code>merge(list&amp; other, Compare comp)</code></p>
+</li>
+<li>
+<p><code>sort</code>:对于元素进行稳定排序,O(NlogN), <code>sort(Compare comp)</code>,<strong>注意:std::sort不可以用于list，因为其要求元素可以随机访问</strong></p>
+</li>
+<li>
+<p><code>unique()</code>:从容器中移除所有相邻的重复元素，只留下第一个，返回移除的元素数。</p>
+</li>
+<li>
+<p><code>reverse()</code>:将列表倒序，时间复杂度O(n)</p>
+</li>
+<li>
+<p><code>splice</code>:从一个list中转移元素到另一个，不复制或者移动元素，只是简单的指针改变。</p>
 <blockquote>
 <p><code>splice(const_iterator pos, list&amp; other)</code>: 在pos前将other移入list</p>
-
 <p><code>splice(const_iterator pos, list&amp; other, const_iterator it)</code>:从 <code>other</code> 转移 <code>it</code> 所指向的元素到 *this 。元素被插入到 <code>pos</code> 所指向的元素之前。</p>
-
 <p><code>splice(const_iterator pos, list&amp; other, const_iterator first, const_iterator last)</code>:</p>
-
 <p>从 <code>other</code> 转移范围 <code>[first, last)</code> 中的元素到 *this 。元素被插入到 <code>pos</code> 所指向的元素之前。若 <code>pos</code> 是范围 <code>[first,last)</code> 中的迭代器则行为未定义。</p>
 </blockquote>
-
-<ol>
-<li><p><code>remove/ remove_if()</code>:移除某一个值，或者移除所有满足条件的值</p></li>
-
-<li><p><code>emplace(const_iterator pos, Args&amp;&amp;... args)</code>:直接于pos前构造一个元素，使用传入的参数。使用new关键字；对应于双向链表，还有<code>emplace_front</code>, <code>emplace_back</code>.</p></li>
-</ol></li>
+</li>
+<li>
+<p><code>remove/ remove_if()</code>:移除某一个值，或者移除所有满足条件的值</p>
+</li>
+<li>
+<p><code>emplace(const_iterator pos, Args&amp;&amp;... args)</code>:直接于pos前构造一个元素，使用传入的参数。使用new关键字；对应于双向链表，还有<code>emplace_front</code>, <code>emplace_back</code>.</p>
+</li>
+</ol>
+</li>
 </ul>
-
 <h1 id="3-deque">3. deque</h1>
-
 <p>Deque是一个双向队列，可以同时在队列头部以及尾部进行高效的读写，基本API与vector相似，但是添加了在头部的高速的<code>pop_front</code>,<code>push_front</code>.但是数据不一定存储在连续的空间，所以随机读入速度较慢。另外，在 deque 任一端插入或删除不会非法化指向其余元素的指针或引用。deque 的存储按需自动扩展及收缩。扩张 deque 比扩展 <a href="https://zh.cppreference.com/w/cpp/container/vector">std::vector</a> 更加方便，因为它不涉及到复制既存元素到新内存位置。另一方面， deque 典型地拥有较大的最小内存开销；只保有一个元素的 deque 必须分配其整个内部数组（例如 64 位 libstdc++ 上为对象大小 8 倍； 64 位 libc++ 上为对象大小 16 倍或 4096 字节的较大者）。</p>
-
 <ul>
 <li>随机访问&ndash;O（1）</li>
 <li>在头尾插入删除&ndash;O(1)</li>
 <li>插入或者移除&ndash;O(n)</li>
 </ul>
-
-<h2 id="3-1-成员函数">3.1 成员函数</h2>
-
+<h2 id="31-成员函数">3.1 成员函数</h2>
 <ul>
-<li><p><strong>构造函数</strong></p>
-
+<li>
+<p><strong>构造函数</strong></p>
 <ol>
 <li><code>deque(const Allocator&amp; alloc)</code>: 默认构造函数</li>
 <li><code>deque(size_type count, const T&amp; value)</code>:构造拥有<code>count</code>个值为<code>value</code>的deque</li>
@@ -453,187 +439,179 @@
 <li><code>deque(const deque&amp; other)</code>:复制构造函数</li>
 <li><code>deque(const deque&amp;&amp; other)</code>: move语义</li>
 <li><code>deque(std::initializer_list&lt;T&gt; init,)</code>:初始值的deque</li>
-</ol></li>
-
-<li><p><strong>元素访问</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <ol>
 <li><code>at()</code>: 访问指定元素，进行越界检查</li>
 <li><code>[]</code>: 指针式访问</li>
 <li><code>front()</code>:首个元素</li>
-</ol></li>
-
-<li><p><code>back()</code>: 最后一个元素</p></li>
-
-<li><p><strong>迭代器</strong>(所有迭代器的end都是指向NULL, 迭代器支持指针的+, -操作)</p>
-
+</ol>
+</li>
+</ul>
+<ol start="4">
+<li><code>back()</code>: 最后一个元素</li>
+</ol>
+<ul>
+<li>
+<p><strong>迭代器</strong>(所有迭代器的end都是指向NULL, 迭代器支持指针的+, -操作)</p>
 <ol>
 <li><code>begin()/cbegin()</code>:返回指向容器首个元素的迭代器</li>
 <li><code>end()/cend()</code>:指向最后一个元素的迭代器</li>
 <li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
 <li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
-</ol></li>
-
-<li><p><strong>容量</strong></p>
-
+</ol>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
-<li><p><code>empty()</code>:为空时返回1；否则返回0</p></li>
-
-<li><p><code>size</code>：元素数量</p></li>
-
-<li><p><code>max_size</code>: 最多可容纳元素数量</p></li>
-
-<li><p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p></li>
-</ol></li>
-
-<li><p><strong>修改器</strong></p>
-
+<li>
+<p><code>empty()</code>:为空时返回1；否则返回0</p>
+</li>
+<li>
+<p><code>size</code>：元素数量</p>
+</li>
+<li>
+<p><code>max_size</code>: 最多可容纳元素数量</p>
+</li>
+<li>
+<p><code>shrink_to_fit()</code>: 通过释放未使用的内存减少内存的使用</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>修改器</strong></p>
 <ol>
-<li><p><code>clear()</code>: 清除内容，不释放空间</p></li>
-
-<li><blockquote>
+<li>
+<p><code>clear()</code>: 清除内容，不释放空间</p>
+</li>
+<li>
+<blockquote>
 <p><code>insert(iterator pos, const T&amp; value)</code>: 在位置pos前插入value</p>
-
 <p><code>insert(iterator pos, size_type count, const T&amp; value)</code>: 在迭代器位置pos前插入<code>count</code>个<code>value</code>.</p>
-
 <p><code>insert(iterator pos, InputIt first, InputIt last)</code>: 在位置pos插入一个序列</p>
-</blockquote></li>
-</ol>
-
+</blockquote>
 <p><strong>注意：所有的insert的迭代器都被非法化，所以原有的迭代器对象指向原有元素，返回值指向新的第n个元素</strong></p>
-
-<ol>
-<li><p><code>erase</code>: 删除指定位置或者范围的元素，位置以及范围由迭代器指定。<strong>所有的迭代器都被非法化，所以原有的<code>it</code>指向第n个元素，删除后的<code>it</code>指向新的deque的第n个元素。</strong></p></li>
-
-<li><p><code>push_back</code>:元素插入末尾，支持引用形式的参数传入，以及<code>move</code>语义的插入</p></li>
-
-<li><p><code>pop_back</code>: 末尾删除</p></li>
-
-<li><p><code>pop_front()</code>:头部删除元素</p></li>
-
-<li><p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p></li>
-
-<li><p><code>swap</code>: 交换两个vector</p></li>
-
-<li><p><code>emplace（const_iterator pos, Args&amp;&amp;... args）</code>:直接位于位置<code>pos</code>前根据所提供的参数构造一个元素，返回一个指向该元素的迭代器，所有的迭代器包括尾部迭代器都被非法化，引用也被非法化。还有<code>emplace_front</code>,<code>emplace_back</code>在头部以及尾部构造元素</p></li>
-</ol></li>
+</li>
+<li>
+<p><code>erase</code>: 删除指定位置或者范围的元素，位置以及范围由迭代器指定。<strong>所有的迭代器都被非法化，所以原有的<code>it</code>指向第n个元素，删除后的<code>it</code>指向新的deque的第n个元素。</strong></p>
+</li>
+<li>
+<p><code>push_back</code>:元素插入末尾，支持引用形式的参数传入，以及<code>move</code>语义的插入</p>
+</li>
+<li>
+<p><code>pop_back</code>: 末尾删除</p>
+</li>
+<li>
+<p><code>pop_front()</code>:头部删除元素</p>
+</li>
+<li>
+<p><code>resize（size_type count, [const T&amp; value]）</code>: 改变容器的元素数量；两种重载形式；如果count 小于size,则取前count个元素；否则以value或者默认值填充</p>
+</li>
+<li>
+<p><code>swap</code>: 交换两个vector</p>
+</li>
+<li>
+<p><code>emplace（const_iterator pos, Args&amp;&amp;... args）</code>:直接位于位置<code>pos</code>前根据所提供的参数构造一个元素，返回一个指向该元素的迭代器，所有的迭代器包括尾部迭代器都被非法化，引用也被非法化。还有<code>emplace_front</code>,<code>emplace_back</code>在头部以及尾部构造元素</p>
+</li>
+</ol>
+</li>
 </ul>
-
-<h2 id="3-2-非成员函数">3.2 非成员函数</h2>
-
+<h2 id="32-非成员函数">3.2 非成员函数</h2>
 <ul>
-<li><p><strong>二元操作符</strong></p>
-
+<li>
+<p><strong>二元操作符</strong></p>
 <ol>
-<li><code>==</code>, <code>!=</code>:</li>
-</ol>
-
+<li>
+<p><code>==</code>, <code>!=</code>:</p>
 <p>检查 <code>lhs</code> 与 <code>rhs</code> 的内容是否相等，即它们是否拥有相同数量的元素且 <code>lhs</code> 中每个元素与 <code>rhs</code> 的同位置元素比较相等。</p>
-
-<ol>
-<li><code>&gt;, &lt;, &lt;=, &gt;=</code>:</li>
+</li>
+<li>
+<p><code>&gt;, &lt;, &lt;=, &gt;=</code>:</p>
+<p>按字典序比较两个deque中的数据,只要第一个元素满足于该操作符即可返回<code>true</code></p>
+</li>
 </ol>
-
-<p>按字典序比较两个deque中的数据,只要第一个元素满足于该操作符即可返回<code>true</code></p></li>
-
-<li><p><strong>erase, erase_if</strong>: c++ 20 特性</p></li>
-</ul>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  <span style="color:#fff;font-weight:bold">template</span>&lt;<span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T, <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Alloc, <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>U&gt;
-  <span style="color:#fff;font-weight:bold">void</span> erase(std::deque&lt;T, Alloc&gt;&amp; c, <span style="color:#fff;font-weight:bold">const</span> U&amp; value)
+</li>
+<li>
+<p><strong>erase, erase_if</strong>: c++ 20 特性</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt;<span style="color:#fff;font-weight:bold">class</span> T, <span style="color:#fff;font-weight:bold">class</span> Alloc, <span style="color:#fff;font-weight:bold">class</span> U&gt;
+<span style="color:#fff;font-weight:bold">void</span> erase(std::deque&lt;T, Alloc&gt;&amp; c, <span style="color:#fff;font-weight:bold">const</span> U&amp; value)
       
-  <span style="color:#fff;font-weight:bold">template</span>&lt; <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T, <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Alloc, <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>Pred &gt;
-  <span style="color:#fff;font-weight:bold">void</span> erase_if(std::deque&lt;T,Alloc&gt;&amp; c, Pred pred);
-</code></pre></div>
-<p>在此之前可以使用<code>std::remove (&lt;algorithm&gt;)</code>结合<code>erase</code>成员函数实现</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  c.erase(std::remove(c.begin(), c.end(), value), c.end());
-  c.erase(std::remove_if(c.begin(), c.end(), pred), c.end());
-</code></pre></div>
+<span style="color:#fff;font-weight:bold">template</span>&lt; <span style="color:#fff;font-weight:bold">class</span> T, <span style="color:#fff;font-weight:bold">class</span> Alloc, <span style="color:#fff;font-weight:bold">class</span> Pred &gt;
+<span style="color:#fff;font-weight:bold">void</span> erase_if(std::deque&lt;T,Alloc&gt;&amp; c, Pred pred);
+</code></pre></div><p>在此之前可以使用<code>std::remove (&lt;algorithm&gt;)</code>结合<code>erase</code>成员函数实现</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">c.erase(std::remove(c.begin(), c.end(), value), c.end());
+c.erase(std::remove_if(c.begin(), c.end(), pred), c.end());
+</code></pre></div></li>
+</ul>
 <h1 id="4-arrays">4. arrays</h1>
-
 <p>c++11中引入的<code>arrays</code>提供了c形式的数组的另一种选择，与c形式的数组相比，arrays有以下优点:</p>
-
 <ul>
 <li>arrays具有size属性，c数组没有该属性，所以将一个数组作为参数传递时，不需要添加一个size的额外参数</li>
 <li>使用c风格的数组有更大的可能数组衰减为指针的形式，但是使用array没有该风险</li>
 <li><code>array</code>类相对于c风格数组更加轻量高效，可靠性强</li>
 </ul>
-
-<p>封装固定大小的容器，此容器是一个聚合类型，语义等同于保有一个c风格数组作为其唯一非静态数据成员结构体，<strong>不同于c数组，他不会自动退化为<code>T*</code>,</strong>该类型结合了c数组的性能与可访问性、容器的优点，可获取大小、支持赋值、随机访问迭代器等。</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  <span style="color:#fff;font-weight:bold">template</span>&lt; 
-      <span style="color:#fff;font-weight:bold">class</span><span style="color:#f00"> </span>T, 
-      std::size_t N 
-  &gt; <span style="color:#fff;font-weight:bold">struct</span> array;
-</code></pre></div>
-<h2 id="4-1-成员函数">4.1 成员函数</h2>
-
+<p>封装固定大小的容器，此容器是一个聚合类型，语义等同于保有一个c风格数组作为其唯一非静态数据成员结构体，**不同于c数组，他不会自动退化为<code>T*</code>,**该类型结合了c数组的性能与可访问性、容器的优点，可获取大小、支持赋值、随机访问迭代器等。</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#fff;font-weight:bold">template</span>&lt; 
+    <span style="color:#fff;font-weight:bold">class</span> T, 
+    std::size_t N 
+&gt; <span style="color:#fff;font-weight:bold">struct</span> array;
+</code></pre></div><h2 id="41-成员函数">4.1 成员函数</h2>
 <ul>
 <li><strong>构造函数</strong></li>
 </ul>
-
 <p>隐式声明，遵循聚合初始化的规则。聚合初始化是指使用一个花括号初始化器列表初始化聚合体。可以直接使用一下语法:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  T object = {arg1, arg2, ...};
-</code></pre></div>
-<p>c++11起可以使用:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  T object{arg1, arg2, arg3, ...};
-</code></pre></div>
-<p>c++20起可以使用:</p>
-<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">  T object = {.<span style="color:#f00">指派符</span>=arg1<span style="color:#f00">，</span>.<span style="color:#f00">指派符</span>{arg2}, ...}
-  T object { .<span style="color:#f00">指派符</span> = arg1 , .<span style="color:#f00">指派符</span> { arg2 } ... };	
-  T object (arg1, arg2, ...);
-</code></pre></div>
-<ul>
-<li><p><strong>元素访问</strong></p>
-
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">T object = {arg1, arg2, ...};
+</code></pre></div><p>c++11起可以使用:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">T object{arg1, arg2, arg3, ...};
+</code></pre></div><p>c++20起可以使用:</p>
+<div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++">T object = {.<span style="color:#f00">指派符</span>=arg1<span style="color:#f00">，</span>.<span style="color:#f00">指派符</span>{arg2}, ...}
+T object { .<span style="color:#f00">指派符</span> = arg1 , .<span style="color:#f00">指派符</span> { arg2 } ... };	
+T object (arg1, arg2, ...);
+</code></pre></div><ul>
+<li>
+<p><strong>元素访问</strong></p>
 <ol>
 <li><code>at()</code>:访问指定元素，同时进行越界检查.</li>
 <li><code>[]</code>：操作符进行c风格数组随机访问</li>
 <li><code>template&lt; size_t I, class T, size_t N &gt; constexpr T&amp; get( array&lt;T,N&gt;&amp; a ) noexcept;</code>:使用<code>get</code>函数获取元素</li>
 <li><code>front(), back()</code>:获取首尾元素</li>
-<li><code>data（）</code>:返回指向底层数组的指针
-<br /></li>
-</ol></li>
-
-<li><p><strong>迭代器</strong></p>
-
+<li><code>data（）</code>:返回指向底层数组的指针</li>
+</ol>
+</li>
+<li>
+<p><strong>迭代器</strong></p>
 <ol>
 <li>begin()/cbegin()`:返回指向容器首个元素的迭代器</li>
 <li><code>end()/cend()</code>:指向最后一个元素的迭代器</li>
 <li><code>rbegin()/crbegin()</code>:返回指向容器最后元素的逆向迭代器</li>
-<li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器
-<br /></li>
-</ol></li>
-
-<li><p><strong>容量</strong></p>
-
+<li><code>rend()/crend()</code>: 返回指向前端的逆向迭代器</li>
+</ol>
+</li>
+<li>
+<p><strong>容量</strong></p>
 <ol>
 <li><code>empty</code>:</li>
 <li><code>size</code>:</li>
-<li><code>max_size</code>
-<br /></li>
-</ol></li>
-
-<li><p><strong>操作</strong></p>
-
+<li><code>max_size</code></li>
+</ol>
+</li>
+<li>
+<p><strong>操作</strong></p>
 <ol>
 <li><code>void fill(const T&amp; value)</code>:以指定值填充数组，复杂度与容器的大小呈线性关系</li>
-<li><code>swap</code>：交换两个数组
-<br />
-<br />
-<br /></li>
-</ol></li>
+<li><code>swap</code>：交换两个数组</li>
+</ol>
+</li>
 </ul>
-
-<h1 id="5-forward-list">5. forward_list</h1>
-
+<h1 id="5-forward_list">5. forward_list</h1>
 <p>STL容器中的单向链表，c++11引入，单向链表可以方便的进行插入、删除、移动等操作，<code>forward_list</code>与<code>list</code>不同,不存储前一个元素的指针，所以节省了空间，但是不可以反向遍历。对于只需要进行单向遍历的场景应优先使用。</p>
-
 <p>支持从容器中的任何位置快速插入和移除元素的容器。不支持快速随机访问。它实现为单链表，且实质上与其在 C 中实现相比无任何开销。</p>
-
-<h2 id="5-1-成员函数">5.1 成员函数</h2>
-
+<h2 id="51-成员函数">5.1 成员函数</h2>
 <ul>
-<li><p><strong>构造函数</strong></p>
-
+<li>
+<p><strong>构造函数</strong></p>
 <ol>
 <li><code>forward_list()</code>: 默认构造器，返回一个空的List容器</li>
 <li><code>forward_list(size_type count, const T&amp; value)</code>: 构造具有<code>count</code>值为<code>value</code>的list</li>
@@ -641,37 +619,33 @@
 <li><code>forward_list(InputIt first, InputIt last)</code>: 构造迭代器范围<code>[first, last)</code>的list</li>
 <li><code>forward_list(const list&amp; other)</code>: 复制构造器</li>
 <li><code>forward_list(list&amp;&amp; other)</code>: move 语义构造器</li>
-<li><code>forward_list(initializer_list&lt;T&gt; init)</code>:赋予初始值的list<br /></li>
-</ol></li>
-
-<li><p><strong>元素访问</strong></p></li>
-</ul>
-
+<li><code>forward_list(initializer_list&lt;T&gt; init)</code>:赋予初始值的list</li>
+</ol>
+</li>
+<li>
+<p><strong>元素访问</strong></p>
 <p>由于单向链表的实现，所以仅提供对于第一个元素的直接访问<code>front</code></p>
-
-<ul>
-<li><p><strong>迭代器</strong></p>
-
+</li>
+<li>
+<p><strong>迭代器</strong></p>
 <ol>
 <li><code>before_begin/cbefore_begin()</code>:返回第一个元素前的迭代器对象</li>
 <li><code>begin/cbegin()</code>：返回第一个元素的迭代器</li>
 <li><code>end/cend()</code>：返回最后一个迭代器</li>
-</ol></li>
-
-<li><p><strong>容量</strong></p></li>
-</ul>
-
-<p>注意单向链表没有size操作，list可以使用，只有<code>empty()</code>, <code>max_size()</code></p>
-
-<ul>
-<li><p><strong>修改器</strong></p>
-
-<ol>
-<li><p><code>clear()</code>:清除所有内容</p></li>
-
-<li><p><code>insert_after</code>:在一个位置后插入元素，支持的重载包括:</p></li>
 </ol>
-
+</li>
+<li>
+<p><strong>容量</strong></p>
+<p>注意单向链表没有size操作，list可以使用，只有<code>empty()</code>, <code>max_size()</code></p>
+</li>
+<li>
+<p><strong>修改器</strong></p>
+<ol>
+<li>
+<p><code>clear()</code>:清除所有内容</p>
+</li>
+<li>
+<p><code>insert_after</code>:在一个位置后插入元素，支持的重载包括:</p>
 <blockquote>
 <table>
 <thead>
@@ -681,57 +655,59 @@
 <th>(C++11 起)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>iterator insert_after( const_iterator pos, T&amp;&amp; value );</td>
 <td>(2)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>iterator insert_after( const_iterator pos, size_type count, const T&amp; value );</td>
 <td>(3)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>template&lt; class InputIt &gt; iterator insert_after( const_iterator pos, InputIt first, InputIt last );</td>
 <td>(4)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
-<td>iterator insert_after( const_iterator pos, <a href="http://zh.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a><T> ilist );</td>
+<td>iterator insert_after( const_iterator pos, <a href="http://zh.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a><!-- raw HTML omitted --> ilist );</td>
 <td>(5)</td>
 <td>(C++11 起</td>
 </tr>
 </tbody>
 </table>
 </blockquote>
-
-<ol>
-<li><p><code>emplace_after()</code>:在一个位置后构造一个元素</p></li>
-
-<li><p><code>erase_after()</code>:删除位置pos后的元素，或者是<strong>(first, last)</strong>范围内的元素</p></li>
-
-<li><p><code>push_front</code>:将元素插入到容器起始位置</p></li>
-
-<li><p><code>pop_front()</code>:删除第一个元素</p></li>
-
-<li><p><code>emplace_front</code>:在第一个位置构造元素</p></li>
-
-<li><p><code>resize(size_type count, [const value_type&amp; value])</code>:重置容器的元素数量，可以赋予初值</p></li>
-
-<li><p><code>swap</code></p></li>
-</ol></li>
-
-<li><p><strong>操作</strong></p>
-
-<ol>
-<li><code>merge</code>:合并两个已排序的链表</li>
+</li>
+<li>
+<p><code>emplace_after()</code>:在一个位置后构造一个元素</p>
+</li>
+<li>
+<p><code>erase_after()</code>:删除位置pos后的元素，或者是**(first, last)**范围内的元素</p>
+</li>
+<li>
+<p><code>push_front</code>:将元素插入到容器起始位置</p>
+</li>
+<li>
+<p><code>pop_front()</code>:删除第一个元素</p>
+</li>
+<li>
+<p><code>emplace_front</code>:在第一个位置构造元素</p>
+</li>
+<li>
+<p><code>resize(size_type count, [const value_type&amp; value])</code>:重置容器的元素数量，可以赋予初值</p>
+</li>
+<li>
+<p><code>swap</code></p>
+</li>
 </ol>
-
+</li>
+<li>
+<p><strong>操作</strong></p>
+<ol>
+<li>
+<p><code>merge</code>:合并两个已排序的链表</p>
 <blockquote>
 <table>
 <thead>
@@ -741,40 +717,27 @@
 <th>(C++11 起)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>void merge( forward_list&amp;&amp; other );</td>
 <td>(1)</td>
 <td>(C++11 起)</td>
 </tr>
-
-<tr>
-<td>template <class Compare>  void merge( forward_list&amp; other, Compare comp );</td>
-<td>(2)</td>
-<td>(C++11 起)</td>
-</tr>
-
-<tr>
-<td>template <class Compare>  void merge( forward_list&amp;&amp; other, Compare comp );</td>
-<td>(2)</td>
-<td>(C++11 起)</td>
-</tr>
 </tbody>
 </table>
 </blockquote>
-
-<p>归并二个已排序链表为一个。链表应以升序排序。</p>
-
-<p>不复制元素。操作后容器 <code>other</code> 变为空。若 <code>other</code> 与 *this 指代同一对象则函数不做任何事。若 get_allocator() != other.get_allocator() ，则行为未定义。没有引用和迭代器变得非法，除了被移动元素的迭代器现在指代到 *this 中，而非到 <code>other</code> 中，第一版本用 operator&lt; 比较元素，第二版本用给定的比较函数 <code>comp</code> 。</p>
-
-<p>此操作是稳定的：对于二个链表中的等价元素，来自 <code>*this</code> 的元素始终前驱来自 <code>other</code> 的元素，而且 <code>*this</code> 和 <code>other</code> 的等价元素顺序不更改。</p>
-
-<ol>
-<li><code>splice_after</code>:将另一个<code>forward_list</code>的元素移入当前的单链表
-<br /></li>
+</li>
 </ol>
-
+<blockquote>
+<p>| template <!-- raw HTML omitted -->  void merge( forward_list&amp; other, Compare comp ); | (2)  | (C++11 起) |
+| template <!-- raw HTML omitted -->  void merge( forward_list&amp;&amp; other, Compare comp ); | (2)  | (C++11 起) |</p>
+</blockquote>
+<p>归并二个已排序链表为一个。链表应以升序排序。</p>
+<p>不复制元素。操作后容器 <code>other</code> 变为空。若 <code>other</code> 与 *this 指代同一对象则函数不做任何事。若 get_allocator() != other.get_allocator() ，则行为未定义。没有引用和迭代器变得非法，除了被移动元素的迭代器现在指代到 *this 中，而非到 <code>other</code> 中，第一版本用 operator&lt; 比较元素，第二版本用给定的比较函数 <code>comp</code> 。</p>
+<p>此操作是稳定的：对于二个链表中的等价元素，来自 <code>*this</code> 的元素始终前驱来自 <code>other</code> 的元素，而且 <code>*this</code> 和 <code>other</code> 的等价元素顺序不更改。</p>
+<ol start="2">
+<li>
+<p><code>splice_after</code>:将另一个<code>forward_list</code>的元素移入当前的单链表</p>
 <blockquote>
 <table>
 <thead>
@@ -784,32 +747,27 @@
 <th>(C++11 起)</th>
 </tr>
 </thead>
-
 <tbody>
 <tr>
 <td>void splice_after( const_iterator pos, forward_list&amp;&amp; other );</td>
 <td>(1)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>void splice_after( const_iterator pos, forward_list&amp; other,                     const_iterator it );</td>
 <td>(2)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>void splice_after( const_iterator pos, forward_list&amp;&amp; other,                    const_iterator it );</td>
 <td>(2)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>void splice_after( const_iterator pos, forward_list&amp; other,                     const_iterator first, const_iterator last );</td>
 <td>(3)</td>
 <td>(C++11 起)</td>
 </tr>
-
 <tr>
 <td>void splice_after( const_iterator pos, forward_list&amp;&amp; other,                     const_iterator first, const_iterator last );</td>
 <td>(3)</td>
@@ -818,14 +776,18 @@
 </tbody>
 </table>
 </blockquote>
-
-<ol>
-<li><p><code>remove/remove_if</code>:删除满足条件的所有元素。</p></li>
-
-<li><p><code>reverse</code>:将链表反转</p></li>
-
-<li><p><code>sort（[Compare comp]）</code>:排序, O(NlogN)的时间复杂度</p></li>
-</ol></li>
+</li>
+<li>
+<p><code>remove/remove_if</code>:删除满足条件的所有元素。</p>
+</li>
+<li>
+<p><code>reverse</code>:将链表反转</p>
+</li>
+<li>
+<p><code>sort（[Compare comp]）</code>:排序, O(NlogN)的时间复杂度</p>
+</li>
+</ol>
+</li>
 </ul>
 
       </div>
@@ -898,14 +860,17 @@ code.has-jax {
     
       <p>It&#39;s not a bug, it&#39;s future</p>
     
-     © 2019
+     © 2020
+    
+              
+      Author <a href="https://github.com/kobeHub">Inno Jia</a>
+      <div> · </div>
+      ICP 备案: <a href="http://www.beian.miit.gov.cn">鲁ICP备18009756号</a>
+      
+    
     
        · 
-      Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-    
-    
-       · 
-      [<a href="https://github.com/luizdepra/hugo-coder/tree/"></a>]
+      <a href="https://github.com/luizdepra/hugo-coder/tree/"></a>
     
   </section>
 </footer>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tutorial on Inno Jia</title>
@@ -21,11 +21,12 @@
 apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
 首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装
 git clone https://github.com/gohugoio/hugo.git cd hugo go install 2. 建立的站点 在工作目录下，建立一个新的站点
-hugo new site Hugo-site cd Hugo-site git init  该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
-git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml  然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
+hugo new site Hugo-site cd Hugo-site git init 该名称可以任意更换，然后添加新的主题。初始化git仓库后添加主题。可以采用hugo-coder 主题做为新的站点主题。
+git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder cp themes/hugo-coder/exampleSite/config.toml config.toml 然后将样例站点的配置文件cp到主文件夹下，同时将themes/hugo-coder 文件夹下的static, layouts 文件夹复制到主目录下，进行内容的更换。
 3. 编辑新的文章 hugo new posts/title.md
 hugo使用markdown进行文章书写，可以使用该命令建立一篇新的文章，新的文件出现在content/posts/ 文件夹下。注意需要将文件头的draft 改为false,才可以正式发布。
-4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。</description>
+4.测试站点 hugo server -D 在浏览器访问[http://localhost:1313]就可以查看网站内容。
+搭建到GitHub 1. 搭建脚本 首先写一个自动构建网站的脚本，每次有新的内容或者网站布局有所改变都可以使用该脚本推送到远程服务器。</description>
     </item>
     
   </channel>
