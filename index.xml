@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Inno Jia</title>
-    <link>https://kobehub.github.io/</link>
+    <link>https://innohub.top/</link>
     <description>Recent content on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 08 Jan 2019 20:24:57 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用 kubeadm 配置 Kubernetes 1.15集群 （基于Ubuntu 16.04）</title>
-      <link>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</link>
+      <link>https://innohub.top/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</link>
       <pubDate>Fri, 26 Jul 2019 10:36:43 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</guid>
+      <guid>https://innohub.top/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</guid>
       <description>Kubernetes 是用于自动部署、扩展和管理容器化应用的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理以及服务，其抽象性允许将容器化应用部署到集群，而不必专门绑定到一个计算机。同时可以提供24/7的全天候使用能力，支持不停机的发布以及更新。Kubernetes 用于协调高度可用的计算机集群，这些计算机群集被连接作为单个单元工作。对于一个Kubernetes集群而言具有两种类型的资源：
  Master: 集群的调度节点 Nodes：应用程序实际运行的工作节点  kubeadm是Kubernetes官方提供的用于快速安装Kubernetes集群的工具, 可以通过该工具快速部署一个集群。本次部署使用虚拟机，基于Ubuntu 16.04进行。
 1. 准备  首先确定三台虚拟机的IP，修改每一台的/etc/hosts文件:  192.168.118.128 node1 192.168.118.129 master 192.168.118.130 node2 除此之外，每一台虚拟机(或者物理机)必须满足至少双CPU， 内存大于2G, 拥有root权限
@@ -28,10 +28,10 @@ cat &amp;gt; ipvsset.sh &amp;lt;&amp;lt;EOF #!/bin/bash modprobe -- ip_vs modpro
     
     <item>
       <title>Python type 以及 object详解</title>
-      <link>https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://innohub.top/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Sat, 06 Jul 2019 15:50:20 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://innohub.top/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</guid>
       <description>基础概念 1. 什么是object? 在python中，遵守着“一切皆对象”的箴言。所有的类型、实例、类均为对象。这是在本文开始前需要明确的。那么在python中，对象的定义到底是什么呢？所有表示实体的概念都可以视为一个对象，一般具有以下特征:
  标识符（Identity）： 用于唯一标示一个对象的标志 值(value): 对象所存储的值，可能包含很多属性（可以使用object.attr对于属性进行操作） 类型(type): 每个对象有且仅有一个类型 基类（bases）： 可以有一个或者多个基类，类似于面向对象语言的父类或者超类，支持多继承。并不是所有的对象都有基类。  如果对于python对象的内存分布更感兴趣，其实可以通过理解**元数据（meta）**抽象，加深理解。所有的对象在内存中都有一个特定的地址，可以通过id()函数获取其地址。
 类型以及基类对于object至关重要，因为他们确定了对象的具体行为，以及与其他对象的关系。同时需要牢记的是所有的类型以及基类都是object！
@@ -41,10 +41,10 @@ cat &amp;gt; ipvsset.sh &amp;lt;&amp;lt;EOF #!/bin/bash modprobe -- ip_vs modpro
     
     <item>
       <title>C&#43;&#43; Standard Template Library (STL)(part 2)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</link>
+      <link>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stlpart-2/</link>
       <pubDate>Wed, 03 Jul 2019 16:01:36 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</guid>
+      <guid>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stlpart-2/</guid>
       <description>STL 容器适配器 c++ STL提供了对于顺序容器的不同的访问接口：
  queue priority_queue stack  1. queue queue是一个典型的容器适配器对象，提供（FIFO）的用户接口，所有的元素都是在尾部插入，在头部删除。容器必须满足顺序容器的要求，必须提供以下接口:
 back, front,pop_front, push_back.标准库中的std::list, std::deque满足该要求。注意容器适配器不支持遍历以及随机访问。
@@ -59,10 +59,10 @@ template&amp;lt; class T, class Container = std::vector&amp;lt;T&amp;gt;, class 
     
     <item>
       <title>C&#43;&#43; Standard Template Library (STL)(part 1)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</link>
+      <link>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stl/</link>
       <pubDate>Wed, 12 Jun 2019 00:00:00 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</guid>
+      <guid>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stl/</guid>
       <description>STL 容器简介 C++ STL容器中常用的容器类型可以分为四类:
  顺序性容器: 提供对于数据的序列化访问  vector list deque arrays forward_list(c++11 引入)   容器适配器: 提供了对于序列化数据的另一种访问接口  queue priority_queue stack   关联容器: 实现了对于有序数据结构的快速访问(O(logn)) （红黑树）  set multiset map multimap   无序关联容器: 提供对于无序数据的快速访问（hash）(c++11 引入)  unordered_set unordered_multiset unordered_map unordered_multimap    1. vector vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以插入时间可能不一致，删除末尾元素可以在O(1)时间内完成，不发生resize操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（由于进行连续存储，所以插入以及删除较慢）.
 vector 上的常见操作复杂度（效率）如下：
@@ -73,10 +73,10 @@ std::vector&amp;lt;T, Allocator&amp;gt;::vector</description>
     
     <item>
       <title>[Review] Image Preprocess</title>
-      <link>https://kobehub.github.io/posts/image-preprocess/</link>
+      <link>https://innohub.top/posts/image-preprocess/</link>
       <pubDate>Fri, 17 May 2019 22:39:33 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/image-preprocess/</guid>
+      <guid>https://innohub.top/posts/image-preprocess/</guid>
       <description>图像预处理 1. 基本的图像处理  在空间坐标删的处理  几何变换   像素处理  代数处理（对于每一个像素点的操作）    2. 代数操作 不改变图像的几何性质，对于图像的灰度级进行加减乘除等算术运算，逐像素的操作。
 2.1 生成图像叠加效果（Alpha Blending）   对于两个图像的合成可以使用加法进行叠加操作： $$ g(x, y) = \alphaf(x, y) + \betaf(x, y) \
 \alpha + \beta = 1 $$ 也可以用于任何两张图像的衔接。
@@ -87,10 +87,10 @@ std::vector&amp;lt;T, Allocator&amp;gt;::vector</description>
     
     <item>
       <title>[Review] Introduction to Coomputer Vision</title>
-      <link>https://kobehub.github.io/posts/introduction-to-computer-vision/</link>
+      <link>https://innohub.top/posts/introduction-to-computer-vision/</link>
       <pubDate>Sun, 12 May 2019 20:13:35 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/introduction-to-computer-vision/</guid>
+      <guid>https://innohub.top/posts/introduction-to-computer-vision/</guid>
       <description>计算机视觉绪论 1. 概述 1.1 视觉可以分为：  视感觉：从分子层次和观点理解人类对于光反应的基本性质  光的物理特性 刺激视觉感受器官的程度 光作用于视网膜后经视觉系统加工产生的感觉   视知觉：最终目的从狭义上说是要能对于客观场景做出观察者有意义的解释和描述  1.2 计算机视觉的目标  建立CV系统来完成各种视觉任务 加深对于人脑是觉得掌握和理解  2. 图像基础 2.1 图像分类   模拟图像
 从连续的客观场景直接观察得到，用一个二维函数$f(x, y)$来表示
   数字图像
@@ -103,10 +103,10 @@ $$ I = k_a I_{pa} + \sum [ k_d I_{pd} cosi + K_s I_{ps} cos^n \theta ] $$</descr
     
     <item>
       <title>Docker 容器配置--多容器通信(Nginx &#43; MongoDB &#43; Tornado)</title>
-      <link>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</link>
+      <link>https://innohub.top/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</link>
       <pubDate>Sun, 24 Mar 2019 15:29:39 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
+      <guid>https://innohub.top/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
       <description>Docker 容器化部署尝试 1. 背景浅谈 作为学期中的项目实训，我们打算做一个基于 web 的 LaTex 编辑工具。为了方便环境的配置以及服务的分离，选用Docker 进行环境的搭建。初始想法是基于一个 Nginx + MongoDB + Tornado + xeLaTex  的基本架构，至少使用4个容器满足基本的需求，下面进行一下简单的记录。
 2. Dockerfile 自定义容器 该项目分为四个部分，对于数据库，可以直接使用 dockerhub 中的Mongodb。不需要额外的定制，直接pull 最新版即可：
 docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，只是添加了一些需要额外挂载的目录：
@@ -116,10 +116,10 @@ docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，�
     
     <item>
       <title>Determines the boundary value of the int overflow</title>
-      <link>https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/</link>
+      <link>https://innohub.top/posts/determines-the-boundary-value-of-the-int-overflow/</link>
       <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/determines-the-boundary-value-of-the-int-overflow/</guid>
+      <guid>https://innohub.top/posts/determines-the-boundary-value-of-the-int-overflow/</guid>
       <description>[Leetcode Note] 关于 int32 溢出值的判定 关于整数的处理，溢出是一个难以避免的话题。对于强类型静态语言来说，一个固定大小的整形的溢出值需要格外注意。以一个 32 bits 的整形为例：对于无符号数范围（0～4294967296），有符号数的范围（-2147483648~2147483647）。对于溢出值，不可能继续采用 32 bits整形进行存储，可以考虑使用 64 bits 整形存储。但是必须考虑一个情形，如果一个大整数，对于 64 bits 仍然溢出呢？我们如果在计算一个值之后再去估计存储它所需要的位数，未免南辕北辙，毕竟我们的工作只是判断是否溢出。
 有符号判定
 Leetcode problem 7 problem 8 中，一个进行数字的倒序，一个实现 atoi操作，涉及到整形的操作，而且规定整形的容量为 32 bits。进行数字倒序时，循环的每次操作得到个位数字，然后加到最终结果result上。那么溢出判断在何时进行呢？一定要在进行加法之前进行。分为两种情况进行讨论：
@@ -130,10 +130,10 @@ func reverse(x int) int { var digit int32 var d = int32(x) const MAX int32 = int
     
     <item>
       <title>Go detail to ASCII, Unicode and Character sets</title>
-      <link>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</link>
+      <link>https://innohub.top/posts/go-detail-to-ascii-unicode-and-character-sets/</link>
       <pubDate>Wed, 13 Feb 2019 13:53:00 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</guid>
+      <guid>https://innohub.top/posts/go-detail-to-ascii-unicode-and-character-sets/</guid>
       <description>ASCII，Unicode 码与字符集 很早就对于编码方式，字符集等问题心存疑惑。在一些语言中，有关字符集的问题都被进行了简化。但是在一些语言中，比如 Rust，对于这个问题进行了较为接近本质的谈论。
 1. 历史溯源 很久很久以前，有一群人，他们决定使用8个可以开合的晶体管来组合形成不同的状态，以表示世界上的万物。他们看见8个字节的开关状态最好，于是将其称为“字节”。后来产生了可以处理这些字节的工具，也就是计算机。最早计算机只在美国使用，八位的字节一共可以组合出256种不同的状态，他们使用了0-127进行编码。这样计算机就可以处理英文的文字了。这样的编码方案被称为 ASCII（America Standard Code for Information Translation）码。由于自己聚具有多大8bits的空间，所以很多人都在思考：“gosh， 我们可以使用128-255的编码”当很多人同时具有这个想法就很糟糕了，很多公司使用各自的规范，这造成了极大地混乱。除此之外，ASCII还有更大的先天不足，由于仅支持英文，所以对于世界上的其他语言无法进行表示。
 但是简单地认为“plain text = ascii = characters 为8bits”的错误大错特错。为了对于世界上其他语系进行有效支持，必须使用更多的字节，并且使用统一的编码。由此，Unicode这一统一的编码集便应运而生了。在这里必须明确一个概念，ASCII， Unicode都是字符集，utf-8是一种编码方式，通过使用统一的编码方式，依据unicode字符集，可以满足所有的编码需求。
@@ -149,10 +149,10 @@ Unicode 是一次伟大的尝试，希望可以创造包含世界上所有有意
     
     <item>
       <title>Yet another tool to mock interfaces in Go</title>
-      <link>https://kobehub.github.io/posts/yet-another-tool-to-mock-interface-in-go/</link>
+      <link>https://innohub.top/posts/yet-another-tool-to-mock-interface-in-go/</link>
       <pubDate>Fri, 25 Jan 2019 14:16:20 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/yet-another-tool-to-mock-interface-in-go/</guid>
+      <guid>https://innohub.top/posts/yet-another-tool-to-mock-interface-in-go/</guid>
       <description>Go 语言中一个模拟接口的工具 单元测试作为一种强大的工具，可以检查代码各个方面的行为。如果对进行代码测试十分重视，那么将会一直编写可持续、可维护的代码，并且在代码的实现过程中保持代码的完整性。依赖于抽象的、经过开发者精心设计的代码是很容易进行测试的，所以代码的可测试性也作为其质量的一个指标。
 如果你已经在 Go 中尝试过测试代码，可能知道接口的巨大作用。在 Go 的标准库中，提供了一系列接口，这些接口大多数只包含一个方法，可以直接使用这些接口。
 Go 还有一个补充框架，用以模拟接口。同时，还有一些社区驱动的包可以完成类似的功能。他们中的大多数都可以根据给定接口，生成实现这些接口的 struct 。 对于较大的接口，或者嵌套了其他接口，使用这种方式很有效。当接口只有一个方法时，不是更有效果吗？
@@ -162,10 +162,10 @@ Go 还有一个补充框架，用以模拟接口。同时，还有一些社区�
     
     <item>
       <title>Introduce to Convolutional neural network</title>
-      <link>https://kobehub.github.io/posts/introduce-to-cnn/</link>
+      <link>https://innohub.top/posts/introduce-to-cnn/</link>
       <pubDate>Tue, 22 Jan 2019 23:13:21 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/introduce-to-cnn/</guid>
+      <guid>https://innohub.top/posts/introduce-to-cnn/</guid>
       <description>CNN简介 1. 特征 Background:
 深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function,
 传到下一层神经元；再经过该层神经元的激活，继续向下传递，如此循环往复到输出层，正是由于这些非线性函数的反复叠加，才使得神经网络有了足够的capacity来抓取复杂的pattern
@@ -185,10 +185,10 @@ Convolutional Neural Networks(CNNs/ConvNets):
     
     <item>
       <title>[Review] Neural Networks</title>
-      <link>https://kobehub.github.io/posts/review-neural-networks/</link>
+      <link>https://innohub.top/posts/review-neural-networks/</link>
       <pubDate>Mon, 14 Jan 2019 20:23:39 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-neural-networks/</guid>
+      <guid>https://innohub.top/posts/review-neural-networks/</guid>
       <description>神经网络与深度学习 1. Artificial Neural Networks 1.1 M-P Neuron Model 由生物神经元的启发，McCulloch and Pitts在1943年提出了MP神经元模型。神经元模型是一个包含输入，输出与计算功能的模型。
 输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。神经元接收来自n个其他神经元传递过来的输入信号，这些输入信号通过带权重的连接进行传递，神经元接收到的总输入值将与神经元的阈值进行比较，然后通过激活函数的处理产生神经元的输出。这是仅有一个神经元的模型。
 激活函数：
@@ -206,10 +206,10 @@ Sigmoid 函数，与用于分类问题的线性回归中使用的联系函数相
     
     <item>
       <title>[Review] Regression</title>
-      <link>https://kobehub.github.io/posts/review-regression/</link>
+      <link>https://innohub.top/posts/review-regression/</link>
       <pubDate>Mon, 14 Jan 2019 15:35:50 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-regression/</guid>
+      <guid>https://innohub.top/posts/review-regression/</guid>
       <description>线性回归 1. 回归模型 回归任务主要是处理连续值的模型。回归学习是用来估计输入值和输出值之间的关系，建立输入值和输出值之间的数学模型，当再来一个新样本时，可以预测新样本的输出值。回归是一个有监督的学习过程，在建立输入值和输出值之间的数学模型时，需要有训练集，在预测的时候需要一些先验知识。
 典型例子：房价的估计
 分类 1. 按照输入值的数量
@@ -222,10 +222,10 @@ Sigmoid 函数，与用于分类问题的线性回归中使用的联系函数相
     
     <item>
       <title>[Review] Support Vector Machine</title>
-      <link>https://kobehub.github.io/posts/review-support-vector-machine/</link>
+      <link>https://innohub.top/posts/review-support-vector-machine/</link>
       <pubDate>Mon, 14 Jan 2019 12:01:51 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-support-vector-machine/</guid>
+      <guid>https://innohub.top/posts/review-support-vector-machine/</guid>
       <description>SVM 1. Margin and Support Vector 首先考虑一个线性分类任务,分类的最基本的想法就是在一个样本空间中划分一个超平面,将两个不同的类别的样本区分开。如何寻找超平面以及衡量超平面的好坏成为重要的问题。
 为了正确的进行分类，我们需要找到一个鲁棒性更强的超平面，对于新的数据具有更强的泛化能力。在样本中，距离超平面的最近的样本点的距离应该尽可能的大，依据此规则选取超平面。
 **间隔:**margin, 两类样本到划分超平面的最近的距离之和。代表着划分超平面对于样本局部扰动的”容忍性“，间隔越大，容忍性越好。
@@ -237,10 +237,10 @@ Target:最大化margin
     
     <item>
       <title>[Review] Decision Tree</title>
-      <link>https://kobehub.github.io/posts/review-decision-tree/</link>
+      <link>https://innohub.top/posts/review-decision-tree/</link>
       <pubDate>Sun, 13 Jan 2019 21:05:17 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-decision-tree/</guid>
+      <guid>https://innohub.top/posts/review-decision-tree/</guid>
       <description>Decision Tree 1. 决策树的定义以及建立 决策树是一种常见的机器学习方法。以二分类问题为例，决策树模拟人类处理问题的机制，对于某一个问题进行决策时，进行一些列的判断或者子决策。对于一棵决策树来说，具有以下属性：
   每一个非叶结点都是一个属性的划分
   每一个划分指向下一个决策或者指向最终结论
@@ -257,10 +257,10 @@ $$ Gain(D, a) = Ent(D) - \sum _{i=1}^k \frac{|D^i|}{|D|}Ent(D^i) $$ 有了信息
     
     <item>
       <title>[Review] Bayesian decision theory</title>
-      <link>https://kobehub.github.io/posts/review-bayesian-decision-theory/</link>
+      <link>https://innohub.top/posts/review-bayesian-decision-theory/</link>
       <pubDate>Sun, 13 Jan 2019 17:11:19 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-bayesian-decision-theory/</guid>
+      <guid>https://innohub.top/posts/review-bayesian-decision-theory/</guid>
       <description>Bayesian decision theory 1. 常用的贝叶斯决策规则  基于最小错误率的贝叶斯决策 基于最小风险的贝叶斯决策 在限定一类错误率条件下使另一类错误率最小的两类别决策 最小最大决策  2.基本概率公式   **条件概率：**$p(A|B)$表示事件A在事件B发生的条件下发生的概率
   **联合概率：**$p(A. B)$ 表示两个事件同时发生的概率，当两个随机事件相互独立时，联合概率等于概率的乘积
 基本条件概率公式： $$ P(A | B) = \frac{P(A, B)}{P(B)} $$ 所以当A B相互独立时，$P(A|B) = P(A)$ .
@@ -276,10 +276,10 @@ $$ P(B_i | A) = \frac{P(B_i)P(A|B_i)}{\sum _{i=1}^{n}P(B_i) P(A|B_i) } $$
     
     <item>
       <title>[Review] Feature selection and feature extraction</title>
-      <link>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</link>
+      <link>https://innohub.top/posts/review-feature-selection-and-feature-extraction/</link>
       <pubDate>Sat, 12 Jan 2019 23:50:37 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</guid>
+      <guid>https://innohub.top/posts/review-feature-selection-and-feature-extraction/</guid>
       <description>特征选择与特征提取 1. 特征介绍 通常用于机器学习任务的特征集，可以使用一个 $l$ 维向量表示。称之为特征向量
 $x = [x_1, x_2, &amp;hellip;, x_l]^T$
 对于特征的产生，可以通过先验知识手工设定，也可以通过学习自动获取。对于先验知识较为明确，区分度大的样本，可以直接设计较好的特征将其分开；对于先验知识不明确，的特征集可以通学习获取。
@@ -293,10 +293,10 @@ $x = [x_1, x_2, &amp;hellip;, x_l]^T$
     
     <item>
       <title>[Review] Main concept of ML</title>
-      <link>https://kobehub.github.io/posts/review-main-concept-of-ml/</link>
+      <link>https://innohub.top/posts/review-main-concept-of-ml/</link>
       <pubDate>Sat, 12 Jan 2019 17:43:29 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-main-concept-of-ml/</guid>
+      <guid>https://innohub.top/posts/review-main-concept-of-ml/</guid>
       <description>机器学习的一些重要概念 1. 机器学习系统的主要操作 对于一个基于普通机器学习方法的分类系统，可能具有以下的基本操作步骤：
   数据收集**(Sensing)**
   数据预处理**(Preprocessing)**:
@@ -323,19 +323,19 @@ $x = [x_1, x_2, &amp;hellip;, x_l]^T$
     
     <item>
       <title>Project</title>
-      <link>https://kobehub.github.io/projects/</link>
+      <link>https://innohub.top/projects/</link>
       <pubDate>Tue, 08 Jan 2019 20:24:57 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/projects/</guid>
+      <guid>https://innohub.top/projects/</guid>
       <description>Waiting to be updated&amp;hellip;</description>
     </item>
     
     <item>
       <title>Contact</title>
-      <link>https://kobehub.github.io/contact/</link>
+      <link>https://innohub.top/contact/</link>
       <pubDate>Tue, 08 Jan 2019 17:28:13 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/contact/</guid>
+      <guid>https://innohub.top/contact/</guid>
       <description>  Email:jdgets111@gmail.com
   WeChat: Add Contacts jdgets, or scan the QR code in WeChat
   </description>
@@ -343,10 +343,10 @@ $x = [x_1, x_2, &amp;hellip;, x_l]^T$
     
     <item>
       <title>Record of build GitHub Pages use Hugo</title>
-      <link>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</link>
+      <link>https://innohub.top/posts/record-of-build-github-pages-use-hugo/</link>
       <pubDate>Tue, 08 Jan 2019 10:10:02 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</guid>
+      <guid>https://innohub.top/posts/record-of-build-github-pages-use-hugo/</guid>
       <description>前期准备 1. 本地下载安装Hugo 基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 apt,或者 snap 包管理进行最快速的安装
 apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
 首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装
@@ -361,10 +361,10 @@ hugo使用markdown进行文章书写，可以使用该命令建立一篇新的�
     
     <item>
       <title>About</title>
-      <link>https://kobehub.github.io/about/</link>
+      <link>https://innohub.top/about/</link>
       <pubDate>Mon, 07 Jan 2019 16:10:59 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/about/</guid>
+      <guid>https://innohub.top/about/</guid>
       <description>I am Inno Jia. A junior in School of Software, Shandong University. I will graduate in 2020.
 My major is Artificial Intelligence, and my interests focus on machine learning and algorithm. Now my work is mainly at signal processing. I am a programming enthusiast and willing to share and discuss.
 I am a typical user of Python, and my favorite static language is Golang. In many ways, I like to learn various programming languages and skills.</description>

@@ -2,84 +2,84 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Inno Jia</title>
-    <link>https://kobehub.github.io/categories/</link>
+    <link>https://innohub.top/categories/</link>
     <description>Recent content in Categories on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 26 Jul 2019 10:36:43 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Record</title>
-      <link>https://kobehub.github.io/categories/record/</link>
+      <link>https://innohub.top/categories/record/</link>
       <pubDate>Fri, 26 Jul 2019 10:36:43 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/record/</guid>
+      <guid>https://innohub.top/categories/record/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://kobehub.github.io/categories/python/</link>
+      <link>https://innohub.top/categories/python/</link>
       <pubDate>Sat, 06 Jul 2019 15:50:20 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/python/</guid>
+      <guid>https://innohub.top/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Summary</title>
-      <link>https://kobehub.github.io/categories/summary/</link>
+      <link>https://innohub.top/categories/summary/</link>
       <pubDate>Wed, 03 Jul 2019 16:01:36 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/summary/</guid>
+      <guid>https://innohub.top/categories/summary/</guid>
       <description></description>
     </item>
     
     <item>
       <title>CV</title>
-      <link>https://kobehub.github.io/categories/cv/</link>
+      <link>https://innohub.top/categories/cv/</link>
       <pubDate>Fri, 17 May 2019 22:39:33 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/cv/</guid>
+      <guid>https://innohub.top/categories/cv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>notes</title>
-      <link>https://kobehub.github.io/categories/notes/</link>
+      <link>https://innohub.top/categories/notes/</link>
       <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/notes/</guid>
+      <guid>https://innohub.top/categories/notes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Golang</title>
-      <link>https://kobehub.github.io/categories/golang/</link>
+      <link>https://innohub.top/categories/golang/</link>
       <pubDate>Fri, 25 Jan 2019 14:16:20 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/golang/</guid>
+      <guid>https://innohub.top/categories/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Deep Learning</title>
-      <link>https://kobehub.github.io/categories/deep-learning/</link>
+      <link>https://innohub.top/categories/deep-learning/</link>
       <pubDate>Tue, 22 Jan 2019 23:13:21 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/deep-learning/</guid>
+      <guid>https://innohub.top/categories/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>https://kobehub.github.io/categories/machine-learning/</link>
+      <link>https://innohub.top/categories/machine-learning/</link>
       <pubDate>Mon, 14 Jan 2019 20:23:39 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/categories/machine-learning/</guid>
+      <guid>https://innohub.top/categories/machine-learning/</guid>
       <description></description>
     </item>
     

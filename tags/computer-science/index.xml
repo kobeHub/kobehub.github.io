@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>computer science on Inno Jia</title>
-    <link>https://kobehub.github.io/tags/computer-science/</link>
+    <link>https://innohub.top/tags/computer-science/</link>
     <description>Recent content in computer science on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 13 Feb 2019 13:53:00 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/tags/computer-science/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/tags/computer-science/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Go detail to ASCII, Unicode and Character sets</title>
-      <link>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</link>
+      <link>https://innohub.top/posts/go-detail-to-ascii-unicode-and-character-sets/</link>
       <pubDate>Wed, 13 Feb 2019 13:53:00 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/go-detail-to-ascii-unicode-and-character-sets/</guid>
+      <guid>https://innohub.top/posts/go-detail-to-ascii-unicode-and-character-sets/</guid>
       <description>ASCII，Unicode 码与字符集 很早就对于编码方式，字符集等问题心存疑惑。在一些语言中，有关字符集的问题都被进行了简化。但是在一些语言中，比如 Rust，对于这个问题进行了较为接近本质的谈论。
 1. 历史溯源 很久很久以前，有一群人，他们决定使用8个可以开合的晶体管来组合形成不同的状态，以表示世界上的万物。他们看见8个字节的开关状态最好，于是将其称为“字节”。后来产生了可以处理这些字节的工具，也就是计算机。最早计算机只在美国使用，八位的字节一共可以组合出256种不同的状态，他们使用了0-127进行编码。这样计算机就可以处理英文的文字了。这样的编码方案被称为 ASCII（America Standard Code for Information Translation）码。由于自己聚具有多大8bits的空间，所以很多人都在思考：“gosh， 我们可以使用128-255的编码”当很多人同时具有这个想法就很糟糕了，很多公司使用各自的规范，这造成了极大地混乱。除此之外，ASCII还有更大的先天不足，由于仅支持英文，所以对于世界上的其他语言无法进行表示。
 但是简单地认为“plain text = ascii = characters 为8bits”的错误大错特错。为了对于世界上其他语系进行有效支持，必须使用更多的字节，并且使用统一的编码。由此，Unicode这一统一的编码集便应运而生了。在这里必须明确一个概念，ASCII， Unicode都是字符集，utf-8是一种编码方式，通过使用统一的编码方式，依据unicode字符集，可以满足所有的编码需求。
