@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Language on Inno Jia</title>
-    <link>https://kobehub.github.io/tags/language/</link>
+    <link>https://innohub.top/tags/language/</link>
     <description>Recent content in Language on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 06 Jul 2019 15:50:20 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/tags/language/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/tags/language/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Python type 以及 object详解</title>
-      <link>https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://innohub.top/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Sat, 06 Jul 2019 15:50:20 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://innohub.top/posts/python-type-%E4%BB%A5%E5%8F%8A-object%E8%AF%A6%E8%A7%A3/</guid>
       <description>基础概念 1. 什么是object? 在python中，遵守着“一切皆对象”的箴言。所有的类型、实例、类均为对象。这是在本文开始前需要明确的。那么在python中，对象的定义到底是什么呢？所有表示实体的概念都可以视为一个对象，一般具有以下特征:
  标识符（Identity）： 用于唯一标示一个对象的标志 值(value): 对象所存储的值，可能包含很多属性（可以使用object.attr对于属性进行操作） 类型(type): 每个对象有且仅有一个类型 基类（bases）： 可以有一个或者多个基类，类似于面向对象语言的父类或者超类，支持多继承。并不是所有的对象都有基类。  如果对于python对象的内存分布更感兴趣，其实可以通过理解**元数据（meta）**抽象，加深理解。所有的对象在内存中都有一个特定的地址，可以通过id()函数获取其地址。
 类型以及基类对于object至关重要，因为他们确定了对象的具体行为，以及与其他对象的关系。同时需要牢记的是所有的类型以及基类都是object！
@@ -26,10 +26,10 @@
     
     <item>
       <title>C&#43;&#43; Standard Template Library (STL)(part 2)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</link>
+      <link>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stlpart-2/</link>
       <pubDate>Wed, 03 Jul 2019 16:01:36 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stlpart-2/</guid>
+      <guid>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stlpart-2/</guid>
       <description>STL 容器适配器 c++ STL提供了对于顺序容器的不同的访问接口：
  queue priority_queue stack  1. queue queue是一个典型的容器适配器对象，提供（FIFO）的用户接口，所有的元素都是在尾部插入，在头部删除。容器必须满足顺序容器的要求，必须提供以下接口:
 back, front,pop_front, push_back.标准库中的std::list, std::deque满足该要求。注意容器适配器不支持遍历以及随机访问。
@@ -44,10 +44,10 @@ template&amp;lt; class T, class Container = std::vector&amp;lt;T&amp;gt;, class 
     
     <item>
       <title>C&#43;&#43; Standard Template Library (STL)(part 1)</title>
-      <link>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</link>
+      <link>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stl/</link>
       <pubDate>Wed, 12 Jun 2019 00:00:00 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/c&#43;&#43;-standard-template-library-stl/</guid>
+      <guid>https://innohub.top/posts/c&#43;&#43;-standard-template-library-stl/</guid>
       <description>STL 容器简介 C++ STL容器中常用的容器类型可以分为四类:
  顺序性容器: 提供对于数据的序列化访问  vector list deque arrays forward_list(c++11 引入)   容器适配器: 提供了对于序列化数据的另一种访问接口  queue priority_queue stack   关联容器: 实现了对于有序数据结构的快速访问(O(logn)) （红黑树）  set multiset map multimap   无序关联容器: 提供对于无序数据的快速访问（hash）(c++11 引入)  unordered_set unordered_multiset unordered_map unordered_multimap    1. vector vector 可以看作一个动态数组，自身维护数组大小。vector在内存中是连续存储，所以可以使用迭代器(iterator)或者常规指针进行访问。vector中的数据在末尾插入，有时可能需要对于底层数组的长度进行扩展(扩展为现有大小的2倍)，所以插入时间可能不一致，删除末尾元素可以在O(1)时间内完成，不发生resize操作。对于非末尾元素的操作（插入，删除），可以在线性时间O(n)内完成（由于进行连续存储，所以插入以及删除较慢）.
 vector 上的常见操作复杂度（效率）如下：

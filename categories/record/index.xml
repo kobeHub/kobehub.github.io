@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Record on Inno Jia</title>
-    <link>https://kobehub.github.io/categories/record/</link>
+    <link>https://innohub.top/categories/record/</link>
     <description>Recent content in Record on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 26 Jul 2019 10:36:43 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/categories/record/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/categories/record/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>使用 kubeadm 配置 Kubernetes 1.15集群 （基于Ubuntu 16.04）</title>
-      <link>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</link>
+      <link>https://innohub.top/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</link>
       <pubDate>Fri, 26 Jul 2019 10:36:43 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</guid>
+      <guid>https://innohub.top/posts/%E4%BD%BF%E7%94%A8-kubeadm-%E9%85%8D%E7%BD%AE-kubernetes-1.15%E9%9B%86%E7%BE%A4-%E5%9F%BA%E4%BA%8Eubuntu-16.04/</guid>
       <description>Kubernetes 是用于自动部署、扩展和管理容器化应用的开源系统。它将组成应用程序的容器组合成逻辑单元，以便于管理以及服务，其抽象性允许将容器化应用部署到集群，而不必专门绑定到一个计算机。同时可以提供24/7的全天候使用能力，支持不停机的发布以及更新。Kubernetes 用于协调高度可用的计算机集群，这些计算机群集被连接作为单个单元工作。对于一个Kubernetes集群而言具有两种类型的资源：
  Master: 集群的调度节点 Nodes：应用程序实际运行的工作节点  kubeadm是Kubernetes官方提供的用于快速安装Kubernetes集群的工具, 可以通过该工具快速部署一个集群。本次部署使用虚拟机，基于Ubuntu 16.04进行。
 1. 准备  首先确定三台虚拟机的IP，修改每一台的/etc/hosts文件:  192.168.118.128 node1 192.168.118.129 master 192.168.118.130 node2 除此之外，每一台虚拟机(或者物理机)必须满足至少双CPU， 内存大于2G, 拥有root权限
@@ -28,10 +28,10 @@ cat &amp;gt; ipvsset.sh &amp;lt;&amp;lt;EOF #!/bin/bash modprobe -- ip_vs modpro
     
     <item>
       <title>Docker 容器配置--多容器通信(Nginx &#43; MongoDB &#43; Tornado)</title>
-      <link>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</link>
+      <link>https://innohub.top/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</link>
       <pubDate>Sun, 24 Mar 2019 15:29:39 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
+      <guid>https://innohub.top/posts/docker-%E5%AE%B9%E5%99%A8%E9%85%8D%E7%BD%AE-%E5%A4%9A%E5%AE%B9%E5%99%A8%E9%80%9A%E4%BF%A1nginx-&#43;-mongodb-&#43;-tornado/</guid>
       <description>Docker 容器化部署尝试 1. 背景浅谈 作为学期中的项目实训，我们打算做一个基于 web 的 LaTex 编辑工具。为了方便环境的配置以及服务的分离，选用Docker 进行环境的搭建。初始想法是基于一个 Nginx + MongoDB + Tornado + xeLaTex  的基本架构，至少使用4个容器满足基本的需求，下面进行一下简单的记录。
 2. Dockerfile 自定义容器 该项目分为四个部分，对于数据库，可以直接使用 dockerhub 中的Mongodb。不需要额外的定制，直接pull 最新版即可：
 docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，只是添加了一些需要额外挂载的目录：
@@ -41,10 +41,10 @@ docker pull mongo:latest 对于 Nginx, 也可以直接使用官方的版本，�
     
     <item>
       <title>Record of build GitHub Pages use Hugo</title>
-      <link>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</link>
+      <link>https://innohub.top/posts/record-of-build-github-pages-use-hugo/</link>
       <pubDate>Tue, 08 Jan 2019 10:10:02 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/record-of-build-github-pages-use-hugo/</guid>
+      <guid>https://innohub.top/posts/record-of-build-github-pages-use-hugo/</guid>
       <description>前期准备 1. 本地下载安装Hugo 基于Ubuntu 16.04安装Hugo,Hugo使用Golang实现，可以直接通过源码编译安装。也可以使用已发行的版本，对于基于Debian的linux发行版，可以使用 apt,或者 snap 包管理进行最快速的安装
 apt-get install hugo snap install install hugo --channel=extended # 安装Sass/SCSS版本 源码安装：
 首先需要声明一个系统的GOPATH指明默认golang程序的安装路径，export GOPATH=$HOME/go ,然后clone 到本地进行编译安装

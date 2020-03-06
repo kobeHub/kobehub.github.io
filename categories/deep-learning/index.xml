@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep Learning on Inno Jia</title>
-    <link>https://kobehub.github.io/categories/deep-learning/</link>
+    <link>https://innohub.top/categories/deep-learning/</link>
     <description>Recent content in Deep Learning on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 22 Jan 2019 23:13:21 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/categories/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/categories/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Introduce to Convolutional neural network</title>
-      <link>https://kobehub.github.io/posts/introduce-to-cnn/</link>
+      <link>https://innohub.top/posts/introduce-to-cnn/</link>
       <pubDate>Tue, 22 Jan 2019 23:13:21 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/introduce-to-cnn/</guid>
+      <guid>https://innohub.top/posts/introduce-to-cnn/</guid>
       <description>CNN简介 1. 特征 Background:
 深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function,
 传到下一层神经元；再经过该层神经元的激活，继续向下传递，如此循环往复到输出层，正是由于这些非线性函数的反复叠加，才使得神经网络有了足够的capacity来抓取复杂的pattern

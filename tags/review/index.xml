@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Review on Inno Jia</title>
-    <link>https://kobehub.github.io/tags/review/</link>
+    <link>https://innohub.top/tags/review/</link>
     <description>Recent content in Review on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 17 May 2019 22:39:33 +0800</lastBuildDate>
     
-	<atom:link href="https://kobehub.github.io/tags/review/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/tags/review/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>[Review] Image Preprocess</title>
-      <link>https://kobehub.github.io/posts/image-preprocess/</link>
+      <link>https://innohub.top/posts/image-preprocess/</link>
       <pubDate>Fri, 17 May 2019 22:39:33 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/image-preprocess/</guid>
+      <guid>https://innohub.top/posts/image-preprocess/</guid>
       <description>图像预处理 1. 基本的图像处理  在空间坐标删的处理  几何变换   像素处理  代数处理（对于每一个像素点的操作）    2. 代数操作 不改变图像的几何性质，对于图像的灰度级进行加减乘除等算术运算，逐像素的操作。
 2.1 生成图像叠加效果（Alpha Blending）   对于两个图像的合成可以使用加法进行叠加操作： $$ g(x, y) = \alphaf(x, y) + \betaf(x, y) \
 \alpha + \beta = 1 $$ 也可以用于任何两张图像的衔接。
@@ -27,10 +27,10 @@
     
     <item>
       <title>[Review] Introduction to Coomputer Vision</title>
-      <link>https://kobehub.github.io/posts/introduction-to-computer-vision/</link>
+      <link>https://innohub.top/posts/introduction-to-computer-vision/</link>
       <pubDate>Sun, 12 May 2019 20:13:35 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/introduction-to-computer-vision/</guid>
+      <guid>https://innohub.top/posts/introduction-to-computer-vision/</guid>
       <description>计算机视觉绪论 1. 概述 1.1 视觉可以分为：  视感觉：从分子层次和观点理解人类对于光反应的基本性质  光的物理特性 刺激视觉感受器官的程度 光作用于视网膜后经视觉系统加工产生的感觉   视知觉：最终目的从狭义上说是要能对于客观场景做出观察者有意义的解释和描述  1.2 计算机视觉的目标  建立CV系统来完成各种视觉任务 加深对于人脑是觉得掌握和理解  2. 图像基础 2.1 图像分类   模拟图像
 从连续的客观场景直接观察得到，用一个二维函数$f(x, y)$来表示
   数字图像
@@ -43,10 +43,10 @@ $$ I = k_a I_{pa} + \sum [ k_d I_{pd} cosi + K_s I_{ps} cos^n \theta ] $$</descr
     
     <item>
       <title>[Review] Neural Networks</title>
-      <link>https://kobehub.github.io/posts/review-neural-networks/</link>
+      <link>https://innohub.top/posts/review-neural-networks/</link>
       <pubDate>Mon, 14 Jan 2019 20:23:39 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-neural-networks/</guid>
+      <guid>https://innohub.top/posts/review-neural-networks/</guid>
       <description>神经网络与深度学习 1. Artificial Neural Networks 1.1 M-P Neuron Model 由生物神经元的启发，McCulloch and Pitts在1943年提出了MP神经元模型。神经元模型是一个包含输入，输出与计算功能的模型。
 输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。神经元接收来自n个其他神经元传递过来的输入信号，这些输入信号通过带权重的连接进行传递，神经元接收到的总输入值将与神经元的阈值进行比较，然后通过激活函数的处理产生神经元的输出。这是仅有一个神经元的模型。
 激活函数：
@@ -64,10 +64,10 @@ Sigmoid 函数，与用于分类问题的线性回归中使用的联系函数相
     
     <item>
       <title>[Review] Regression</title>
-      <link>https://kobehub.github.io/posts/review-regression/</link>
+      <link>https://innohub.top/posts/review-regression/</link>
       <pubDate>Mon, 14 Jan 2019 15:35:50 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-regression/</guid>
+      <guid>https://innohub.top/posts/review-regression/</guid>
       <description>线性回归 1. 回归模型 回归任务主要是处理连续值的模型。回归学习是用来估计输入值和输出值之间的关系，建立输入值和输出值之间的数学模型，当再来一个新样本时，可以预测新样本的输出值。回归是一个有监督的学习过程，在建立输入值和输出值之间的数学模型时，需要有训练集，在预测的时候需要一些先验知识。
 典型例子：房价的估计
 分类 1. 按照输入值的数量
@@ -80,10 +80,10 @@ Sigmoid 函数，与用于分类问题的线性回归中使用的联系函数相
     
     <item>
       <title>[Review] Support Vector Machine</title>
-      <link>https://kobehub.github.io/posts/review-support-vector-machine/</link>
+      <link>https://innohub.top/posts/review-support-vector-machine/</link>
       <pubDate>Mon, 14 Jan 2019 12:01:51 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-support-vector-machine/</guid>
+      <guid>https://innohub.top/posts/review-support-vector-machine/</guid>
       <description>SVM 1. Margin and Support Vector 首先考虑一个线性分类任务,分类的最基本的想法就是在一个样本空间中划分一个超平面,将两个不同的类别的样本区分开。如何寻找超平面以及衡量超平面的好坏成为重要的问题。
 为了正确的进行分类，我们需要找到一个鲁棒性更强的超平面，对于新的数据具有更强的泛化能力。在样本中，距离超平面的最近的样本点的距离应该尽可能的大，依据此规则选取超平面。
 **间隔:**margin, 两类样本到划分超平面的最近的距离之和。代表着划分超平面对于样本局部扰动的”容忍性“，间隔越大，容忍性越好。
@@ -95,10 +95,10 @@ Target:最大化margin
     
     <item>
       <title>[Review] Decision Tree</title>
-      <link>https://kobehub.github.io/posts/review-decision-tree/</link>
+      <link>https://innohub.top/posts/review-decision-tree/</link>
       <pubDate>Sun, 13 Jan 2019 21:05:17 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-decision-tree/</guid>
+      <guid>https://innohub.top/posts/review-decision-tree/</guid>
       <description>Decision Tree 1. 决策树的定义以及建立 决策树是一种常见的机器学习方法。以二分类问题为例，决策树模拟人类处理问题的机制，对于某一个问题进行决策时，进行一些列的判断或者子决策。对于一棵决策树来说，具有以下属性：
   每一个非叶结点都是一个属性的划分
   每一个划分指向下一个决策或者指向最终结论
@@ -115,10 +115,10 @@ $$ Gain(D, a) = Ent(D) - \sum _{i=1}^k \frac{|D^i|}{|D|}Ent(D^i) $$ 有了信息
     
     <item>
       <title>[Review] Bayesian decision theory</title>
-      <link>https://kobehub.github.io/posts/review-bayesian-decision-theory/</link>
+      <link>https://innohub.top/posts/review-bayesian-decision-theory/</link>
       <pubDate>Sun, 13 Jan 2019 17:11:19 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-bayesian-decision-theory/</guid>
+      <guid>https://innohub.top/posts/review-bayesian-decision-theory/</guid>
       <description>Bayesian decision theory 1. 常用的贝叶斯决策规则  基于最小错误率的贝叶斯决策 基于最小风险的贝叶斯决策 在限定一类错误率条件下使另一类错误率最小的两类别决策 最小最大决策  2.基本概率公式   **条件概率：**$p(A|B)$表示事件A在事件B发生的条件下发生的概率
   **联合概率：**$p(A. B)$ 表示两个事件同时发生的概率，当两个随机事件相互独立时，联合概率等于概率的乘积
 基本条件概率公式： $$ P(A | B) = \frac{P(A, B)}{P(B)} $$ 所以当A B相互独立时，$P(A|B) = P(A)$ .
@@ -134,10 +134,10 @@ $$ P(B_i | A) = \frac{P(B_i)P(A|B_i)}{\sum _{i=1}^{n}P(B_i) P(A|B_i) } $$
     
     <item>
       <title>[Review] Feature selection and feature extraction</title>
-      <link>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</link>
+      <link>https://innohub.top/posts/review-feature-selection-and-feature-extraction/</link>
       <pubDate>Sat, 12 Jan 2019 23:50:37 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-feature-selection-and-feature-extraction/</guid>
+      <guid>https://innohub.top/posts/review-feature-selection-and-feature-extraction/</guid>
       <description>特征选择与特征提取 1. 特征介绍 通常用于机器学习任务的特征集，可以使用一个 $l$ 维向量表示。称之为特征向量
 $x = [x_1, x_2, &amp;hellip;, x_l]^T$
 对于特征的产生，可以通过先验知识手工设定，也可以通过学习自动获取。对于先验知识较为明确，区分度大的样本，可以直接设计较好的特征将其分开；对于先验知识不明确，的特征集可以通学习获取。
@@ -151,10 +151,10 @@ $x = [x_1, x_2, &amp;hellip;, x_l]^T$
     
     <item>
       <title>[Review] Main concept of ML</title>
-      <link>https://kobehub.github.io/posts/review-main-concept-of-ml/</link>
+      <link>https://innohub.top/posts/review-main-concept-of-ml/</link>
       <pubDate>Sat, 12 Jan 2019 17:43:29 +0800</pubDate>
       
-      <guid>https://kobehub.github.io/posts/review-main-concept-of-ml/</guid>
+      <guid>https://innohub.top/posts/review-main-concept-of-ml/</guid>
       <description>机器学习的一些重要概念 1. 机器学习系统的主要操作 对于一个基于普通机器学习方法的分类系统，可能具有以下的基本操作步骤：
   数据收集**(Sensing)**
   数据预处理**(Preprocessing)**:
