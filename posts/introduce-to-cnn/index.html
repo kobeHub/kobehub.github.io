@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.65.3" />
+    <meta name="generator" content="Hugo 0.66.0" />
   </head>
 
   <body class=" ">
@@ -174,7 +174,7 @@
 <p>卷积神经网络与普通神经网络相似，由神经元构成，具有可学习的weights and biases，每个神经元接收一个输入进行点积运算后，并且可以选择非线性跟随．整个网络仍然表现出单一的可微分分数函数：</p>
 <p><strong>从一端的原始图像像素(raw pxiel)到另一端的分数函数</strong></p>
 <p>并且在最后一层（全连接层）仍然具有损失函数(SVM/Softmax) 	ConvNet体系结构明确地假设输入是图像，这允许我们将某些属性编码到体系结构中。这些使得forward 函数　更有效地实施并极大地减少了网络中的参数数量</p>
-<p><img src="http://media.innohub.top/full.png" alt="tri-nural"></p>
+<p><img src="https://mediainter.innohub.top/full.png" alt="tri-nural"></p>
 <h2 id="2与全连接神经网络的比较">2.与全连接神经网络的比较</h2>
 <p>对于一个32*32*3的图像而言，如果采用RNN(regular neural nets) 将其转化为一维矩阵，如果采用全连接架构，对于每一个像素都需要一个神经元　所以普通神经网络的一层将需要　32*32*3= 3027 个权重</p>
 <p>不适合进行图像的处理，而且过多的参数极易导致过拟合</p>
@@ -199,7 +199,7 @@
 <blockquote>
 <p><em>Example 2</em>. Suppose an input volume had size [16x16x20]. Then using an example receptive field size of 3x3, every neuron in the Conv Layer would now have a total of 3<em>3</em>20 = 180 connections to the input volume. Notice that, again, the connectivity is local in space (e.g. 3x3), but full along the input depth (20).</p>
 </blockquote>
-<p>​	    <img src="http://media.innohub.top/180502-l1.png" alt="l1"></p>
+<p>​	    <img src="https://mediainter.innohub.top/180502-l1.png" alt="l1"></p>
 <h2 id="2local--region--input-volume---求点积">2.local  region * input volume   求点积</h2>
 <p>对于每个过滤器其depth一定与 input volume　depth相同，才可进行点乘运算，下面以深度为３　的filter为例：(参数共享式)</p>
 <ul>
@@ -207,15 +207,15 @@
 <li>将三个暂时结果相加同时加上误差值 bias 得到卷积层的对应位置的值</li>
 <li>按一定的步长平移filter　重复以上步骤，每多一个filter卷积层的depth就＋１</li>
 </ul>
-<p><img src="http://media.innohub.top/180502-mul1.png" alt="mul1"></p>
+<p><img src="https://mediainter.innohub.top/180502-mul1.png" alt="mul1"></p>
 <p>卷积层０的第一个元素计算：</p>
 <p>s1 = 1*1 + 1*1+ 1*1</p>
 <p>s2 = 2*1 + 1*1</p>
 <p>s3 = 2*1 + 1*1</p>
 <p>output[0, 0, 0] = s1 + s2 +s3 +bias = 10</p>
 <p>其他计算类似最终得到　［3, 3, 2］的卷积层输出</p>
-<p><img src="http://media.innohub.top/180502-mul2.png" alt="mul2"></p>
-<p><img src="http://media.innohub.top/180502-l3.png" alt="计算单层卷积"></p>
+<p><img src="https://mediainter.innohub.top/180502-mul2.png" alt="mul2"></p>
+<p><img src="https://mediainter.innohub.top/180502-l3.png" alt="计算单层卷积"></p>
 <h2 id="3空间排列-spatial-arrangement">3.空间排列 Spatial arrangement</h2>
 <p>有三个超参数控制着，卷积层的神经元数目，排列方式．</p>
 <ul>
@@ -230,7 +230,7 @@
 <p>深度即为filer的数量</p>
 <p><strong>步长的限制：</strong></p>
 <p><strong>在选用过滤器移动步长时应该慎重考虑，否则会造成输入卷无法被filer均分,即在公式<code>(W-F+2P)/S +1</code> 计算得到的不是整数，此时会报出错误或者添加一个0界使其满足要求</strong></p>
-<p><img src="http://media.innohub.top/180502-l2.png" alt="l2"></p>
+<p><img src="https://mediainter.innohub.top/180502-l2.png" alt="l2"></p>
 <h2 id="4-参数共享parameter--sharing">4 .参数共享　Parameter  Sharing</h2>
 <p><strong>1. Two Small insight:</strong></p>
 <p><strong>(1) 功能是分层的</strong></p>
@@ -245,7 +245,7 @@
 	55*55*96 = 290,400
 对于每个神经元都需要 11*11*3 = 363个weights以及一个bias
 故总参数数目为：
-	364*290400 = 105,705,600 
+	364*290400 = 105,705,600
 </code></pre></div><p>根据以上分析可知，参数的数目很大．如果１中的两个假设成立，将会极大地减少参数数量．根据特征的平移不变性，对于单个二维深度切片（大小为［５５，５５，９６］的卷具有９６个深度切片每个大小为［５５，５５］）．限制每个深度切片中的神经元使用相同的权重和偏差</p>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">采用这种参数共享方案：
 每个深度切片只需要原本一个神经元的参数：
@@ -257,24 +257,24 @@
 <p>注意，在某些情形下参数共享假设可能失效，当ConvNet的输入图像具有特定的中心结构时，可能失效．例如：我们应该期望在图像的一侧学习完全不同的特征．一个实际的例子是当输入居中的脸的图像，希望在不同的空间位置都可以学习不同的眼镜以及头发的特征，在这种情形下，通常会放宽参数共享方案，将该层称为本地连接层**(Locally-Connected Layer)**</p>
 <h2 id="5tensorflow-中建立卷积核的函数">5.tensorflow 中建立卷积核的函数</h2>
 <div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">tf.layers.conv2d(
-    inputs, 
-    filters, 
-    kernel_size, 
-    strides=(<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>), 
-    padding=<span style="color:#0ff;font-weight:bold">&#39;valid&#39;</span>, 
-    data_format=<span style="color:#0ff;font-weight:bold">&#39;channels_last&#39;</span>, 
-    dilation_rate=(<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>), 
-    activation=None, 
-    use_bias=True, 
-    kernel_initializer=None, 
-    bias_initializer=&lt;tensorflow.python.ops.init_ops.Zeros <span style="color:#fff;font-weight:bold">object</span> at <span style="color:#ff0;font-weight:bold">0x7ff604fc7128</span>&gt;, 
-    kernel_regularizer=None, 
-    bias_regularizer=None, 
-    activity_regularizer=None, 
-    kernel_constraint=None, 
-    bias_constraint=None, 
-    trainable=True, 
-    name=None, 
+    inputs,
+    filters,
+    kernel_size,
+    strides=(<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>),
+    padding=<span style="color:#0ff;font-weight:bold">&#39;valid&#39;</span>,
+    data_format=<span style="color:#0ff;font-weight:bold">&#39;channels_last&#39;</span>,
+    dilation_rate=(<span style="color:#ff0;font-weight:bold">1</span>, <span style="color:#ff0;font-weight:bold">1</span>),
+    activation=None,
+    use_bias=True,
+    kernel_initializer=None,
+    bias_initializer=&lt;tensorflow.python.ops.init_ops.Zeros <span style="color:#fff;font-weight:bold">object</span> at <span style="color:#ff0;font-weight:bold">0x7ff604fc7128</span>&gt;,
+    kernel_regularizer=None,
+    bias_regularizer=None,
+    activity_regularizer=None,
+    kernel_constraint=None,
+    bias_constraint=None,
+    trainable=True,
+    name=None,
     reuse=None)
 </code></pre></div><p>This layer creates a convolution kernel that is convolved
 (actually cross-correlated) with the layer input to produce a tensor of

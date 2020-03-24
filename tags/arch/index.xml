@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>notes on Inno Jia</title>
-    <link>https://innohub.top/categories/notes/</link>
-    <description>Recent content in notes on Inno Jia</description>
+    <title>Arch on Inno Jia</title>
+    <link>https://innohub.top/tags/arch/</link>
+    <description>Recent content in Arch on Inno Jia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 24 Mar 2020 12:48:34 +0800</lastBuildDate>
     
-	<atom:link href="https://innohub.top/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://innohub.top/tags/arch/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -35,20 +35,6 @@
  301，代表 永久重定向，也就是说第一次请求拿到长链接后，下次浏览器再去请求短链的话，不会向短网址服务器请求了，而是直接从浏览器的缓存里拿，这样在 server 层面就无法获取到短网址的点击数了，如果这个链接刚好是某个活动的链接，也就无法分析此活动的效果。所以我们一般不采用 301。 302，代表 临时重定向，也就是说每次去请求短链都会去请求短网址服务器（除非响应中用 Cache-Control 或 Expired 暗示浏览器缓存）,这样就便于 server 统计点击数，所以虽然用 302 会给 server 增加一点压力，但在数据异常重要的今天，这点代码是值得的，所以推荐使用 302！  短链生成的几种方法 1、哈希算法 怎样才能生成短链，仔细观察上例中的短链，显然它是由固定短链域名 + 长链映射成的一串字母组成，那么长链怎么才能映射成一串字母呢，哈希函数不就用来干这事的吗，于是我们有了以下设计思路
 那么这个哈希函数该怎么取呢，相信肯定有很多人说用 MD5，SHA 等算法，其实这样做有点杀鸡用牛刀了，而且既然是加密就意味着性能上会有损失，我们其实不关心反向解密的难度，反而更关心的是哈希的运算速度和冲突概率。
 能够满足这样的哈希算法有很多，这里推荐 Google 出品的 MurmurHash 算法，MurmurHash 是一种非加密型哈希函数，适用于一般的哈希检索操作。与其它流行的哈希函数相比，对于规律性较强的 key，MurmurHash 的随机分布特征表现更良好。非加密意味着着相比 MD5，SHA 这些函数它的性能肯定更高（实际上性能是 MD5 等加密算法的十倍以上），也正是由于它的这些优点，所以虽然它出现于 2008，但目前已经广泛应用到 Redis、MemCache、Cassandra、HBase、Lucene 等众多著名的软件中。</description>
-    </item>
-    
-    <item>
-      <title>Determines the boundary value of the int overflow</title>
-      <link>https://innohub.top/posts/determines-the-boundary-value-of-the-int-overflow/</link>
-      <pubDate>Mon, 18 Feb 2019 12:56:03 +0800</pubDate>
-      
-      <guid>https://innohub.top/posts/determines-the-boundary-value-of-the-int-overflow/</guid>
-      <description>[Leetcode Note] 关于 int32 溢出值的判定 关于整数的处理，溢出是一个难以避免的话题。对于强类型静态语言来说，一个固定大小的整形的溢出值需要格外注意。以一个 32 bits 的整形为例：对于无符号数范围（0～4294967296），有符号数的范围（-2147483648~2147483647）。对于溢出值，不可能继续采用 32 bits整形进行存储，可以考虑使用 64 bits 整形存储。但是必须考虑一个情形，如果一个大整数，对于 64 bits 仍然溢出呢？我们如果在计算一个值之后再去估计存储它所需要的位数，未免南辕北辙，毕竟我们的工作只是判断是否溢出。
-有符号判定
-Leetcode problem 7 problem 8 中，一个进行数字的倒序，一个实现 atoi操作，涉及到整形的操作，而且规定整形的容量为 32 bits。进行数字倒序时，循环的每次操作得到个位数字，然后加到最终结果result上。那么溢出判断在何时进行呢？一定要在进行加法之前进行。分为两种情况进行讨论：
- result &amp;gt; INT_MAX / 10 , 下次操作一定会溢出 result == INT_MAX / 10 , 对于 32 bits 有符号数而言，进行下次操作时。最大可以加上7，所以当 result == INT_MAX / 10 &amp;amp;&amp;amp; digit &amp;gt; 7(digit 为下一次加上的数字) 也会溢出  对于负数预制类似。
-go 实现的 pro 7：
-func reverse(x int) int { var digit int32 var d = int32(x) const MAX int32 = int32(^uint32(0) &amp;gt;&amp;gt; 1) const MIN = ^MAX var sum int32 = 0 for d !</description>
     </item>
     
   </channel>

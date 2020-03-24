@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.65.3" />
+    <meta name="generator" content="Hugo 0.66.0" />
   </head>
 
   <body class=" ">
@@ -224,7 +224,7 @@ True
 &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">isinstance</span>(<span style="color:#fff;font-weight:bold">type</span>, <span style="color:#fff;font-weight:bold">object</span>)
 True
 </code></pre></div><p>可以惊喜的看到，<code>object, type</code>的类型都是<code>type</code>,而<code>type</code>的基类是<code>object</code>,<strong>所以二者互为对方的实例，同时由于双箭头的存在，所以他们自身又是自身的实例。</strong></p>
-<p><img src="http://media.innohub.top/190706-py.png" alt="type and object"></p>
+<p><img src="https://mediainter.innohub.top/190706-py.png" alt="type and object"></p>
 <h3 id="22-类型对象">2.2 类型对象</h3>
 <p>在第一对象的基础上，可以引入类型对象。例如：<code>int</code>， <code>User</code>等预定义或者自定义的对象。实际上，<code>&lt;class type&gt;</code>可以看作是一个<code>trait</code>（Rust概念），规定了<strong>类型对象</strong>具有以下特征:</p>
 <ul>
@@ -247,7 +247,7 @@ True
 </ol>
 </blockquote>
 <h3 id="23-更多内置类型">2.3 更多内置类型</h3>
-<p><img src="http://media.innohub.top/190706-ty.png" alt="list dict tuple"></p>
+<p><img src="https://mediainter.innohub.top/190706-ty.png" alt="list dict tuple"></p>
 <p>python还有很多其他的原始类型，他们都继承自<code>object</code>,同时是<code>type</code>的一种实现，都是类型对象。</p>
 <h2 id="3-创建对象">3. 创建对象</h2>
 <h3 id="31-通过子类创建新的对象">3.1 通过子类创建新的对象</h3>
@@ -270,12 +270,12 @@ True
         <span style="color:#fff;font-weight:bold">return</span> <span style="color:#fff;font-weight:bold">str</span>(<span style="color:#fff;font-weight:bold">sorted</span>(self)[<span style="color:#ff0;font-weight:bold">0</span>:<span style="color:#ff0;font-weight:bold">3</span>])
 </code></pre></div><div class="highlight"><pre style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">&gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> A:
 ...     <span style="color:#fff;font-weight:bold">pass</span>
-... 
+...
 &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(A)
 &lt;<span style="color:#fff;font-weight:bold">class</span> <span style="color:#f00">&#39;</span>type<span style="color:#0ff;font-weight:bold">&#39;&gt;</span>
 &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">class</span> B(A):
 ...     <span style="color:#fff;font-weight:bold">pass</span>
-... 
+...
 &gt;&gt;&gt; <span style="color:#fff;font-weight:bold">type</span>(B)
 &lt;<span style="color:#fff;font-weight:bold">class</span> <span style="color:#f00">&#39;</span>type<span style="color:#0ff;font-weight:bold">&#39;&gt;</span>
 
@@ -285,7 +285,7 @@ True
 <span style="color:#ff0;font-weight:bold">2.</span> <span style="color:#f00">调用该类型对象的</span> __new__ <span style="color:#f00">方法为该实例分配空间，然后再调用</span> __init__ <span style="color:#f00">方法进行初始化</span>
 <span style="color:#ff0;font-weight:bold">3.</span> <span style="color:#f00">此时，该类型作为一个工厂生产出新的对象</span>
 </code></pre></div><p><em>最终的对象图谱：</em></p>
-<p><img src="http://media.innohub.top/190706-map.png" alt="object map"></p>
+<p><img src="https://mediainter.innohub.top/190706-map.png" alt="object map"></p>
 <p>可以把对象分为三类:</p>
 <ul>
 <li>元类</li>
