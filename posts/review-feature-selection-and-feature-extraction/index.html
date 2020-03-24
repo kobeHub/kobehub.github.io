@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.65.3" />
+    <meta name="generator" content="Hugo 0.66.0" />
   </head>
 
   <body class=" ">
@@ -200,7 +200,7 @@
 <li>对于特征子集进行评估</li>
 <li>观察是否达到临界条件，达到即可以使用，否则继续上述操作</li>
 </ul>
-<p><img src="http://media.innohub.top/190112-fea.png" alt="selection"></p>
+<p><img src="https://mediainter.innohub.top/190112-fea.png" alt="selection"></p>
 <h3 id="23-特征选取方法-relief--lvw--l1-norm-">2.3 特征选取方法（ Relief / LVW / L1-Norm ）</h3>
 <h4 id="a-过滤式filter">a. 过滤式（Filter）</h4>
 <ul>
@@ -280,7 +280,7 @@ $$</p>
 <h3 id="33-kernel-pca">3.3 Kernel-PCA</h3>
 <p>对于线性组合无法获得最优特征表示的数据，kernel-PCA是PCA方法的扩展，利用核函数，可以将原始空间的特征映射到一个高维的再生核希尔伯特空间，在新的空间中再利用线性PCA提取特征。属于非线性变换。</p>
 <p>目标函数比较：</p>
-<p><img src="http://media.innohub.top/190112-pca.png" alt="target"></p>
+<p><img src="https://mediainter.innohub.top/190112-pca.png" alt="target"></p>
 <p>经过$\phi(x)$的高维变换，再计算其内积，结果太高，计算复杂度较高。高维空间的向量内积使用低维空间的核函数。</p>
 <p><strong>核函数类型：</strong></p>
 <ul>
@@ -296,7 +296,7 @@ $$</p>
 </ul>
 <h3 id="34-流形学习方法manifold-learning">3.4 流形学习方法（Manifold Learning）</h3>
 <p>流形空间是在局部与欧式空间同胚的空间，换言之，他在局部具有欧式空间的性质，可以使用欧氏距离进行距离计算。其数据分布进过可视化表示通常呈现为流体形。对于流形数据，任意两个数据间的距离都需要沿着曲面计算，不可以使用欧氏距离。</p>
-<p><img src="http://media.innohub.top/190112-is.png" alt="isomap"></p>
+<p><img src="https://mediainter.innohub.top/190112-is.png" alt="isomap"></p>
 <p>如图所示，假设数据有标记，图中不同类间的欧氏距离都小于同类点在曲面上的距离，所以只可以使用曲面上的距离叫做测地距离（Geodesic distance）。这种分布为流形分布。</p>
 <p>流形学习的主要目标是将流形分布的数据特征转化到欧式空间上，并且保留原来的数据信息。</p>
 <ul>

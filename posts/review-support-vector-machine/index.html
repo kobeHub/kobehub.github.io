@@ -39,7 +39,7 @@
 
     
 
-    <meta name="generator" content="Hugo 0.65.3" />
+    <meta name="generator" content="Hugo 0.66.0" />
   </head>
 
   <body class=" ">
@@ -294,7 +294,7 @@ L(w, b, \alpha , \xi , \mu ) =  \frac {1}{2} ||w||^2 + \sum _{i = 1}^m \alpha _i
 $$</p>
 <p><strong>求偏导：</strong></p>
 <p>$$
-w = \sum_{i=1}^m \alpha_iy_ix_i<br>
+w = \sum_{i=1}^m \alpha_iy_ix_i
 \\ 0 = \sum _{i=1}^m \alpha _i y_i
 \\ C = \alpha _i + \mu _i
 $$</p>
@@ -328,12 +328,12 @@ $$</p>
 </li>
 </ul>
 </blockquote>
-<p><img src="http://media.innohub.top/190114-soft.png" alt="soft margin"></p>
+<p><img src="https://mediainter.innohub.top/190114-soft.png" alt="soft margin"></p>
 <p>根据对偶问题可以看出，软间隔支持向量机与硬间隔的唯一不同就是规定了拉格朗日乘子的上界，也就是对于支持向量做了一定的”放宽“。因为没有上界时，该乘子可以取无穷大，对于支持向量必须严格满足约束，现在有了上界，表示允许一部分不满足约束。</p>
 <h2 id="5-支持向量回归">5. 支持向量回归</h2>
 <p><strong>Support Vector Regression</strong>，与传统的回归模型不同，允许预测值与真实值之间存在$\epsilon$ 的偏差，<strong>也就是说当预测值与真实值的差的绝对值大于 $\epsilon$  时才计算损失</strong></p>
 <p>也就是说，在以$f(x)$为中心，构建了一条宽度为$2\epsilon$ 的margin，当样本落入其中时，则认为预测正确。</p>
-<p><img src="http://media.innohub.top/190114-reg.png" alt="regression"></p>
+<p><img src="https://mediainter.innohub.top/190114-reg.png" alt="regression"></p>
 
       </div>
 

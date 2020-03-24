@@ -50,7 +50,8 @@ $$ I = k_a I_{pa} + \sum [ k_d I_{pd} cosi + K_s I_{ps} cos^n \theta ] $$</descr
       <description>神经网络与深度学习 1. Artificial Neural Networks 1.1 M-P Neuron Model 由生物神经元的启发，McCulloch and Pitts在1943年提出了MP神经元模型。神经元模型是一个包含输入，输出与计算功能的模型。
 输入可以类比为神经元的树突，而输出可以类比为神经元的轴突，计算则可以类比为细胞核。神经元接收来自n个其他神经元传递过来的输入信号，这些输入信号通过带权重的连接进行传递，神经元接收到的总输入值将与神经元的阈值进行比较，然后通过激活函数的处理产生神经元的输出。这是仅有一个神经元的模型。
 激活函数：
-阶跃函数，输出值大于0则为1，否则为0 $$ sgn(x)= \begin{cases} 1, &amp;amp; x \geq 0; \\ 0, &amp;amp; x &amp;lt; 0; \end{cases} \\y= \begin{cases} 1, &amp;amp; \sum_{i=1}^{n}w_ix_i-b \geq 0; \\0, &amp;amp; otherwise; \end{cases} $$
+阶跃函数，输出值大于0则为1，否则为0 $$ sgn(x)= \begin{cases} 1, &amp;amp; x \geq 0; \\
+0, &amp;amp; x &amp;lt; 0; \end{cases} \\y= \begin{cases} 1, &amp;amp; \sum_{i=1}^{n}w_ix_i-b \geq 0; \\0, &amp;amp; otherwise; \end{cases} $$
 1.2 Perceptron 第一个可以根据输入样本学习权重的模型，是首个可以学习的人工神经网络。The Perceptron was introduced in 1958 by Frank Rosenblatt.
 该模型有两个层次。分别是输入层和输出层。输入层里的“输入单元”只负责传输数据，不做计算。输出层里的“输出单元”则需要对前面一层的输入进行计算我们把需要计算的层次称之为“计算层”，并把拥有一个计算层的网络称之为“单层神经网络”。单层感知机只可以处理线性可分的数据。
 多层感知机（MLP）
