@@ -199,6 +199,7 @@ keep_files:
 # Plug-ins
 plugins:
   - jekyll-archives
+  - jekyll-mermaid
   - jekyll-diagrams
   - jekyll-email-protect
   - jekyll-feed
