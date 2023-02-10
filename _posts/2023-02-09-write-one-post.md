@@ -20,7 +20,7 @@ Recently, I migrated my personal site from Hugo to Jekyll and I was satisfied to
 - RubyGems
 - GCC and Make
 
-**Instructions**
+**Use Jekyll locally**
 
 1. Install all [prerequisites](https://jekyllrb.com/docs/installation/).
 
@@ -30,29 +30,21 @@ Recently, I migrated my personal site from Hugo to Jekyll and I was satisfied to
    gem install jekyll bundler
    ```
 
-3. Create a new Jekyll site at
+3. Install `mermaid-cli`
 
    ```bash
-   ./myblog
+   npm install -g @mermaid-js/mermaid-cli
    ```
-
+   If we cannot install chromium, we can ignore it.
    ```bash
-   jekyll new myblog
+   PUPPETEER_SKIP_DOWNLOAD=1 npm install -g @mermaid-js/mermaid-cli
    ```
-
-4. Change into your new directory.
-
-   ```bash
-   cd myblog
-   ```
-
-5. Build the site and make it available on a local server.
-
+4. Serve in local environment.
    ```bash
    bundle exec jekyll serve --host 0.0.0.0
    ```
 
-6. Browse to [http://127.0.0.1:4000](http://127.0.0.1:4000/)
+5. Browse to [http://127.0.0.1:4000](http://127.0.0.1:4000/)
 
 Now, we could visit and preview our blog locally before pushing contents to github pages.
 
@@ -250,14 +242,14 @@ string myString;
     cout << "input a string: ";
     getline(cin, myString);
     int length = myString.length();
-
+    
     char charArray = new char * [length];
-
+    
     charArray = myString;
     for(int i = 0; i < length; ++i){
         cout << charArray[i] << " ";
     }
-
+    
     return 0;
 
 }
@@ -349,4 +341,3 @@ We can use different layout to form a group of images, here are some exmaples.
            {% include figure.html path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
        </div>
 </div>
-
