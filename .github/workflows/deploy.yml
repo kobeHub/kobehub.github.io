@@ -3,11 +3,9 @@ name: deploy
 on:
   push:
     branches:
-      - master
       - main
   pull_request:
     branches:
-      - master
       - main
 
 jobs:
@@ -23,7 +21,7 @@ jobs:
         bundler-cache: true
     - name: Install deps
       run: |
-        npm install -g mermaid.cli
+        npm install -g @mermaid-js/mermaid.cli
     - name: Setup deploy options
       id: setup
       run: |
