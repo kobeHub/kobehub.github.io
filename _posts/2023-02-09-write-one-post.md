@@ -34,10 +34,12 @@ Recently, I migrated my personal site from Hugo to Jekyll and I was satisfied to
 
    ```bash
    npm install -g @mermaid-js/mermaid-cli
+   // or mermaid-cli
    ```
    If we cannot install chromium, we can ignore it.
    ```bash
    PUPPETEER_SKIP_DOWNLOAD=1 npm install -g @mermaid-js/mermaid-cli
+   // or mermaid-cli
    ```
 4. Serve in local environment.
    ```bash
@@ -191,21 +193,22 @@ $$
 $$
 
 - **MathJax mode**: use `\begin{equation}...\end{equation}` ; add `\label{...}` inside the equation environment, we can now refer to the equation using `\eqref`.
-
-  ```latex
-  \begin{equation}
-  \label{eq:cauchy-schwarz}
-  \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
-  \end{equation}
-  ```
+{% raw %}
+```latex
+\begin{equation}
+\label{eq:cauchy-schwarz}
+\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\end{equation}
+```
+{% endraw %}
 
 \begin{equation}
 \label{eq:cauchy-schwarz}
-\left( \sum*{k=1}^n a_k b_k \right)^2 \leq \left( \sum*{k=1}^n a*k^2 \right) \left( \sum*{k=1}^n b_k^2 \right)
+\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
 \end{equation}
 
 We need to refer to the equation above:
-
+{% raw %}
 ```latex
 \begin{align}
 x& = y_1-y_2+y_3-y_5+y_8-\dots
@@ -214,11 +217,12 @@ x& = y_1-y_2+y_3-y_5+y_8-\dots
 & = y(0) y' && \text {by Axiom 1.}
 \end{align}
 ```
+{% endraw %}
 
 \begin{align}
 x& = y_1-y_2+y_3-y_5+y_8-\dots
-&& \text{by \eqref{eq:cauchy-schwarz}}\\
-& = y'\circ y^\* && \text{(by \eqref{eq:cauchy-schwarz})}\\
+&& \text{by \eqref{eq:cauchy-schwarz}} \\
+& = y'\circ y^\* && \text{(by \eqref{eq:cauchy-schwarz})} \\
 & = y(0) y' && \text {by Axiom 1.}
 \end{align}
 
@@ -307,6 +311,24 @@ We can use different layout to form a group of images, here are some exmaples.
 
 :arrow_right_hook: **Images in the same row with a caption.**
 
+{% raw %}
+
+```html
+<div class="row mt-3">
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/9.jpg" class="img-fluid rounded z-depth-1" %}
+       </div>
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" %}
+       </div>
+   </div>
+   <div class="caption">
+       A simple, elegant caption looks good between image rows, after each row, or doesn't have to be there at all.
+</div>
+```
+
+{% endraw %}
+
 <div class="row mt-3">
        <div class="col-sm mt-3 mt-md-0">
            {% include figure.html path="assets/img/9.jpg" class="img-fluid rounded z-depth-1" %}
@@ -320,6 +342,21 @@ We can use different layout to form a group of images, here are some exmaples.
 </div>
 :arrow_right_hook: **Images can be zoomable. Simply add `data-zoomable` to `<img>` tags that you want to make zoomable.**
 
+{% raw %}
+
+```html
+<div class="row mt-3">
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/8.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+       </div>
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/10.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+       </div>
+</div>
+```
+
+{% endraw %}
+
 <div class="row mt-3">
        <div class="col-sm mt-3 mt-md-0">
            {% include figure.html path="assets/img/8.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
@@ -329,6 +366,24 @@ We can use different layout to form a group of images, here are some exmaples.
        </div>
 </div>
 :arrow_right_hook: **Images are arranged into different mini-galleries.**
+
+{% raw %}
+
+```html
+<div class="row mt-3">
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/11.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+       </div>
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/12.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+       </div>
+       <div class="col-sm mt-3 mt-md-0">
+           {% include figure.html path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
+       </div>
+</div>
+```
+
+{% endraw %}
 
 <div class="row mt-3">
        <div class="col-sm mt-3 mt-md-0">
@@ -341,3 +396,128 @@ We can use different layout to form a group of images, here are some exmaples.
            {% include figure.html path="assets/img/7.jpg" class="img-fluid rounded z-depth-1" zoomable=true %}
        </div>
 </div>
+
+
+## 7. Diagrams
+
+We can generate great diagrams using [jekyll-diagrams](https://github.com/zhustec/jekyll-diagrams){:target="\_blank"} plugin. We can use different languages such as [mermaid](https://mermaid-js.github.io/mermaid/){:target="\_blank"}, [plantuml](https://plantuml.com/){:target="\_blank"}, [vega-lite](https://vega.github.io/vega-lite/){:target="\_blank"}, etc. 
+
+We prepared mermaid-cli before, so here are examples showing how to use mermaid.
+
+### Mermaid
+
+**Sequence Diagram**
+
+{% raw %}
+
+```
+{% mermaid %}
+sequenceDiagram
+    participant John
+    participant Alice
+    Alice->>John: Hello John, how are you?
+    John-->>Alice: Great!
+{% endmermaid %}
+```
+
+{% endraw %}
+
+{% mermaid %}
+sequenceDiagram
+participant John
+participant Alice
+Alice->>John: Hello John, how are you?
+John-->>Alice: Great!
+{% endmermaid %}
+
+**flowchart**
+
+{% raw %}
+
+```
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    C --> D[Rethink]
+    D --> B
+    B -- No ----> E[End]
+```
+
+{% endraw %}
+
+{% mermaid %}
+flowchart TD
+    A[Start] --> B{Is it?}
+    B -- Yes --> C[OK]
+    C --> D[Rethink]
+    D --> B
+    B -- No ----> E[End]
+{% endmermaid %}
+
+**Class Diagrams**
+
+{% raw %}
+
+```mermaid
+---
+title: Animal example
+---
+classDiagram
+    note "From Duck till Zebra"
+    Animal <|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+```
+
+
+
+{% endraw %}
+
+{% mermaid %}
+
+---
+title: Animal example
+---
+classDiagram
+    note "From Duck till Zebra"
+    Animal <|-- Duck
+    note for Duck "can fly\ncan swim\ncan dive\ncan help in debugging"
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+        +String beakColor
+        +swim()
+        +quack()
+    }
+    class Fish{
+        -int sizeInFeet
+        -canEat()
+    }
+    class Zebra{
+        +bool is_wild
+        +run()
+    }
+
+{% endmermaid %}
