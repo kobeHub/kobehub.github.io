@@ -34,12 +34,10 @@ Recently, I migrated my personal site from Hugo to Jekyll and I was satisfied to
 
    ```bash
    npm install -g @mermaid-js/mermaid-cli
-   // or mermaid-cli
    ```
    If we cannot install chromium, we can ignore it.
    ```bash
    PUPPETEER_SKIP_DOWNLOAD=1 npm install -g @mermaid-js/mermaid-cli
-   // or mermaid-cli
    ```
 4. Serve in local environment.
    ```bash
@@ -115,7 +113,7 @@ We can take full advantage of html with markdown. Here are some example to use h
 
 - `<hr>` Separator
 
-  **source:**
+  **source:// or mermaid-cli**
 
   ```html
   <hr />
@@ -209,6 +207,7 @@ $$
 
 We need to refer to the equation above:
 {% raw %}
+
 ```latex
 \begin{align}
 x& = y_1-y_2+y_3-y_5+y_8-\dots
@@ -447,11 +446,11 @@ flowchart TD
 
 {% mermaid %}
 flowchart TD
-    A[Start] --> B{Is it?}
-    B -- Yes --> C[OK]
-    C --> D[Rethink]
-    D --> B
-    B -- No ----> E[End]
+A[Start] --> B{Is it?}
+B -- Yes --> C[OK]
+C --> D[Rethink]
+D --> B
+B -- No ----> E[End]
 {% endmermaid %}
 
 **Class Diagrams**
