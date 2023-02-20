@@ -88,17 +88,21 @@ We can also download from [apple developer site](https://developer.apple.com/dow
 ### Necessary tools
 
 ```bash
-brew install git alacritty iterm2 neovim python3 rust ruby golang zsh
+brew install autoconf brotli c-ares ca-certificates clang-format cmake efm-langserver \
+gettext go icu4c libevent libnghttp2 libtermkey libuv libvterm libyaml luajit \
+luv m4 make mpdecimal msgpack ncurses neovim node python \
+rbenv ruby ruby-build rust sqlite the_silver_searcher tmux tmux-mem-cpu-load tree-sitter zsh \
+alacritty font-hack-nerd-font font-meslo-lg-nerd-font iterm2 visual-studio-code
 ```
 
 ### Git config
 
 ```bash
-git config --global user.name=""
-git config --global user.email=""
-git config --global core.editor=nvim
-git config --global core.autocrlf=false
-git config --global http.sslverify=false
+git config --global user.name ""
+git config --global user.email ""
+git config --global core.editor nvim
+git config --global core.autocrlf false
+git config --global http.sslverify false
 
 // For mirros users
 git config --global url."https://github.com.cnpmjs.org/".insteadOf https://github.com/
@@ -192,7 +196,7 @@ font:
 
   # Bold font face
   bold:
-    family: MesloLGS NF
+    family: MesloLGS NF # or Nerd Font
     style: Bold
   # Italic font face
   italic:
@@ -226,9 +230,20 @@ key_bindings:
 
 + Settting -> Keys -> Hotkeys **Create a Dedicated Hotkey Window...**
 + Set Hotkey to `Ctrl+\`
-+ 
 
 ## 4. ClashX
 
-Release version: https://github.com/yichengchen/clashX/releases.
+Release version: [https://github.com/yichengchen/clashX/releases](https://github.com/yichengchen/clashX/releases).
+
+## 5. Neovim
+
+First, we need to copy dotfile from gitee.com:
+
+```bash
+git clone git@gitee.com:kobeHub/selfdot.git $HOME/.config/nvim
+```
+
+**Make sure we have installed all the lsp servers and tools like silver searcher.**
+
+We can install packer and plugins by `:PackerSync`
 
