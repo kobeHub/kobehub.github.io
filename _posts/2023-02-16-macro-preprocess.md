@@ -1,10 +1,10 @@
 ---
 layout: post
 title: C++ Preprocess Directives
-date: 2023-02-20 10:00:00
+date: 2023-02-16 10:00:00
 description: Common-used preprocess directives in c++.
-tags: c++
-categories: c++, programming
+tags: cpp
+categories: cpp, programming
 giscus_comments: true
 ---
 
@@ -12,7 +12,7 @@ I have recently joined a company that specializes in Quantitative Trading, where
 
 ## 1. #include and #include_next
 
-#include is the most common-used directive in c/c++. It just searches the file and add targeted file's content to current file. Normally, we include all header files(.h and .hpp) in our source files (.cc, .cpp, .cxx). Basic usage:
+#include is the most common-used directive in c/c++. It just searches the file and add targeted file's content to current file. Normally, we include all header files(.h and .hpp) in our source files (.cc, .cpp, .cxx). Basic usage:∞
 
 ```c++
 #include <path-spec>
@@ -127,7 +127,7 @@ The conditional compilation statements in the following example assume a previou
 #endif
 ```
 
-## 4. #progma
+## 4. #pragma
 
 Pragma directives specify machine-specific or operating system-specific compiler features. A line that starts with `#pragma` specifies a pragma directive. 
 
@@ -139,26 +139,53 @@ _Pragma( string-literal ) // C99
 
 Each implementation of C and C++ supports some features unique to its host machine or operating system. Some programs, for example, must exercise precise control over the location of data in memory, or control the way certain functions receive parameters. The **`#pragma`** directives offer a way for each compiler to offer machine- and operating system-specific features, while maintaining overall compatibility with the C and C++ languages.
 
-|      |      |      |      |
-| ---- | ---- | ---- | ---- |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
-|      |      |      |      |
+### 4.1 #pragma region
 
+This directive specifies the packing alignment for structure, union and class members.
 
++ `#pragma pack(show)`: shows current byte value for packing alignment. The value is displayed by a warning message.
++ `#pragma pack(push, n)`: pushes the current packimg alignment value to internal compiler stack and set current packing alignment to `n`. If n is not specified, current packing alignment value is pushed.
++ `#pragma pack(pop, n)`: Removes the record from the top of internal compiler stack. If `n` isn't specified with `pop`, then current packing alignment value is the top of the stack. If `n` is specified, `n` becomes the new packing alignment value. 
++ `#pragma pack(n)`: specifies the packing alignment value. The default value is 8, available values include 1, 2, 4, 8, and 16. The alignment of a member is on a boundary that's either a multiple of *`n`*, or a multiple of the size of the member, whichever is smaller.
 
-### 4.1 #progma region
+As for the push and pop, we can also assign one identifier to it. If you pop using an *`identifier`*, for example, `#pragma pack(pop, r1)`, then all records on the stack are popped until the record that has *`identifier`* is found. That record gets popped, and the packing value associated with the record found on the top of the stack becomes the new packing alignment value. If you pop using an *`identifier`* that isn't found in any record on the stack, then the **`pop`** is ignored.
+
+```c++
+// pragma_directives_pack_2.cpp
+// compile with: /W1 /c
+#pragma pack()   // n defaults to 8; equivalent to /Zp8
+#pragma pack(show)   // C4810
+#pragma pack(4)   // n = 4
+#pragma pack(show)   // C4810
+#pragma pack(push, r1, 16)   // n = 16, pushed to stack
+#pragma pack(show)   // C4810
+
+// pop to the identifier and then set
+// the value of the current packing alignment:
+#pragma pack(pop, r1, 2)   // n = 2 , stack popped
+#pragma pack(show)   // C4810
+```
+
+### 4.1 `#pragma once`
+
+This directive specifies that the compiler includes this header file only once, while compiling a source file.
+
+The use of `#pragma once` can reduce build times, as the compiler won't open and read the file again after the first `#include` of the file in the translation unit. It's called the *multiple-include optimization*. We can also use include guard idiom, which puts around the entirety of the header file:
+
+```c++
+// point.hpp
+#ifndef MYPROJECT_POINT_HPP_GUARD
+#define MYPROJECT_POINT_HPP_GUARD
+struct point {
+    int x, y;
+};
+#endif
+```
+
+We recommend the `#pragma once` directive for new code because it doesn't pollute the global namespace with a preprocessor symbol. It requires less typing, it's less distracting, and it can't cause *symbol collisions*. Symbol collisions are errors caused when different header files use the same preprocessor symbol as the guard value. It isn't part of the C++ Standard, but it's implemented portably by several common compilers.
+
 
 ## 5. \__attribute\__
 
 ## 6. \__declspec
-
-## 7. pack progma
 
