@@ -5,17 +5,25 @@
       value: Dong Jia
     - name: Prefered Name
       value: Inno Jia
-    - name: Date of Birth
-      value: 17th October 1997
+    # - name: Date of Birth
+    #   value: 17th October 1997
+    - name: Email
+      value: dong.jia@ucalgary.ca
     - name: Languages
-      value: Chinese, English
+      value: English, Mandarin
 
 - title: Education
   type: time_table
   contents:
+    - title: Master of Science
+      institution: University of Calgary, Calgary, Canada
+      year: Sep. 2023 - present
+      description:
+        - title: <strong>Program</strong>
+          contents: Electrical Engineering 
     - title: Bachelor of Engineering
       institution: Shandong University, Jinan, China
-      year: 2016-2020
+      year: Sep. 2016 - Jun. 2020
       description:
         - title: <strong>Major</strong>
           contents: Software Engineering
@@ -29,9 +37,17 @@
 - title: Experience
   type: time_table
   contents:
+    - title: Rust Developer
+      institution: Feitu Co., LTD, China
+      year: Feb. 2023 - Jul. 2023
+      description:
+        - Developed a high-performance and reliable quantitative trading platform using Rust Rust, and C++.
+        - Provided technical supports for customers.
+        - <strong>Technical Skills:</strong> Rust, Tokio, Tonic, zeromq.
+        - <strong>Soft Skills:</strong> Teamwork, Time Management, Communication.
     - title: Back-end Software Engineering
       institution: Pinduoudo Inc. China
-      year: 2020 - 2022
+      year: Jul. 2020 - Apr. 2022
       description:
         - Developed and maintained services related to marketing activities and basic support.
         - Modified product solutions from a technical prospective.
@@ -40,7 +56,7 @@
         - <strong>Soft Skills:</strong> Teamwork, Time Management, Communication.
     - title: AI Platform Development Intership
       institution: Huya Inc. China
-      year: 2019
+      year: Jul. 2019 - Nov. 2019
       description:
         - Increased the efficiency of the Image Labeling Platform by providing a hint label inferred from well‐tuned Inception models.
         - Developed a tool for automatic Dockerfile generation saving 90% of the work to build Docker images.
@@ -81,4 +97,4 @@
 - title: Interests
   type: list
   contents:
-    - <u>Linux</u>, Reading, working out, Music.
+    - <u>Linux</u>, Gym, Reading, Music.
