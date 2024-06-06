@@ -17,12 +17,10 @@ social: true # includes social icons at the bottom of the page
 ---
 
 
-I am currently a MSc student at the University of Calgary, where I focus my research on wireless communication, UAV-assisted network deployment, 6G, and digital twins under the supervision of [Dr. Qiang (John) Ye](https://qiang-john-ye.github.io/Research.html).
+I am currently an MSc student at the University of Calgary, focusing my research on wireless communication, UAV-assisted network deployment, 6G, and digital twins under the supervision of [Dr. Qiang (John) Ye](https://qiang-john-ye.github.io/Research.html).
 
-Before pursuing my master's, I worked as a programmer for three years after receiving my bachelor's degree. As a passionate jack of many trades, I am eager to learn and use various programming languages, including Rust, C++, Java, Python, and Lua.
+Before pursuing my master's, I worked as a programmer for three years. As a passionate jack of all trades, I am eager to learn and use various programming languages, including Rust, C++, Java, Python, and Go.
 
-I am a devoted fan of [Neovim](https://github.com/neovim/neovim) and [Arch Linux](https://archlinux.org/) Arch Linux. I am particularly interested in generative AI, large language models (LLMs), and compiler technology like LLVM. Additionally, I dabble in cloud native and Kubernetes.
+I am a devoted fan of [Neovim](https://github.com/neovim/neovim) and [Arch Linux](https://archlinux.org/). I have a particular interest in generative AI, large language models (LLMs), and compiler technology like LLVM. Additionally, I dabble in cloud native technologies and Kubernetes.
 
 In short, I am interested in and willing to try any novel technologies.
-
-
