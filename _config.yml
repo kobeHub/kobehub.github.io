@@ -175,6 +175,7 @@ news_limit: 5 # leave blank to include all the news in the `_news` folder
 markdown: kramdown
 highlighter: rouge
 kramdown:
+  math_engine: mathjax
   input: GFM
   syntax_highlighter_opts:
     css_class: "highlight"
@@ -382,7 +383,7 @@ jquery:
   version: "3.6.0"
   integrity: "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 mathjax:
-  version: "3.2.0"
+  version: "3.2.2"
 masonry:
   version: "4.2.2"
   integrity: "sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI="
