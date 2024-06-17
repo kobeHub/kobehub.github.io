@@ -187,7 +187,9 @@ Note that from the above definition, we conclude that in a Poisson process, the 
 
 We denote $X_1$ as the interval of the first arrival, the $T_1$ is the time instant of first arrival. 
 
-![](https://www.probabilitycourse.com/images/chapter11/Poisson-interarrival.png)
+
+<img src="{{site.baseurl}}/assets/img/posts/2024.06.17/Poisson-interarrival.png" alt="Arrivals" style="zoom:50%;" />
+
 
 If $N(t)$ is a Poisson process with rate $\lambda$, then the. interarrival times $X_1, X_2, \dots$ are independent and
 
