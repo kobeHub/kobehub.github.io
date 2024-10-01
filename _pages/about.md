@@ -17,7 +17,7 @@ social: true # includes social icons at the bottom of the page
 ---
 
 
-I am currently an MSc student at the University of Calgary, focusing my research on wireless communication, UAV-assisted network deployment, 6G, and digital twins under the supervision of [Dr. Qiang (John) Ye](https://qiang-john-ye.github.io/Research.html).
+I am currently an PhD student at the University of Calgary, focusing my research on wireless communication, UAV-assisted network deployment, 6G, and digital twins under the supervision of [Dr. Qiang (John) Ye](https://qiang-john-ye.github.io/Research.html).
 
 Before pursuing my master's, I worked as a programmer for three years. As a passionate jack of all trades, I am eager to learn and use various programming languages, including Rust, C++, Java, Python, and Go.
 
