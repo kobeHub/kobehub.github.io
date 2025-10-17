@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://innohub.top/sitemap.xml
+Sitemap: https://kobehub.github.io/sitemap.xml
