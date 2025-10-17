@@ -410,24 +410,24 @@ We prepared mermaid-cli before, so here are examples showing how to use mermaid.
 {% raw %}
 
 ```
-{% mermaid %}
+<pre class="mermaid">
 sequenceDiagram
     participant John
     participant Alice
     Alice->>John: Hello John, how are you?
     John-->>Alice: Great!
-{% endmermaid %}
+</pre>
 ```
 
 {% endraw %}
 
-{% mermaid %}
+<pre class="mermaid">
 sequenceDiagram
 participant John
 participant Alice
 Alice->>John: Hello John, how are you?
 John-->>Alice: Great!
-{% endmermaid %}
+</pre>
 
 **flowchart**
 
@@ -444,14 +444,14 @@ flowchart TD
 
 {% endraw %}
 
-{% mermaid %}
+<pre class="mermaid">
 flowchart TD
 A[Start] --> B{Is it?}
 B -- Yes --> C[OK]
 C --> D[Rethink]
 D --> B
 B -- No ----> E[End]
-{% endmermaid %}
+</pre>
 
 **Class Diagrams**
 
@@ -490,7 +490,7 @@ classDiagram
 
 {% endraw %}
 
-{% mermaid %}
+<pre class="mermaid">
 
 ---
 title: Animal example
@@ -519,4 +519,4 @@ classDiagram
         +run()
     }
 
-{% endmermaid %}
+</pre>
